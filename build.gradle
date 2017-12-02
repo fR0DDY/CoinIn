@@ -44,7 +44,7 @@ ext {
     retrofitVersion = '2.3.0'
     okHttpVersion = '3.9.0'
     gsonVersion = '2.8.2'
-    dagger2Version = '2.11'
+    dagger2Version = '2.13'
     butterKnifeVersion = '8.8.1'
     parcelerVersion = '1.1.9'
     leakcanaryVersion = '1.5.1'
