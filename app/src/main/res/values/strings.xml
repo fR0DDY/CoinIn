@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Coin In</string>
+
+    <string name="some_error">Some Error Occurred!</string>
+</resources>
