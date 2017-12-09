@@ -1,5 +1,6 @@
 package com.fr0ddy.coinin.data.source.remote.service;
 
+import com.fr0ddy.coinin.data.source.remote.model.BitfinexResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ThroughbitResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ZebpayResponse;
@@ -20,5 +21,8 @@ public interface ExchangeRateService {
 
     @GET("https://api.zebpay.com/api/v1/ticker?currencyCode=INR")
     Flowable<ZebpayResponse> fetchZebpayRates();
+
+    @GET("https://api.bitfinex.com/v2/tickers?symbols=tBTCUSD,tETHUSD,tXRPUSD,tLTCUSD,tBCHUSD")
+    Flowable<BitfinexResponse> fetchBitfinexRates();
 
 }

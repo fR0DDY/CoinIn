@@ -5,18 +5,18 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.StringRes;
-import android.support.v4.app.Fragment;
 import android.view.View;
 
 import com.fr0ddy.coinin.utils.CommonUtils;
 
 import butterknife.Unbinder;
+import dagger.android.support.DaggerFragment;
 
 /**
  * Created by gaurav on 18/11/17.
  */
 
-public abstract class BaseFragment extends Fragment implements BaseViewContract {
+public abstract class BaseFragment extends DaggerFragment implements BaseViewContract {
 
     private BaseActivity mActivity;
     private Unbinder mUnBinder;

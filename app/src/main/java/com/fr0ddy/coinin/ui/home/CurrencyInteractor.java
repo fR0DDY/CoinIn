@@ -12,22 +12,22 @@ import javax.inject.Inject;
 import io.reactivex.Flowable;
 
 /**
- * Created by gaurav on 18/11/17.
+ * Created by gaurav on 05/12/17.
  */
 
-public class HomeInteractor extends BaseInteractor
-        implements HomeContract.Interactor {
+public class CurrencyInteractor extends BaseInteractor
+        implements CurrencyContract.Interactor {
 
     private ExchangeRateRepository mExchangeRateRepository;
 
     @Inject
-    public HomeInteractor(PreferencesHelper preferencesHelper, ExchangeRateRepository exchangeRateRepository) {
+    public CurrencyInteractor(PreferencesHelper preferencesHelper, ExchangeRateRepository exchangeRateRepository) {
         super(preferencesHelper);
         mExchangeRateRepository = exchangeRateRepository;
     }
 
     @Override
-    public Flowable<List<ExchangeRate>> getRates() {
-        return mExchangeRateRepository.getRates();
+    public Flowable<List<ExchangeRate>> getRatesForCurrency(String currency) {
+        return mExchangeRateRepository.getRatesForCurrency(currency);
     }
 }

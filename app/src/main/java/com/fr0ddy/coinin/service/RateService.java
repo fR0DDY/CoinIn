@@ -83,6 +83,14 @@ public class RateService extends Service {
                         .subscribe(exchangeRates -> mExchangeRateRepository.saveRates(exchangeRates)
                                 , throwable -> Timber.e(throwable));
 
+
+                /*mExchangeRateRepository.fetchBitfinexRates().subscribeOn(schedulerProvider.io())
+                        .observeOn(schedulerProvider.computation())
+                        .subscribe(bitfinexResponse -> {
+                                    Timber.d(bitfinexResponse.toString());
+                                }
+                                , throwable -> Timber.e(throwable));*/
+
             }
         }, 0, 60000);
     }

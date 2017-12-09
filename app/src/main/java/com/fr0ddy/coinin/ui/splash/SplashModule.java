@@ -1,23 +1,19 @@
 package com.fr0ddy.coinin.ui.splash;
 
+import dagger.Binds;
 import dagger.Module;
-import dagger.Provides;
 
 /**
  * Created by gaurav on 15/11/17.
  */
 
 @Module
-public class SplashModule {
+abstract public class SplashModule {
 
-    @Provides
-    SplashContract.Presenter<SplashContract.View, SplashContract.Interactor> provideSplashPresenter(
-            SplashPresenter<SplashContract.View, SplashContract.Interactor> presenter) {
-        return presenter;
-    }
+    @Binds
+    abstract SplashContract.Presenter<SplashContract.View, SplashContract.Interactor> provideSplashPresenter(
+            SplashPresenter<SplashContract.View, SplashContract.Interactor> presenter);
 
-    @Provides
-    SplashContract.Interactor provideSplashInteractor(SplashInteractor interactor) {
-        return interactor;
-    }
+    @Binds
+    abstract SplashContract.Interactor provideSplashInteractor(SplashInteractor interactor);
 }

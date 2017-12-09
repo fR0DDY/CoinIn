@@ -2,4 +2,6 @@
     <string name="app_name">Coin In</string>
 
     <string name="some_error">Some Error Occurred!</string>
+
+    <string name="empty_screen">We do not have anything\nhere right now.</string>
 </resources>

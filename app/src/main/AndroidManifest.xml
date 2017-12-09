@@ -16,8 +16,7 @@
         <activity
             android:name=".ui.splash.SplashActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -27,8 +26,7 @@
         <activity
             android:name=".ui.home.HomeActivity"
             android:launchMode="singleTop"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppThemeFullScreen" />
+            android:screenOrientation="portrait" />
 
         <service android:name=".service.RateService" />
     </application>

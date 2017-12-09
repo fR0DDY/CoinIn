@@ -22,4 +22,7 @@ public interface ExchangeRateDao {
 
     @Query("SELECT * FROM ExchangeRate GROUP BY exchangeId, currency ORDER BY dateTime DESC")
     Flowable<List<ExchangeRate>> getRates();
+
+    @Query("SELECT * FROM ExchangeRate WHERE currency = :currency GROUP BY exchangeId ORDER BY dateTime DESC, buyRate ASC, sellRate DESC")
+    Flowable<List<ExchangeRate>> getRatesForCurrency(String currency);
 }

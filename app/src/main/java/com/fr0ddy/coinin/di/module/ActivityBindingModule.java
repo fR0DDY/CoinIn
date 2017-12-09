@@ -22,5 +22,5 @@ public abstract class ActivityBindingModule {
 
     @ActivityScoped
     @ContributesAndroidInjector(modules = HomeModule.class)
-    abstract HomeActivity bindHomeActivity();
+    abstract HomeActivity homeActivity();
 }
