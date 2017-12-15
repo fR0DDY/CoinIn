@@ -13,4 +13,8 @@ public interface ExchangeDataSource {
     List<Long> insertExchanges(List<Exchange> exchanges);
 
     List<Long> insertExchangeFees(List<ExchangeFees> exchangeFees);
+
+    List<Exchange> getExchanges();
+
+    List<ExchangeFees> getExchangeFees();
 }

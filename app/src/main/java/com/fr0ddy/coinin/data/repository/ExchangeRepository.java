@@ -32,4 +32,14 @@ public class ExchangeRepository implements ExchangeDataSource {
     public List<Long> insertExchangeFees(List<ExchangeFees> exchangeFees) {
         return mExchangeLocalDataSource.insertExchangeFees(exchangeFees);
     }
+
+    @Override
+    public List<Exchange> getExchanges() {
+        return mExchangeLocalDataSource.getExchanges();
+    }
+
+    @Override
+    public List<ExchangeFees> getExchangeFees() {
+        return mExchangeLocalDataSource.getExchangeFees();
+    }
 }

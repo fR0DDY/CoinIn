@@ -45,17 +45,17 @@ public class SplashInteractor extends BaseInteractor
     @Override
     public Observable<List<Long>> saveDefaultExchangeFees() {
 
-        ExchangeFees koinexETHFees = new ExchangeFees(1, 1, "ETH", 0.0025, 0.0020, 0.001);
+        ExchangeFees koinexETHFees = new ExchangeFees(1, 1, "ETH", 0.0025, 0.0020, 0.003);
         ExchangeFees koinexBTCFees = new ExchangeFees(2, 1, "BTC", 0.0025, 0.0020, 0.001);
         ExchangeFees koinexBCHFees = new ExchangeFees(3, 1, "BCH", 0.0025, 0.0020, 0.001);
         ExchangeFees koinexLTCFees = new ExchangeFees(4, 1, "LTC", 0.0025, 0.0020, 0.01);
         ExchangeFees koinexXRPFees = new ExchangeFees(5, 1, "XRP", 0.0025, 0.0020, 0.02);
         ExchangeFees throughbitETHFees = new ExchangeFees(6, 2, "ETH", 0.00885, 0.00885, 0.002);
         ExchangeFees throughbitBTCFees = new ExchangeFees(7, 2, "BTC", 0.00885, 0.00885, 0.0007);
-        ExchangeFees zebpayBTCFees = new ExchangeFees(8, 3, "BTC", 0.0, 0.0, 0.000409);
-        ExchangeFees coinomeBTCFees = new ExchangeFees(9, 4, "BTC", 0.00354, 0.00118, 0.001);
+        ExchangeFees zebpayBTCFees = new ExchangeFees(8, 3, "BTC", 0.0, 0.0, 0.0001);
+        ExchangeFees coinomeBTCFees = new ExchangeFees(9, 4, "BTC", 0.00354, 0.00354, 0.001);
         ExchangeFees coinomeBCHFees = new ExchangeFees(10, 4, "BCH", 0.00354, 0.00354, 0.001);
-        ExchangeFees coinomeLTCFees = new ExchangeFees(10, 4, "BCH", 0.00354, 0.00354, 0.001);
+        ExchangeFees coinomeLTCFees = new ExchangeFees(11, 4, "LTC", 0.00354, 0.00354, 0.005);
 
         List<ExchangeFees> exchangeFees = Arrays.asList(koinexETHFees, koinexBTCFees, koinexBCHFees, koinexLTCFees, koinexXRPFees, throughbitETHFees, throughbitBTCFees, zebpayBTCFees, coinomeBTCFees, coinomeBCHFees, coinomeLTCFees);
 

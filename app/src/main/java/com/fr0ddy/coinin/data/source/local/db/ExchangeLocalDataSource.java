@@ -38,4 +38,14 @@ public class ExchangeLocalDataSource implements ExchangeDataSource {
     public List<Long> insertExchangeFees(List<ExchangeFees> exchangeFees) {
         return mExchangeFeesDao.insertExchangeFees(exchangeFees);
     }
+
+    @Override
+    public List<Exchange> getExchanges() {
+        return mExchangeDao.getExchange();
+    }
+
+    @Override
+    public List<ExchangeFees> getExchangeFees() {
+        return mExchangeFeesDao.getExchangeFees();
+    }
 }
