@@ -1,10 +1,10 @@
 package com.fr0ddy.coinin.data.source.remote;
 
 import com.fr0ddy.coinin.data.repository.ExchangeRateDataSource;
+import com.fr0ddy.coinin.data.source.local.db.model.CurrentExchangeRate;
 import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
-import com.fr0ddy.coinin.data.source.remote.model.BitfinexResponse;
+import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
-import com.fr0ddy.coinin.data.source.remote.model.ThroughbitResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ZebpayResponse;
 import com.fr0ddy.coinin.data.source.remote.service.ExchangeRateService;
 
@@ -35,18 +35,13 @@ public class ExchangeRateRemoteDataSource implements ExchangeRateDataSource {
     }
 
     @Override
-    public Flowable<ThroughbitResponse> fetchThroughbitETHRates() {
-        return exchangeRateService.fetchThroughbitETHRates();
+    public Flowable<CoinomeResponse> fetchCoinomeRates() {
+        return exchangeRateService.fetchCoinomeRates();
     }
 
     @Override
     public Flowable<ZebpayResponse> fetchZebpayRates() {
         return exchangeRateService.fetchZebpayRates();
-    }
-
-    @Override
-    public Flowable<BitfinexResponse> fetchBitfinexRates() {
-        return exchangeRateService.fetchBitfinexRates();
     }
 
     @Override
@@ -62,7 +57,7 @@ public class ExchangeRateRemoteDataSource implements ExchangeRateDataSource {
     }
 
     @Override
-    public Flowable<List<ExchangeRate>> getRatesForCurrency(String currency) {
+    public Flowable<List<CurrentExchangeRate>> getRatesForCurrency(String currency) {
         // Not required in remote
         return null;
     }

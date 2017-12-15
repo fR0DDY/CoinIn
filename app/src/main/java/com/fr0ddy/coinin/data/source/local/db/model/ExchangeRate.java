@@ -20,7 +20,7 @@ import java.util.Date;
                 childColumns = "exchangeId",
                 onDelete = ForeignKey.CASCADE)},
         indices = {@Index(value = "exchangeId")})
-public final class ExchangeRate {
+public class ExchangeRate {
     @PrimaryKey(autoGenerate = true)
     private int id;
     private int exchangeId;
@@ -29,6 +29,9 @@ public final class ExchangeRate {
     private Date dateTime;
     private double buyRate;
     private double sellRate;
+
+    public ExchangeRate() {
+    }
 
     public ExchangeRate(int exchangeId, String currency, Date dateTime, double buyRate, double sellRate) {
         this.exchangeId = exchangeId;

@@ -7,9 +7,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.fr0ddy.coinin.R;
-import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
+import com.fr0ddy.coinin.data.source.local.db.model.CurrentExchangeRate;
 import com.fr0ddy.coinin.ui.base.BaseViewHolder;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import butterknife.BindView;
@@ -24,9 +25,11 @@ public class ExchangeRateAdapter extends RecyclerView.Adapter<BaseViewHolder> {
     public static final int VIEW_TYPE_EMPTY = 0;
     public static final int VIEW_TYPE_NORMAL = 1;
 
-    private List<ExchangeRate> mExchangeRateList;
+    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
-    public ExchangeRateAdapter(List<ExchangeRate> exchangeRateList) {
+    private List<CurrentExchangeRate> mExchangeRateList;
+
+    public ExchangeRateAdapter(List<CurrentExchangeRate> exchangeRateList) {
         mExchangeRateList = exchangeRateList;
     }
 
@@ -66,7 +69,7 @@ public class ExchangeRateAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         }
     }
 
-    public void addItems(ExchangeRate show) {
+    public void addItems(CurrentExchangeRate show) {
         mExchangeRateList.add(show);
         notifyDataSetChanged();
     }
@@ -104,12 +107,12 @@ public class ExchangeRateAdapter extends RecyclerView.Adapter<BaseViewHolder> {
         public void onBind(int position) {
             super.onBind(position);
 
-            final ExchangeRate exchangeRate = mExchangeRateList.get(position);
+            final CurrentExchangeRate exchangeRate = mExchangeRateList.get(position);
 
-            exchangeName.setText("" + exchangeRate.getExchangeId());
+            exchangeName.setText("" + exchangeRate.getExchangeName());
             buyRate.setText("₹" + exchangeRate.getBuyRate());
             sellRate.setText("₹" + exchangeRate.getSellRate());
-            lastUpdatedTime.setText(exchangeRate.getDateTime().toString());
+            lastUpdatedTime.setText(dateFormat.format(exchangeRate.getDateTime()));
         }
     }
 

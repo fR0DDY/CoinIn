@@ -54,10 +54,10 @@ public class SplashInteractor extends BaseInteractor
         ExchangeFees throughbitBTCFees = new ExchangeFees(7, 2, "BTC", 0.00885, 0.00885, 0.0007);
         ExchangeFees zebpayBTCFees = new ExchangeFees(8, 3, "BTC", 0.0, 0.0, 0.000409);
         ExchangeFees coinomeBTCFees = new ExchangeFees(9, 4, "BTC", 0.00354, 0.00118, 0.001);
-        ExchangeFees coinomeBCHFees = new ExchangeFees(10, 4, "BCH", 0.00354, 0.00118, 0.001);
+        ExchangeFees coinomeBCHFees = new ExchangeFees(10, 4, "BCH", 0.00354, 0.00354, 0.001);
+        ExchangeFees coinomeLTCFees = new ExchangeFees(10, 4, "BCH", 0.00354, 0.00354, 0.001);
 
-
-        List<ExchangeFees> exchangeFees = Arrays.asList(koinexETHFees, koinexBTCFees, koinexBCHFees, koinexLTCFees, koinexXRPFees, throughbitETHFees, throughbitBTCFees, zebpayBTCFees, coinomeBTCFees, coinomeBCHFees);
+        List<ExchangeFees> exchangeFees = Arrays.asList(koinexETHFees, koinexBTCFees, koinexBCHFees, koinexLTCFees, koinexXRPFees, throughbitETHFees, throughbitBTCFees, zebpayBTCFees, coinomeBTCFees, coinomeBCHFees, coinomeLTCFees);
 
         return Observable.fromCallable(() -> mExchangeRepository.insertExchangeFees(exchangeFees));
     }

@@ -1,6 +1,6 @@
 package com.fr0ddy.coinin.ui.home;
 
-import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
+import com.fr0ddy.coinin.data.source.local.db.model.CurrentExchangeRate;
 import com.fr0ddy.coinin.ui.base.BaseInteractorContract;
 import com.fr0ddy.coinin.ui.base.BasePresenterContract;
 import com.fr0ddy.coinin.ui.base.BaseViewContract;
@@ -16,11 +16,11 @@ import io.reactivex.Flowable;
 public class CurrencyContract {
 
     interface View extends BaseViewContract {
-        void setRate(List<ExchangeRate> exchangeRates);
+        void setRate(List<CurrentExchangeRate> exchangeRates);
     }
 
     interface Interactor extends BaseInteractorContract {
-        Flowable<List<ExchangeRate>> getRatesForCurrency(String currency);
+        Flowable<List<CurrentExchangeRate>> getRatesForCurrency(String currency);
     }
 
     interface Presenter<V extends View,

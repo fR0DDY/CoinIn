@@ -7,6 +7,7 @@ import com.fr0ddy.coinin.utils.rx.SchedulerProvider;
 
 import javax.inject.Inject;
 
+import io.reactivex.disposables.Disposable;
 import timber.log.Timber;
 
 /**

@@ -1,9 +1,9 @@
 package com.fr0ddy.coinin.data.repository;
 
+import com.fr0ddy.coinin.data.source.local.db.model.CurrentExchangeRate;
 import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
-import com.fr0ddy.coinin.data.source.remote.model.BitfinexResponse;
+import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
-import com.fr0ddy.coinin.data.source.remote.model.ThroughbitResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ZebpayResponse;
 
 import java.util.List;
@@ -17,15 +17,13 @@ import io.reactivex.Flowable;
 public interface ExchangeRateDataSource {
     Flowable<KoinexResponse> fetchKoinexRates();
 
-    Flowable<ThroughbitResponse> fetchThroughbitETHRates();
+    Flowable<CoinomeResponse> fetchCoinomeRates();
 
     Flowable<ZebpayResponse> fetchZebpayRates();
-
-    Flowable<BitfinexResponse> fetchBitfinexRates();
 
     List<Long> saveRates(List<ExchangeRate> exchangeRates);
 
     Flowable<List<ExchangeRate>> getRates();
 
-    Flowable<List<ExchangeRate>> getRatesForCurrency(String currency);
+    Flowable<List<CurrentExchangeRate>> getRatesForCurrency(String currency);
 }

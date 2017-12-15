@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.fr0ddy.coinin.R;
+import com.fr0ddy.coinin.data.source.local.db.model.CurrentExchangeRate;
 import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
 import com.fr0ddy.coinin.ui.base.BaseFragment;
 
@@ -87,9 +88,9 @@ public class CurrencyFragment extends BaseFragment implements CurrencyContract.V
     }
 
     @Override
-    public void setRate(List<ExchangeRate> exchangeRates) {
+    public void setRate(List<CurrentExchangeRate> exchangeRates) {
         mExchangeRateAdapter.clearItems();
-        for (ExchangeRate exchangeRate : exchangeRates) {
+        for (CurrentExchangeRate exchangeRate : exchangeRates) {
             mExchangeRateAdapter.addItems(exchangeRate);
         }
     }

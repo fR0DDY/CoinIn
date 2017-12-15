@@ -57,7 +57,7 @@ public class RateService extends Service {
                 Timber.i("Background service running");
                 Date date = new Date();
 
-                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), mExchangeRateRepository.fetchZebpayRates(), (koinexResponse, zebpayResponse) -> {
+                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), mExchangeRateRepository.fetchZebpayRates(), mExchangeRateRepository.fetchCoinomeRates(), (koinexResponse, zebpayResponse, coinomeResponse) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
                     ExchangeRate koinexETHRate = new ExchangeRate(1, "ETH", date, Double.parseDouble(koinexResponse.getStats().getETH().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getETH().getHighestBid()));
 
@@ -71,25 +71,26 @@ public class RateService extends Service {
 
                     ExchangeRate zebpayRate = new ExchangeRate(3, "BTC", date, zebpayResponse.getBuyPrice(), zebpayResponse.getSellPrice());
 
+                    ExchangeRate coinomeBTCRate = new ExchangeRate(4, "BTC", date, Double.parseDouble(coinomeResponse.getBTC().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getBTC().getHighestBid()));
+
+                    ExchangeRate coinomeBCHRate = new ExchangeRate(4, "BCH", date, Double.parseDouble(coinomeResponse.getBCH().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getBCH().getHighestBid()));
+
+                    ExchangeRate coinomeLTCRate = new ExchangeRate(4, "LTC", date, Double.parseDouble(coinomeResponse.getLTC().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getLTC().getHighestBid()));
+
                     exchangeRates.add(koinexETHRate);
                     exchangeRates.add(koinexBTCRate);
                     exchangeRates.add(koinexBCHRate);
                     exchangeRates.add(koinexLTCRate);
                     exchangeRates.add(koinexXRPRate);
                     exchangeRates.add(zebpayRate);
+                    exchangeRates.add(coinomeBTCRate);
+                    exchangeRates.add(coinomeBCHRate);
+                    exchangeRates.add(coinomeLTCRate);
                     return exchangeRates;
                 }).subscribeOn(schedulerProvider.io())
                         .observeOn(schedulerProvider.computation())
                         .subscribe(exchangeRates -> mExchangeRateRepository.saveRates(exchangeRates)
                                 , throwable -> Timber.e(throwable));
-
-
-                /*mExchangeRateRepository.fetchBitfinexRates().subscribeOn(schedulerProvider.io())
-                        .observeOn(schedulerProvider.computation())
-                        .subscribe(bitfinexResponse -> {
-                                    Timber.d(bitfinexResponse.toString());
-                                }
-                                , throwable -> Timber.e(throwable));*/
 
             }
         }, 0, 60000);

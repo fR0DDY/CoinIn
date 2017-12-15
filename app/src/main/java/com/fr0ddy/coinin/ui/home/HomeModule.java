@@ -2,6 +2,7 @@ package com.fr0ddy.coinin.ui.home;
 
 import android.support.v7.widget.LinearLayoutManager;
 
+import com.fr0ddy.coinin.data.source.local.db.model.CurrentExchangeRate;
 import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
 import com.fr0ddy.coinin.di.FragmentScoped;
 
@@ -42,7 +43,7 @@ abstract public class HomeModule {
 
     @Provides
     static ExchangeRateAdapter provideExchangeRateAdapter() {
-        return new ExchangeRateAdapter(new ArrayList<ExchangeRate>());
+        return new ExchangeRateAdapter(new ArrayList<CurrentExchangeRate>());
     }
 
 }

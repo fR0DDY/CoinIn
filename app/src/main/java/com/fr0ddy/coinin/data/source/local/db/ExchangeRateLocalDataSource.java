@@ -4,10 +4,10 @@ import android.support.annotation.NonNull;
 
 import com.fr0ddy.coinin.data.repository.ExchangeRateDataSource;
 import com.fr0ddy.coinin.data.source.local.db.dao.ExchangeRateDao;
+import com.fr0ddy.coinin.data.source.local.db.model.CurrentExchangeRate;
 import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
-import com.fr0ddy.coinin.data.source.remote.model.BitfinexResponse;
+import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
-import com.fr0ddy.coinin.data.source.remote.model.ThroughbitResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ZebpayResponse;
 
 import java.util.List;
@@ -38,19 +38,13 @@ public class ExchangeRateLocalDataSource implements ExchangeRateDataSource {
     }
 
     @Override
-    public Flowable<ThroughbitResponse> fetchThroughbitETHRates() {
+    public Flowable<CoinomeResponse> fetchCoinomeRates() {
         // Not required in Local
         return null;
     }
 
     @Override
     public Flowable<ZebpayResponse> fetchZebpayRates() {
-        // Not required in Local
-        return null;
-    }
-
-    @Override
-    public Flowable<BitfinexResponse> fetchBitfinexRates() {
         // Not required in Local
         return null;
     }
@@ -67,7 +61,7 @@ public class ExchangeRateLocalDataSource implements ExchangeRateDataSource {
     }
 
     @Override
-    public Flowable<List<ExchangeRate>> getRatesForCurrency(String currency) {
+    public Flowable<List<CurrentExchangeRate>> getRatesForCurrency(String currency) {
         return mExchangeRateDao.getRatesForCurrency(currency);
     }
 }
