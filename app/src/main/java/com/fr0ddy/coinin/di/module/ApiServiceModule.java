@@ -3,6 +3,8 @@ package com.fr0ddy.coinin.di.module;
 import com.fr0ddy.coinin.data.source.remote.service.ExchangeRateService;
 import com.fr0ddy.coinin.utils.AppConstants;
 
+import java.util.concurrent.TimeUnit;
+
 import javax.inject.Named;
 import javax.inject.Singleton;
 
@@ -39,7 +41,10 @@ public class ApiServiceModule {
     @Provides
     @Singleton
     OkHttpClient provideHttpClient(HttpLoggingInterceptor httpInterceptor) {
-        return new OkHttpClient.Builder().addInterceptor(httpInterceptor).build();
+        return new OkHttpClient.Builder()
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(10, TimeUnit.SECONDS)
+                .addInterceptor(httpInterceptor).build();
     }
 
     @Provides
