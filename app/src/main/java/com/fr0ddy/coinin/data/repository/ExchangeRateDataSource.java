@@ -2,6 +2,7 @@ package com.fr0ddy.coinin.data.repository;
 
 import com.fr0ddy.coinin.data.source.local.db.model.CurrentExchangeRate;
 import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
+import com.fr0ddy.coinin.data.source.remote.model.BuyUcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ZebpayResponse;
@@ -20,6 +21,8 @@ public interface ExchangeRateDataSource {
     Flowable<CoinomeResponse> fetchCoinomeRates();
 
     Flowable<ZebpayResponse> fetchZebpayRates();
+
+    Flowable<BuyUcoinResponse> fetchBuyUcoinRates();
 
     List<Long> saveRates(List<ExchangeRate> exchangeRates);
 

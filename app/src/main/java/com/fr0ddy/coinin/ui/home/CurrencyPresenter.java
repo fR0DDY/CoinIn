@@ -30,7 +30,6 @@ final class CurrencyPresenter<V extends CurrencyContract.View, I extends Currenc
                 .subscribeOn(getSchedulerProvider().io())
                 .observeOn(getSchedulerProvider().ui())
                 .subscribe(exchangeRates -> {
-                    Timber.d(exchangeRates.toString());
                     if (!isViewAttached()) {
                         return;
                     }

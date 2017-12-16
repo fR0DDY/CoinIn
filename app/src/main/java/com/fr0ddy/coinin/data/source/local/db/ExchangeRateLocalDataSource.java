@@ -6,6 +6,7 @@ import com.fr0ddy.coinin.data.repository.ExchangeRateDataSource;
 import com.fr0ddy.coinin.data.source.local.db.dao.ExchangeRateDao;
 import com.fr0ddy.coinin.data.source.local.db.model.CurrentExchangeRate;
 import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
+import com.fr0ddy.coinin.data.source.remote.model.BuyUcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ZebpayResponse;
@@ -45,6 +46,12 @@ public class ExchangeRateLocalDataSource implements ExchangeRateDataSource {
 
     @Override
     public Flowable<ZebpayResponse> fetchZebpayRates() {
+        // Not required in Local
+        return null;
+    }
+
+    @Override
+    public Flowable<BuyUcoinResponse> fetchBuyUcoinRates() {
         // Not required in Local
         return null;
     }

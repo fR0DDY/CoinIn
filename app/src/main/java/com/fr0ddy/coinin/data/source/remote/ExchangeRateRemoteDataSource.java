@@ -3,6 +3,7 @@ package com.fr0ddy.coinin.data.source.remote;
 import com.fr0ddy.coinin.data.repository.ExchangeRateDataSource;
 import com.fr0ddy.coinin.data.source.local.db.model.CurrentExchangeRate;
 import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
+import com.fr0ddy.coinin.data.source.remote.model.BuyUcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ZebpayResponse;
@@ -42,6 +43,11 @@ public class ExchangeRateRemoteDataSource implements ExchangeRateDataSource {
     @Override
     public Flowable<ZebpayResponse> fetchZebpayRates() {
         return exchangeRateService.fetchZebpayRates();
+    }
+
+    @Override
+    public Flowable<BuyUcoinResponse> fetchBuyUcoinRates() {
+        return exchangeRateService.fetchBuyUcoinRates();
     }
 
     @Override

@@ -76,7 +76,7 @@ public class RateService extends Service {
                 Timber.i("Background service running");
                 Date date = new Date();
 
-                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), mExchangeRateRepository.fetchZebpayRates(), mExchangeRateRepository.fetchCoinomeRates(), (koinexResponse, zebpayResponse, coinomeResponse) -> {
+                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), mExchangeRateRepository.fetchZebpayRates(), mExchangeRateRepository.fetchCoinomeRates(), mExchangeRateRepository.fetchBuyUcoinRates(),  (koinexResponse, zebpayResponse, coinomeResponse, buyUcoinResponse) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
                     ExchangeRate koinexETHRate = new ExchangeRate(1, "ETH", date, Double.parseDouble(koinexResponse.getStats().getETH().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getETH().getHighestBid()));
 
@@ -96,6 +96,16 @@ public class RateService extends Service {
 
                     ExchangeRate coinomeLTCRate = new ExchangeRate(4, "LTC", date, Double.parseDouble(coinomeResponse.getLTC().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getLTC().getHighestBid()));
 
+                    ExchangeRate buyUcoinETHRate = new ExchangeRate(5, "ETH", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getEthBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getEthSellPrice()));
+
+                    ExchangeRate buyUcoinBTCRate = new ExchangeRate(5, "BTC", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getBtcBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getBtcSellPrice()));
+
+                    ExchangeRate buyUcoinBCHRate = new ExchangeRate(5, "BCH", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getBchBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getBchSellPrice()));
+
+                    ExchangeRate buyUcoinLTCRate = new ExchangeRate(5, "LTC", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getLtcBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getLtcSellPrice()));
+
+                    ExchangeRate buyUcoinXRPRate = new ExchangeRate(5, "XRP", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getXrpBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getXrpSellPrice()));
+
                     exchangeRates.add(koinexETHRate);
                     exchangeRates.add(koinexBTCRate);
                     exchangeRates.add(koinexBCHRate);
@@ -105,6 +115,11 @@ public class RateService extends Service {
                     exchangeRates.add(coinomeBTCRate);
                     exchangeRates.add(coinomeBCHRate);
                     exchangeRates.add(coinomeLTCRate);
+                    exchangeRates.add(buyUcoinETHRate);
+                    exchangeRates.add(buyUcoinBTCRate);
+                    exchangeRates.add(buyUcoinBCHRate);
+                    exchangeRates.add(buyUcoinLTCRate);
+                    exchangeRates.add(buyUcoinXRPRate);
 
                     checkArbitrage(exchangeRates);
                     return exchangeRates;
@@ -179,7 +194,6 @@ public class RateService extends Service {
                     if (fromExchangeRate.getBuyRate() < toExchangeRate.getSellRate()) {
                         ExchangeFees fromFee = exchangeToExchangeFeesMap.get(fromExchangeRate.getExchangeId() + "_" + fromExchangeRate.getCurrency());
                         ExchangeFees toFee = exchangeToExchangeFeesMap.get(toExchangeRate.getExchangeId() + "_" + fromExchangeRate.getCurrency());
-                        Timber.d(fromExchangeRate.getExchangeId() + "_" + fromExchangeRate.getCurrency());
                         double buyCost = fromExchangeRate.getBuyRate() + fromExchangeRate.getBuyRate() * fromFee.getBuyFee();
                         double transferFee = buyCost * fromFee.getTransferFee();
 

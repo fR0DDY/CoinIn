@@ -1,5 +1,6 @@
 package com.fr0ddy.coinin.data.source.remote.service;
 
+import com.fr0ddy.coinin.data.source.remote.model.BuyUcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ZebpayResponse;
@@ -20,4 +21,7 @@ public interface ExchangeRateService {
 
     @GET("https://www.zebapi.com/api/v1/market/ticker/btc/inr")
     Flowable<ZebpayResponse> fetchZebpayRates();
+
+    @GET("https://www.buyucoin.com/api/v1/crypto/")
+    Flowable<BuyUcoinResponse> fetchBuyUcoinRates();
 }

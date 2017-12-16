@@ -35,8 +35,9 @@ public class SplashInteractor extends BaseInteractor
         Exchange throughbit = new Exchange(2, "Throughbit", "IND");
         Exchange zebpay = new Exchange(3, "Zebpay", "IND");
         Exchange coinome = new Exchange(4, "Coinome", "IND");
+        Exchange buyUcoin = new Exchange(5, "BuyUcoin", "IND");
 
-        List<Exchange> exchanges = Arrays.asList(koinex, throughbit, zebpay, coinome);
+        List<Exchange> exchanges = Arrays.asList(koinex, throughbit, zebpay, coinome, buyUcoin);
 
         return Observable.fromCallable(() -> mExchangeRepository.insertExchanges(exchanges));
     }
@@ -56,8 +57,14 @@ public class SplashInteractor extends BaseInteractor
         ExchangeFees coinomeBTCFees = new ExchangeFees(9, 4, "BTC", 0.00354, 0.00354, 0.001);
         ExchangeFees coinomeBCHFees = new ExchangeFees(10, 4, "BCH", 0.00354, 0.00354, 0.001);
         ExchangeFees coinomeLTCFees = new ExchangeFees(11, 4, "LTC", 0.00354, 0.00354, 0.005);
+        ExchangeFees buyUcoinETHFees = new ExchangeFees(12, 5, "ETH", 0.0, 0.0, 0.006);
+        ExchangeFees buyUcoinBTCFees = new ExchangeFees(13, 5, "BTC", 0.0, 0.0, 0.0015);
+        ExchangeFees buyUcoinBCHFees = new ExchangeFees(14, 5, "BCH", 0.0, 0.0, 0.001);
+        ExchangeFees buyUcoinLTCFees = new ExchangeFees(15, 5, "LTC", 0.0, 0.0, 0.025);
+        ExchangeFees buyUcoinXRPFees = new ExchangeFees(16, 5, "XRP", 0.0, 0.0, 5);
 
-        List<ExchangeFees> exchangeFees = Arrays.asList(koinexETHFees, koinexBTCFees, koinexBCHFees, koinexLTCFees, koinexXRPFees, throughbitETHFees, throughbitBTCFees, zebpayBTCFees, coinomeBTCFees, coinomeBCHFees, coinomeLTCFees);
+        List<ExchangeFees> exchangeFees = Arrays.asList(koinexETHFees, koinexBTCFees, koinexBCHFees, koinexLTCFees, koinexXRPFees, throughbitETHFees, throughbitBTCFees, zebpayBTCFees, coinomeBTCFees, coinomeBCHFees, coinomeLTCFees, buyUcoinETHFees, buyUcoinBTCFees, buyUcoinBCHFees, buyUcoinLTCFees,
+                buyUcoinXRPFees);
 
         return Observable.fromCallable(() -> mExchangeRepository.insertExchangeFees(exchangeFees));
     }
