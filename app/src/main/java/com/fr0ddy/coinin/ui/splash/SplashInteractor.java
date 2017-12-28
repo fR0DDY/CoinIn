@@ -16,6 +16,7 @@ import io.reactivex.Observable;
 import static com.fr0ddy.coinin.utils.AppConstants.BUYUCOIN_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.COINDELTA_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.COINOME_ID;
+import static com.fr0ddy.coinin.utils.AppConstants.COINSECURE_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.KOINEX_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.POCKETBITS_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.THROUGHBIT_ID;
@@ -46,8 +47,9 @@ public class SplashInteractor extends BaseInteractor
         Exchange buyUcoin = new Exchange(BUYUCOIN_ID, "BuyUcoin", "IND");
         Exchange coindelta = new Exchange(COINDELTA_ID, "Coindelta", "IND");
         Exchange pocketBits = new Exchange(POCKETBITS_ID, "PocketBits", "IND");
+        Exchange coinsecure = new Exchange(COINSECURE_ID, "Coinsecure", "IND");
 
-        List<Exchange> exchanges = Arrays.asList(koinex, throughbit, zebpay, coinome, buyUcoin, coindelta, pocketBits);
+        List<Exchange> exchanges = Arrays.asList(koinex, throughbit, zebpay, coinome, buyUcoin, coindelta, pocketBits, coinsecure);
 
         return Observable.fromCallable(() -> mExchangeRepository.insertExchanges(exchanges));
     }
@@ -82,10 +84,11 @@ public class SplashInteractor extends BaseInteractor
         ExchangeFees pocketBitsBCHFees = new ExchangeFees(24, POCKETBITS_ID, "BCH", 0.0, 0.0, 0.001);
         ExchangeFees pocketBitsLTCFees = new ExchangeFees(25, POCKETBITS_ID, "LTC", 0.0, 0.0, 0.01);
         ExchangeFees pocketBitsXRPFees = new ExchangeFees(26, POCKETBITS_ID, "XRP", 0.0, 0.0, 5);
+        ExchangeFees coinsecureBTCFees = new ExchangeFees(27, COINSECURE_ID, "BTC", 0.004, 0.004, 0.0001);
 
         List<ExchangeFees> exchangeFees = Arrays.asList(koinexETHFees, koinexBTCFees, koinexBCHFees, koinexLTCFees, koinexXRPFees, throughbitETHFees, throughbitBTCFees, zebpayBTCFees, coinomeBTCFees, coinomeBCHFees, coinomeLTCFees, buyUcoinETHFees, buyUcoinBTCFees, buyUcoinBCHFees, buyUcoinLTCFees,
                 buyUcoinXRPFees, coindeltaETHFees, coindeltaBTCFees, coindeltaBCHFees, coindeltaLTCFees, coindeltaXRPFees, pocketBitsETHFees, pocketBitsBTCFees,
-                pocketBitsBCHFees, pocketBitsLTCFees, pocketBitsXRPFees);
+                pocketBitsBCHFees, pocketBitsLTCFees, pocketBitsXRPFees, coinsecureBTCFees);
 
         return Observable.fromCallable(() -> mExchangeRepository.insertExchangeFees(exchangeFees));
     }

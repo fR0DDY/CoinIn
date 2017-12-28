@@ -3,6 +3,7 @@ package com.fr0ddy.coinin.data.source.remote.service;
 import com.fr0ddy.coinin.data.source.remote.model.BuyUcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
+import com.fr0ddy.coinin.data.source.remote.model.CoinsecureResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsBitcoinResponse;
@@ -38,4 +39,7 @@ public interface ExchangeRateService {
 
     @GET("https://www.pocketbits.in/AltCoins/GetFrontDataBuySell")
     Flowable<List<PocketBitsAltcoinResponse>> fetchPocketBitsAltcoinRates();
+
+    @GET("https://api.coinsecure.in/v1/exchange/ticker")
+    Flowable<CoinsecureResponse> fetchCoinsecureRates();
 }

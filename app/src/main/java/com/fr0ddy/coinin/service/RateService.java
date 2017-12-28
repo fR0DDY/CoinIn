@@ -43,6 +43,7 @@ import timber.log.Timber;
 
 import static com.fr0ddy.coinin.utils.AppConstants.BUYUCOIN_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.COINDELTA_ID;
+import static com.fr0ddy.coinin.utils.AppConstants.COINSECURE_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.KOINEX_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.POCKETBITS_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.ZEBPAY_ID;
@@ -84,7 +85,7 @@ public class RateService extends Service {
                 Timber.i("Background service running");
                 Date date = new Date();
 
-                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), mExchangeRateRepository.fetchZebpayRates(), mExchangeRateRepository.fetchBuyUcoinRates(), mExchangeRateRepository.fetchCoindeltaRates(), mExchangeRateRepository.fetchPocketBitsBitcoinRates(), mExchangeRateRepository.fetchPocketBitsAltcoinRates(), (koinexResponse, zebpayResponse, buyUcoinResponse, coindeltaResponse, pocketBitsBitcoinResponse, pocketBitsAltcoinResponses) -> {
+                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), mExchangeRateRepository.fetchZebpayRates(), mExchangeRateRepository.fetchBuyUcoinRates(), mExchangeRateRepository.fetchCoindeltaRates(), mExchangeRateRepository.fetchPocketBitsBitcoinRates(), mExchangeRateRepository.fetchPocketBitsAltcoinRates(), mExchangeRateRepository.fetchCoinsecureRates(), (koinexResponse, zebpayResponse, buyUcoinResponse, coindeltaResponse, pocketBitsBitcoinResponse, pocketBitsAltcoinResponses, coinsecureResponse) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
                     ExchangeRate koinexETHRate = new ExchangeRate(KOINEX_ID, "ETH", date, Double.parseDouble(koinexResponse.getStats().getETH().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getETH().getHighestBid()));
 
@@ -151,6 +152,8 @@ public class RateService extends Service {
                         }
                     }
 
+                    ExchangeRate coinsecureBTCRate = new ExchangeRate(COINSECURE_ID, "BTC", date, coinsecureResponse.getMessage().getLowestAsk() / 100.0, coinsecureResponse.getMessage().getHighestBid() / 100.0);
+
                     exchangeRates.add(koinexETHRate);
                     exchangeRates.add(koinexBTCRate);
                     exchangeRates.add(koinexBCHRate);
@@ -166,6 +169,7 @@ public class RateService extends Service {
                     exchangeRates.add(buyUcoinLTCRate);
                     exchangeRates.add(buyUcoinXRPRate);
                     exchangeRates.add(pocketBitsBTCRate);
+                    exchangeRates.add(coinsecureBTCRate);
 
                     checkArbitrage(exchangeRates);
                     return exchangeRates;
