@@ -8,7 +8,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.fr0ddy.coinin.R;
 import com.fr0ddy.coinin.data.source.local.db.model.CurrentExchangeRate;
@@ -37,9 +36,6 @@ public class CurrencyFragment extends BaseFragment implements CurrencyContract.V
     ExchangeRateAdapter mExchangeRateAdapter;
 
     String mCurrency;
-
-    @BindView(R.id.test_text)
-    TextView mTextView;
 
     @BindView(R.id.exchange_rate_recycler_view)
     RecyclerView mRecyclerView;
@@ -74,7 +70,6 @@ public class CurrencyFragment extends BaseFragment implements CurrencyContract.V
     protected void setUp(View view) {
         Bundle bundle = getArguments();
         mCurrency = bundle.getString("currency");
-        mTextView.setText(mCurrency);
         mLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
