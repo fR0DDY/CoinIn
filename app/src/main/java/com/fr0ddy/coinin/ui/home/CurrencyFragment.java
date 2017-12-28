@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 import com.fr0ddy.coinin.R;
 import com.fr0ddy.coinin.data.source.local.db.model.CurrentExchangeRate;
-import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
 import com.fr0ddy.coinin.ui.base.BaseFragment;
 
 import java.util.List;

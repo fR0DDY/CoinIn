@@ -110,8 +110,13 @@ public class ExchangeRateAdapter extends RecyclerView.Adapter<BaseViewHolder> {
             final CurrentExchangeRate exchangeRate = mExchangeRateList.get(position);
 
             exchangeName.setText("" + exchangeRate.getExchangeName());
-            buyRate.setText("₹" + exchangeRate.getBuyRate());
-            sellRate.setText("₹" + exchangeRate.getSellRate());
+            if (exchangeRate.getBuyRate() > 1000.0) {
+                buyRate.setText("₹" + Math.round(exchangeRate.getBuyRate()));
+                sellRate.setText("₹" + Math.round(exchangeRate.getSellRate()));
+            } else {
+                buyRate.setText("₹" + (Math.round(exchangeRate.getBuyRate() * 100.0) / 100.0));
+                sellRate.setText("₹" + (Math.round(exchangeRate.getSellRate() * 100.0) / 100.0));
+            }
             lastUpdatedTime.setText(dateFormat.format(exchangeRate.getDateTime()));
         }
     }

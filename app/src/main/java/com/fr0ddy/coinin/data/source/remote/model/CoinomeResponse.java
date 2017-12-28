@@ -80,6 +80,11 @@ public class CoinomeResponse {
                     ", highestBid='" + highestBid + '\'' +
                     '}';
         }
+
+        public Data(String lowestAsk, String highestBid) {
+            this.lowestAsk = lowestAsk;
+            this.highestBid = highestBid;
+        }
     }
 
     @Override

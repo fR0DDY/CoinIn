@@ -3,8 +3,11 @@ package com.fr0ddy.coinin.data.repository;
 import com.fr0ddy.coinin.data.source.local.db.model.CurrentExchangeRate;
 import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
 import com.fr0ddy.coinin.data.source.remote.model.BuyUcoinResponse;
+import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
+import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
+import com.fr0ddy.coinin.data.source.remote.model.PocketBitsBitcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ZebpayResponse;
 
 import java.util.List;
@@ -23,6 +26,12 @@ public interface ExchangeRateDataSource {
     Flowable<ZebpayResponse> fetchZebpayRates();
 
     Flowable<BuyUcoinResponse> fetchBuyUcoinRates();
+
+    Flowable<List<CoindeltaResponse>> fetchCoindeltaRates();
+
+    Flowable<PocketBitsBitcoinResponse> fetchPocketBitsBitcoinRates();
+
+    Flowable<List<PocketBitsAltcoinResponse>> fetchPocketBitsAltcoinRates();
 
     List<Long> saveRates(List<ExchangeRate> exchangeRates);
 

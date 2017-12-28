@@ -4,8 +4,11 @@ import com.fr0ddy.coinin.data.repository.ExchangeRateDataSource;
 import com.fr0ddy.coinin.data.source.local.db.model.CurrentExchangeRate;
 import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
 import com.fr0ddy.coinin.data.source.remote.model.BuyUcoinResponse;
+import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
+import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
+import com.fr0ddy.coinin.data.source.remote.model.PocketBitsBitcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ZebpayResponse;
 import com.fr0ddy.coinin.data.source.remote.service.ExchangeRateService;
 
@@ -48,6 +51,21 @@ public class ExchangeRateRemoteDataSource implements ExchangeRateDataSource {
     @Override
     public Flowable<BuyUcoinResponse> fetchBuyUcoinRates() {
         return exchangeRateService.fetchBuyUcoinRates();
+    }
+
+    @Override
+    public Flowable<List<CoindeltaResponse>> fetchCoindeltaRates() {
+        return exchangeRateService.fetchCoindeltaRates();
+    }
+
+    @Override
+    public Flowable<PocketBitsBitcoinResponse> fetchPocketBitsBitcoinRates() {
+        return exchangeRateService.fetchPocketBitsBitcoinRates();
+    }
+
+    @Override
+    public Flowable<List<PocketBitsAltcoinResponse>> fetchPocketBitsAltcoinRates() {
+        return exchangeRateService.fetchPocketBitsAltcoinRates();
     }
 
     @Override

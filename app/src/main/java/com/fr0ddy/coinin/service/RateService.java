@@ -18,6 +18,8 @@ import com.fr0ddy.coinin.data.repository.ExchangeRepository;
 import com.fr0ddy.coinin.data.source.local.db.model.Exchange;
 import com.fr0ddy.coinin.data.source.local.db.model.ExchangeFees;
 import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
+import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
+import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
 import com.fr0ddy.coinin.di.component.DaggerServiceComponent;
 import com.fr0ddy.coinin.ui.home.HomeActivity;
 import com.fr0ddy.coinin.utils.rx.SchedulerProvider;
@@ -38,6 +40,12 @@ import javax.inject.Inject;
 
 import io.reactivex.Flowable;
 import timber.log.Timber;
+
+import static com.fr0ddy.coinin.utils.AppConstants.BUYUCOIN_ID;
+import static com.fr0ddy.coinin.utils.AppConstants.COINDELTA_ID;
+import static com.fr0ddy.coinin.utils.AppConstants.KOINEX_ID;
+import static com.fr0ddy.coinin.utils.AppConstants.POCKETBITS_ID;
+import static com.fr0ddy.coinin.utils.AppConstants.ZEBPAY_ID;
 
 
 /**
@@ -76,35 +84,72 @@ public class RateService extends Service {
                 Timber.i("Background service running");
                 Date date = new Date();
 
-                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), mExchangeRateRepository.fetchZebpayRates(), mExchangeRateRepository.fetchCoinomeRates(), mExchangeRateRepository.fetchBuyUcoinRates(),  (koinexResponse, zebpayResponse, coinomeResponse, buyUcoinResponse) -> {
+                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), mExchangeRateRepository.fetchZebpayRates(), mExchangeRateRepository.fetchBuyUcoinRates(), mExchangeRateRepository.fetchCoindeltaRates(), mExchangeRateRepository.fetchPocketBitsBitcoinRates(), mExchangeRateRepository.fetchPocketBitsAltcoinRates(), (koinexResponse, zebpayResponse, buyUcoinResponse, coindeltaResponse, pocketBitsBitcoinResponse, pocketBitsAltcoinResponses) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
-                    ExchangeRate koinexETHRate = new ExchangeRate(1, "ETH", date, Double.parseDouble(koinexResponse.getStats().getETH().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getETH().getHighestBid()));
+                    ExchangeRate koinexETHRate = new ExchangeRate(KOINEX_ID, "ETH", date, Double.parseDouble(koinexResponse.getStats().getETH().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getETH().getHighestBid()));
 
-                    ExchangeRate koinexBTCRate = new ExchangeRate(1, "BTC", date, Double.parseDouble(koinexResponse.getStats().getBTC().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getBTC().getHighestBid()));
+                    ExchangeRate koinexBTCRate = new ExchangeRate(KOINEX_ID, "BTC", date, Double.parseDouble(koinexResponse.getStats().getBTC().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getBTC().getHighestBid()));
 
-                    ExchangeRate koinexBCHRate = new ExchangeRate(1, "BCH", date, Double.parseDouble(koinexResponse.getStats().getBCH().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getBCH().getHighestBid()));
+                    ExchangeRate koinexBCHRate = new ExchangeRate(KOINEX_ID, "BCH", date, Double.parseDouble(koinexResponse.getStats().getBCH().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getBCH().getHighestBid()));
 
-                    ExchangeRate koinexLTCRate = new ExchangeRate(1, "LTC", date, Double.parseDouble(koinexResponse.getStats().getLTC().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getLTC().getHighestBid()));
+                    ExchangeRate koinexLTCRate = new ExchangeRate(KOINEX_ID, "LTC", date, Double.parseDouble(koinexResponse.getStats().getLTC().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getLTC().getHighestBid()));
 
-                    ExchangeRate koinexXRPRate = new ExchangeRate(1, "XRP", date, Double.parseDouble(koinexResponse.getStats().getXRP().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getXRP().getHighestBid()));
+                    ExchangeRate koinexXRPRate = new ExchangeRate(KOINEX_ID, "XRP", date, Double.parseDouble(koinexResponse.getStats().getXRP().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getXRP().getHighestBid()));
 
-                    ExchangeRate zebpayRate = new ExchangeRate(3, "BTC", date, zebpayResponse.getBuyPrice(), zebpayResponse.getSellPrice());
+                    ExchangeRate zebpayRate = new ExchangeRate(ZEBPAY_ID, "BTC", date, zebpayResponse.getBuyPrice(), zebpayResponse.getSellPrice());
 
-                    ExchangeRate coinomeBTCRate = new ExchangeRate(4, "BTC", date, Double.parseDouble(coinomeResponse.getBTC().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getBTC().getHighestBid()));
+                    /*ExchangeRate coinomeBTCRate = new ExchangeRate(COINOME_ID, "BTC", date, Double.parseDouble(coinomeResponse.getBTC().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getBTC().getHighestBid()));
 
-                    ExchangeRate coinomeBCHRate = new ExchangeRate(4, "BCH", date, Double.parseDouble(coinomeResponse.getBCH().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getBCH().getHighestBid()));
+                    ExchangeRate coinomeBCHRate = new ExchangeRate(COINOME_ID, "BCH", date, Double.parseDouble(coinomeResponse.getBCH().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getBCH().getHighestBid()));
 
-                    ExchangeRate coinomeLTCRate = new ExchangeRate(4, "LTC", date, Double.parseDouble(coinomeResponse.getLTC().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getLTC().getHighestBid()));
+                    ExchangeRate coinomeLTCRate = new ExchangeRate(COINOME_ID, "LTC", date, Double.parseDouble(coinomeResponse.getLTC().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getLTC().getHighestBid()));*/
 
-                    ExchangeRate buyUcoinETHRate = new ExchangeRate(5, "ETH", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getEthBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getEthSellPrice()));
+                    ExchangeRate buyUcoinETHRate = new ExchangeRate(BUYUCOIN_ID, "ETH", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getEthBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getEthSellPrice()));
 
-                    ExchangeRate buyUcoinBTCRate = new ExchangeRate(5, "BTC", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getBtcBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getBtcSellPrice()));
+                    ExchangeRate buyUcoinBTCRate = new ExchangeRate(BUYUCOIN_ID, "BTC", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getBtcBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getBtcSellPrice()));
 
-                    ExchangeRate buyUcoinBCHRate = new ExchangeRate(5, "BCH", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getBchBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getBchSellPrice()));
+                    ExchangeRate buyUcoinBCHRate = new ExchangeRate(BUYUCOIN_ID, "BCH", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getBchBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getBchSellPrice()));
 
-                    ExchangeRate buyUcoinLTCRate = new ExchangeRate(5, "LTC", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getLtcBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getLtcSellPrice()));
+                    ExchangeRate buyUcoinLTCRate = new ExchangeRate(BUYUCOIN_ID, "LTC", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getLtcBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getLtcSellPrice()));
 
-                    ExchangeRate buyUcoinXRPRate = new ExchangeRate(5, "XRP", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getXrpBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getXrpSellPrice()));
+                    ExchangeRate buyUcoinXRPRate = new ExchangeRate(BUYUCOIN_ID, "XRP", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getXrpBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getXrpSellPrice()));
+
+                    for (CoindeltaResponse data : coindeltaResponse) {
+                        if ("btc-inr".equalsIgnoreCase(data.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "BTC", date, data.getLowestAsk(), data.getHighestBid());
+                            exchangeRates.add(rate);
+                        } else if ("eth-inr".equalsIgnoreCase(data.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "ETH", date, data.getLowestAsk(), data.getHighestBid());
+                            exchangeRates.add(rate);
+                        } else if ("ltc-inr".equalsIgnoreCase(data.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "LTC", date, data.getLowestAsk(), data.getHighestBid());
+                            exchangeRates.add(rate);
+                        } else if ("bch-inr".equalsIgnoreCase(data.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "BCH", date, data.getLowestAsk(), data.getHighestBid());
+                            exchangeRates.add(rate);
+                        } else if ("xrp-inr".equalsIgnoreCase(data.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "XRP", date, data.getLowestAsk(), data.getHighestBid());
+                            exchangeRates.add(rate);
+                        }
+                    }
+
+                    ExchangeRate pocketBitsBTCRate = new ExchangeRate(POCKETBITS_ID, "BTC", date, Double.parseDouble(pocketBitsBitcoinResponse.getRates().getBuyPrice()), Double.parseDouble(pocketBitsBitcoinResponse.getRates().getSellPrice()));
+
+                    for (PocketBitsAltcoinResponse response : pocketBitsAltcoinResponses) {
+                        if ("BCC".equalsIgnoreCase(response.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "BCH", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                            exchangeRates.add(rate);
+                        } else if ("ETH".equalsIgnoreCase(response.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "ETH", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                            exchangeRates.add(rate);
+                        } else if ("LTC".equalsIgnoreCase(response.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "LTC", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                            exchangeRates.add(rate);
+                        } else if ("XRP".equalsIgnoreCase(response.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "XRP", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                            exchangeRates.add(rate);
+                        }
+                    }
 
                     exchangeRates.add(koinexETHRate);
                     exchangeRates.add(koinexBTCRate);
@@ -112,14 +157,15 @@ public class RateService extends Service {
                     exchangeRates.add(koinexLTCRate);
                     exchangeRates.add(koinexXRPRate);
                     exchangeRates.add(zebpayRate);
-                    exchangeRates.add(coinomeBTCRate);
+                    /*exchangeRates.add(coinomeBTCRate);
                     exchangeRates.add(coinomeBCHRate);
-                    exchangeRates.add(coinomeLTCRate);
+                    exchangeRates.add(coinomeLTCRate);*/
                     exchangeRates.add(buyUcoinETHRate);
                     exchangeRates.add(buyUcoinBTCRate);
                     exchangeRates.add(buyUcoinBCHRate);
                     exchangeRates.add(buyUcoinLTCRate);
                     exchangeRates.add(buyUcoinXRPRate);
+                    exchangeRates.add(pocketBitsBTCRate);
 
                     checkArbitrage(exchangeRates);
                     return exchangeRates;
@@ -246,6 +292,10 @@ public class RateService extends Service {
 
             for (Map.Entry<Double, String> entry : profitToStringMap.entrySet()) {
                 notificationInboxStyle.addLine(entry.getValue());
+            }
+
+            if (profitToStringMap.size() == 1) {
+                notificationInboxStyle.addLine("Nothing more.");
             }
 
             NotificationManager notificationManager =
