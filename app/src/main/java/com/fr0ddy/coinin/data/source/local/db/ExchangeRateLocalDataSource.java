@@ -6,6 +6,7 @@ import com.fr0ddy.coinin.data.repository.ExchangeRateDataSource;
 import com.fr0ddy.coinin.data.source.local.db.dao.ExchangeRateDao;
 import com.fr0ddy.coinin.data.source.local.db.model.CurrentExchangeRate;
 import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
+import com.fr0ddy.coinin.data.source.remote.model.BitbnsResponse;
 import com.fr0ddy.coinin.data.source.remote.model.BuyUcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
@@ -49,7 +50,25 @@ public class ExchangeRateLocalDataSource implements ExchangeRateDataSource {
     }
 
     @Override
-    public Flowable<ZebpayResponse> fetchZebpayRates() {
+    public Flowable<ZebpayResponse> fetchZebpayBTCRates() {
+        // Not required in Local
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayBCHRates() {
+        // Not required in Local
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayLTCRates() {
+        // Not required in Local
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayXRPRates() {
         // Not required in Local
         return null;
     }
@@ -80,6 +99,12 @@ public class ExchangeRateLocalDataSource implements ExchangeRateDataSource {
 
     @Override
     public Flowable<CoinsecureResponse> fetchCoinsecureRates() {
+        // Not required in Local
+        return null;
+    }
+
+    @Override
+    public Flowable<List<BitbnsResponse>> fetchBitbnsRates() {
         // Not required in Local
         return null;
     }

@@ -1,5 +1,6 @@
 package com.fr0ddy.coinin.data.source.remote.service;
 
+import com.fr0ddy.coinin.data.source.remote.model.BitbnsResponse;
 import com.fr0ddy.coinin.data.source.remote.model.BuyUcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
@@ -25,8 +26,17 @@ public interface ExchangeRateService {
     @GET("https://www.coinome.com/api/v1/ticker.json")
     Flowable<CoinomeResponse> fetchCoinomeRates();
 
-    @GET("https://www.zebapi.com/api/v1/market/ticker/btc/inr")
-    Flowable<ZebpayResponse> fetchZebpayRates();
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/btc/inr")
+    Flowable<ZebpayResponse> fetchZebpayBTCRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/bch/inr")
+    Flowable<ZebpayResponse> fetchZebpayBCHRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/ltc/inr")
+    Flowable<ZebpayResponse> fetchZebpayLTCRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/xrp/inr")
+    Flowable<ZebpayResponse> fetchZebpayXRPRates();
 
     @GET("https://www.buyucoin.com/api/v1/crypto/")
     Flowable<BuyUcoinResponse> fetchBuyUcoinRates();
@@ -42,4 +52,7 @@ public interface ExchangeRateService {
 
     @GET("https://api.coinsecure.in/v1/exchange/ticker")
     Flowable<CoinsecureResponse> fetchCoinsecureRates();
+
+    @GET("https://bitbns.com/order/getTickerAll")
+    Flowable<List<BitbnsResponse>> fetchBitbnsRates();
 }

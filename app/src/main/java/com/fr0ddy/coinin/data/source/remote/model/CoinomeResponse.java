@@ -8,12 +8,16 @@ import com.google.gson.annotations.SerializedName;
 
 public class CoinomeResponse {
 
-    @SerializedName("BTC-INR")
+    @SerializedName("btc-inr")
     Data BTC;
-    @SerializedName("LTC-INR")
+    @SerializedName("ltc-inr")
     Data LTC;
-    @SerializedName("BCH-INR")
+    @SerializedName("bch-inr")
     Data BCH;
+    @SerializedName("dash-inr")
+    Data DASH;
+    @SerializedName("dgb-inr")
+    Data DGB;
 
     public Data getBTC() {
         return BTC;
@@ -39,6 +43,13 @@ public class CoinomeResponse {
         this.BCH = BCH;
     }
 
+    public Data getDASH() {
+        return DASH;
+    }
+
+    public Data getDGB() {
+        return DGB;
+    }
 
     public class Data {
         @SerializedName("last")

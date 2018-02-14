@@ -3,6 +3,7 @@ package com.fr0ddy.coinin.data.source.remote;
 import com.fr0ddy.coinin.data.repository.ExchangeRateDataSource;
 import com.fr0ddy.coinin.data.source.local.db.model.CurrentExchangeRate;
 import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
+import com.fr0ddy.coinin.data.source.remote.model.BitbnsResponse;
 import com.fr0ddy.coinin.data.source.remote.model.BuyUcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
@@ -45,8 +46,23 @@ public class ExchangeRateRemoteDataSource implements ExchangeRateDataSource {
     }
 
     @Override
-    public Flowable<ZebpayResponse> fetchZebpayRates() {
-        return exchangeRateService.fetchZebpayRates();
+    public Flowable<ZebpayResponse> fetchZebpayBTCRates() {
+        return exchangeRateService.fetchZebpayBTCRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayBCHRates() {
+        return exchangeRateService.fetchZebpayBCHRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayLTCRates() {
+        return exchangeRateService.fetchZebpayLTCRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayXRPRates() {
+        return exchangeRateService.fetchZebpayXRPRates();
     }
 
     @Override
@@ -72,6 +88,11 @@ public class ExchangeRateRemoteDataSource implements ExchangeRateDataSource {
     @Override
     public Flowable<CoinsecureResponse> fetchCoinsecureRates() {
         return exchangeRateService.fetchCoinsecureRates();
+    }
+
+    @Override
+    public Flowable<List<BitbnsResponse>> fetchBitbnsRates() {
+        return exchangeRateService.fetchBitbnsRates();
     }
 
     @Override

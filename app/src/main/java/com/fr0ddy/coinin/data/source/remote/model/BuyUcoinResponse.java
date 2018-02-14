@@ -34,6 +34,34 @@ public class BuyUcoinResponse {
         String bchBuyPrice;
         @SerializedName("bcc_sell_price")
         String bchSellPrice;
+        @SerializedName("dash_buy_price")
+        String dashBuyPrice;
+        @SerializedName("dash_sell_price")
+        String dashSellPrice;
+        @SerializedName("neo_buy_price")
+        String neoBuyPrice;
+        @SerializedName("neo_sell_price")
+        String neoSellPrice;
+        @SerializedName("etc_buy_price")
+        String etcBuyPrice;
+        @SerializedName("etc_sell_price")
+        String etcSellPrice;
+        @SerializedName("qtum_buy_price")
+        String qtumBuyPrice;
+        @SerializedName("qtum_sell_price")
+        String qtumSellPrice;
+        @SerializedName("xmr_buy_price")
+        String xmrBuyPrice;
+        @SerializedName("xmr_sell_price")
+        String xmrSellPrice;
+        @SerializedName("zec_buy_price")
+        String zecBuyPrice;
+        @SerializedName("zec_sell_price")
+        String zecSellPrice;
+        @SerializedName("omg_buy_price")
+        String omgBuyPrice;
+        @SerializedName("omg_sell_price")
+        String omgSellPrice;
 
         public String getBtcBuyPrice() {
             return btcBuyPrice;
@@ -113,6 +141,62 @@ public class BuyUcoinResponse {
 
         public void setBchSellPrice(String bchSellPrice) {
             this.bchSellPrice = bchSellPrice;
+        }
+
+        public String getDashBuyPrice() {
+            return dashBuyPrice;
+        }
+
+        public String getDashSellPrice() {
+            return dashSellPrice;
+        }
+
+        public String getNeoBuyPrice() {
+            return neoBuyPrice;
+        }
+
+        public String getNeoSellPrice() {
+            return neoSellPrice;
+        }
+
+        public String getEtcBuyPrice() {
+            return etcBuyPrice;
+        }
+
+        public String getEtcSellPrice() {
+            return etcSellPrice;
+        }
+
+        public String getQtumBuyPrice() {
+            return qtumBuyPrice;
+        }
+
+        public String getQtumSellPrice() {
+            return qtumSellPrice;
+        }
+
+        public String getXmrBuyPrice() {
+            return xmrBuyPrice;
+        }
+
+        public String getXmrSellPrice() {
+            return xmrSellPrice;
+        }
+
+        public String getZecBuyPrice() {
+            return zecBuyPrice;
+        }
+
+        public String getZecSellPrice() {
+            return zecSellPrice;
+        }
+
+        public String getOmgBuyPrice() {
+            return omgBuyPrice;
+        }
+
+        public String getOmgSellPrice() {
+            return omgSellPrice;
         }
 
         @Override

@@ -18,11 +18,14 @@ import com.fr0ddy.coinin.data.repository.ExchangeRepository;
 import com.fr0ddy.coinin.data.source.local.db.model.Exchange;
 import com.fr0ddy.coinin.data.source.local.db.model.ExchangeFees;
 import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
+import com.fr0ddy.coinin.data.source.remote.model.BitbnsResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
 import com.fr0ddy.coinin.di.component.DaggerServiceComponent;
 import com.fr0ddy.coinin.ui.home.HomeActivity;
 import com.fr0ddy.coinin.utils.rx.SchedulerProvider;
+
+import org.intellij.lang.annotations.Flow;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,8 +44,10 @@ import javax.inject.Inject;
 import io.reactivex.Flowable;
 import timber.log.Timber;
 
+import static com.fr0ddy.coinin.utils.AppConstants.BITBNS_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.BUYUCOIN_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.COINDELTA_ID;
+import static com.fr0ddy.coinin.utils.AppConstants.COINOME_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.COINSECURE_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.KOINEX_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.POCKETBITS_ID;
@@ -85,7 +90,23 @@ public class RateService extends Service {
                 Timber.i("Background service running");
                 Date date = new Date();
 
-                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), mExchangeRateRepository.fetchZebpayRates(), mExchangeRateRepository.fetchBuyUcoinRates(), mExchangeRateRepository.fetchCoindeltaRates(), mExchangeRateRepository.fetchPocketBitsBitcoinRates(), mExchangeRateRepository.fetchPocketBitsAltcoinRates(), mExchangeRateRepository.fetchCoinsecureRates(), (koinexResponse, zebpayResponse, buyUcoinResponse, coindeltaResponse, pocketBitsBitcoinResponse, pocketBitsAltcoinResponses, coinsecureResponse) -> {
+                Flowable.zip(mExchangeRateRepository.fetchZebpayBTCRates(), mExchangeRateRepository.fetchZebpayBCHRates(), mExchangeRateRepository.fetchZebpayLTCRates(), mExchangeRateRepository.fetchZebpayXRPRates(), (zebpayBTCResponse, zebpayBCHResponse, zebpayLTCResponse, zebpayXRPResponse) -> {
+                    List<ExchangeRate> exchangeRates = new ArrayList<>();
+                    ExchangeRate zebpayBTCRate = new ExchangeRate(ZEBPAY_ID, "BTC", date, zebpayBTCResponse.getBuyPrice(), zebpayBTCResponse.getSellPrice());
+                    exchangeRates.add(zebpayBTCRate);
+                    ExchangeRate zebpayBCHRate = new ExchangeRate(ZEBPAY_ID, "BCH", date, zebpayBCHResponse.getBuyPrice(), zebpayBCHResponse.getSellPrice());
+                    exchangeRates.add(zebpayBCHRate);
+                    ExchangeRate zebpayLTCRate = new ExchangeRate(ZEBPAY_ID, "LTC", date, zebpayLTCResponse.getBuyPrice(), zebpayLTCResponse.getSellPrice());
+                    exchangeRates.add(zebpayLTCRate);
+                    ExchangeRate zebpayXRPRate = new ExchangeRate(ZEBPAY_ID, "XRP", date, zebpayXRPResponse.getBuyPrice(), zebpayXRPResponse.getSellPrice());
+                    exchangeRates.add(zebpayXRPRate);
+                    return exchangeRates;
+                }).subscribeOn(schedulerProvider.io())
+                        .observeOn(schedulerProvider.computation())
+                        .subscribe(exchangeRates -> mExchangeRateRepository.saveRates(exchangeRates)
+                                , throwable -> Timber.e(throwable));;
+
+                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), mExchangeRateRepository.fetchPocketBitsBitcoinRates(), mExchangeRateRepository.fetchPocketBitsAltcoinRates(), mExchangeRateRepository.fetchBuyUcoinRates(), mExchangeRateRepository.fetchCoinomeRates(), mExchangeRateRepository.fetchCoindeltaRates(), mExchangeRateRepository.fetchBitbnsRates(), mExchangeRateRepository.fetchCoinsecureRates(), (koinexResponse, pocketBitsBitcoinResponse, pocketBitsAltcoinResponses, buyUcoinResponse, coinomeResponse, coindeltaResponse, bitbnsResponse, coinsecureResponse) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
                     ExchangeRate koinexETHRate = new ExchangeRate(KOINEX_ID, "ETH", date, Double.parseDouble(koinexResponse.getStats().getETH().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getETH().getHighestBid()));
 
@@ -97,13 +118,15 @@ public class RateService extends Service {
 
                     ExchangeRate koinexXRPRate = new ExchangeRate(KOINEX_ID, "XRP", date, Double.parseDouble(koinexResponse.getStats().getXRP().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getXRP().getHighestBid()));
 
-                    ExchangeRate zebpayRate = new ExchangeRate(ZEBPAY_ID, "BTC", date, zebpayResponse.getBuyPrice(), zebpayResponse.getSellPrice());
+                    ExchangeRate coinomeBTCRate = new ExchangeRate(COINOME_ID, "BTC", date, Double.parseDouble(coinomeResponse.getBTC().getLowestAsk()), Double.parseDouble(coinomeResponse.getBTC().getHighestBid()));
 
-                    /*ExchangeRate coinomeBTCRate = new ExchangeRate(COINOME_ID, "BTC", date, Double.parseDouble(coinomeResponse.getBTC().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getBTC().getHighestBid()));
+                    ExchangeRate coinomeBCHRate = new ExchangeRate(COINOME_ID, "BCH", date, Double.parseDouble(coinomeResponse.getBCH().getLowestAsk()), Double.parseDouble(coinomeResponse.getBCH().getHighestBid()));
 
-                    ExchangeRate coinomeBCHRate = new ExchangeRate(COINOME_ID, "BCH", date, Double.parseDouble(coinomeResponse.getBCH().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getBCH().getHighestBid()));
+                    ExchangeRate coinomeLTCRate = new ExchangeRate(COINOME_ID, "LTC", date, Double.parseDouble(coinomeResponse.getLTC().getLowestAsk()), Double.parseDouble(coinomeResponse.getLTC().getHighestBid()));
 
-                    ExchangeRate coinomeLTCRate = new ExchangeRate(COINOME_ID, "LTC", date, Double.parseDouble(coinomeResponse.getLTC().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getLTC().getHighestBid()));*/
+                    ExchangeRate coinomeDASHRate = new ExchangeRate(COINOME_ID, "DASH", date, Double.parseDouble(coinomeResponse.getDASH().getLowestAsk()), Double.parseDouble(coinomeResponse.getDASH().getHighestBid()));
+
+                    ExchangeRate coinomeDGBRate = new ExchangeRate(COINOME_ID, "DGB", date, Double.parseDouble(coinomeResponse.getDGB().getLowestAsk()), Double.parseDouble(coinomeResponse.getDGB().getHighestBid()));
 
                     ExchangeRate buyUcoinETHRate = new ExchangeRate(BUYUCOIN_ID, "ETH", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getEthBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getEthSellPrice()));
 
@@ -114,6 +137,20 @@ public class RateService extends Service {
                     ExchangeRate buyUcoinLTCRate = new ExchangeRate(BUYUCOIN_ID, "LTC", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getLtcBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getLtcSellPrice()));
 
                     ExchangeRate buyUcoinXRPRate = new ExchangeRate(BUYUCOIN_ID, "XRP", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getXrpBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getXrpSellPrice()));
+
+                    ExchangeRate buyUcoinZECRate = new ExchangeRate(BUYUCOIN_ID, "ZEC", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getZecBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getZecSellPrice()));
+
+                    ExchangeRate buyUcoinXMRRate = new ExchangeRate(BUYUCOIN_ID, "XMR", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getXmrBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getXmrSellPrice()));
+
+                    ExchangeRate buyUcoinQTUMRate = new ExchangeRate(BUYUCOIN_ID, "QTUM", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getQtumBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getQtumSellPrice()));
+
+                    ExchangeRate buyUcoinETCRate = new ExchangeRate(BUYUCOIN_ID, "ETC", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getEtcBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getEtcSellPrice()));
+
+                    ExchangeRate buyUcoinNEORate = new ExchangeRate(BUYUCOIN_ID, "NEO", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getNeoBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getNeoSellPrice()));
+
+                    ExchangeRate buyUcoinDASHRate = new ExchangeRate(BUYUCOIN_ID, "DASH", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getDashBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getDashSellPrice()));
+
+                    ExchangeRate buyUcoinOMGRate = new ExchangeRate(BUYUCOIN_ID, "OMG", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getOmgBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getOmgSellPrice()));
 
                     for (CoindeltaResponse data : coindeltaResponse) {
                         if ("btc-inr".equalsIgnoreCase(data.getMarketName())) {
@@ -131,6 +168,12 @@ public class RateService extends Service {
                         } else if ("xrp-inr".equalsIgnoreCase(data.getMarketName())) {
                             ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "XRP", date, data.getLowestAsk(), data.getHighestBid());
                             exchangeRates.add(rate);
+                        } else if ("qtum-inr".equalsIgnoreCase(data.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "QTUM", date, data.getLowestAsk(), data.getHighestBid());
+                            exchangeRates.add(rate);
+                        } else if ("omg-inr".equalsIgnoreCase(data.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "OMG", date, data.getLowestAsk(), data.getHighestBid());
+                            exchangeRates.add(rate);
                         }
                     }
 
@@ -139,6 +182,15 @@ public class RateService extends Service {
                     for (PocketBitsAltcoinResponse response : pocketBitsAltcoinResponses) {
                         if ("BCC".equalsIgnoreCase(response.getMarketName())) {
                             ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "BCH", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                            exchangeRates.add(rate);
+                        }  else if ("BTG".equalsIgnoreCase(response.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "BTG", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                            exchangeRates.add(rate);
+                        }  else if ("DGB".equalsIgnoreCase(response.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "DGB", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                            exchangeRates.add(rate);
+                        }  else if ("XLM".equalsIgnoreCase(response.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "XLM", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
                             exchangeRates.add(rate);
                         } else if ("ETH".equalsIgnoreCase(response.getMarketName())) {
                             ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "ETH", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
@@ -149,27 +201,82 @@ public class RateService extends Service {
                         } else if ("XRP".equalsIgnoreCase(response.getMarketName())) {
                             ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "XRP", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
                             exchangeRates.add(rate);
+                        } else if ("DASH".equalsIgnoreCase(response.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "DASH", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                            exchangeRates.add(rate);
+                        } else if ("ETC".equalsIgnoreCase(response.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "ETC", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                            exchangeRates.add(rate);
+                        } else if ("XMR".equalsIgnoreCase(response.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "XMR", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                            exchangeRates.add(rate);
+                        } else if ("NEO".equalsIgnoreCase(response.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "NEO", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                            exchangeRates.add(rate);
+                        } else if ("OMG".equalsIgnoreCase(response.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "OMG", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                            exchangeRates.add(rate);
+                        } else if ("ZEC".equalsIgnoreCase(response.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "ZEC", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                            exchangeRates.add(rate);
+                        } else if ("SC".equalsIgnoreCase(response.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "SC", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                            exchangeRates.add(rate);
+                        } else if ("XVG".equalsIgnoreCase(response.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "XVG", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                            exchangeRates.add(rate);
+                        } else if ("VOX".equalsIgnoreCase(response.getMarketName())) {
+                            ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "VOX", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                            exchangeRates.add(rate);
                         }
                     }
 
                     ExchangeRate coinsecureBTCRate = new ExchangeRate(COINSECURE_ID, "BTC", date, coinsecureResponse.getMessage().getLowestAsk() / 100.0, coinsecureResponse.getMessage().getHighestBid() / 100.0);
+
+                    for (BitbnsResponse response : bitbnsResponse) {
+                        if (response.getBTC() != null) {
+                            ExchangeRate rate = new ExchangeRate(BITBNS_ID, "BTC", date, response.getBTC().getSellPrice(), response.getBTC().getBuyPrice());
+                            exchangeRates.add(rate);
+                        } else if (response.getXRP() != null) {
+                            ExchangeRate rate = new ExchangeRate(BITBNS_ID, "XRP", date, response.getXRP().getSellPrice(), response.getXRP().getBuyPrice());
+                            exchangeRates.add(rate);
+                        } else if (response.getNEO() != null) {
+                            ExchangeRate rate = new ExchangeRate(BITBNS_ID, "NEO", date, response.getNEO().getSellPrice(), response.getNEO().getBuyPrice());
+                            exchangeRates.add(rate);
+                        } else if (response.getETH() != null) {
+                            ExchangeRate rate = new ExchangeRate(BITBNS_ID, "ETH", date, response.getETH().getSellPrice(), response.getETH().getBuyPrice());
+                            exchangeRates.add(rate);
+                        } else if (response.getXLM() != null) {
+                            ExchangeRate rate = new ExchangeRate(BITBNS_ID, "XLM", date, response.getXLM().getSellPrice(), response.getXLM().getBuyPrice());
+                            exchangeRates.add(rate);
+                        }
+                    }
 
                     exchangeRates.add(koinexETHRate);
                     exchangeRates.add(koinexBTCRate);
                     exchangeRates.add(koinexBCHRate);
                     exchangeRates.add(koinexLTCRate);
                     exchangeRates.add(koinexXRPRate);
-                    exchangeRates.add(zebpayRate);
-                    /*exchangeRates.add(coinomeBTCRate);
+                    exchangeRates.add(coinomeBTCRate);
                     exchangeRates.add(coinomeBCHRate);
-                    exchangeRates.add(coinomeLTCRate);*/
+                    exchangeRates.add(coinomeLTCRate);
+                    exchangeRates.add(coinomeDASHRate);
+                    exchangeRates.add(coinomeDGBRate);
                     exchangeRates.add(buyUcoinETHRate);
                     exchangeRates.add(buyUcoinBTCRate);
                     exchangeRates.add(buyUcoinBCHRate);
                     exchangeRates.add(buyUcoinLTCRate);
                     exchangeRates.add(buyUcoinXRPRate);
-                    exchangeRates.add(pocketBitsBTCRate);
+                    exchangeRates.add(buyUcoinZECRate);
+                    exchangeRates.add(buyUcoinXMRRate);
+                    exchangeRates.add(buyUcoinQTUMRate);
+                    exchangeRates.add(buyUcoinETCRate);
+                    exchangeRates.add(buyUcoinXRPRate);
+                    exchangeRates.add(buyUcoinNEORate);
+                    exchangeRates.add(buyUcoinDASHRate);
+                    exchangeRates.add(buyUcoinOMGRate);
                     exchangeRates.add(coinsecureBTCRate);
+                    exchangeRates.add(pocketBitsBTCRate);
 
                     checkArbitrage(exchangeRates);
                     return exchangeRates;
@@ -230,12 +337,15 @@ public class RateService extends Service {
                             if (profitPercentage > 1) {
                                 double breakEvenINR = ((sellCost * fromFee.getTransferFee()) /
                                         (sellCost - buyCost)) * sellCost;
-                                profitToStringMap.put(profitPercentage, currency + " " +
-                                        exchangeToNameMap.get(fromExchangeRate.getExchangeId()) + " → " +
-                                        exchangeToNameMap.get(toExchangeRate.getExchangeId()) + " " +
-                                        String.format("%.2f%%", profitPercentage) + " " + String.format("%.0f", breakEvenINR));
 
-                                notificationCurrencies.add(currency);
+                                if (breakEvenINR < 10000.0) {
+                                    profitToStringMap.put(profitPercentage, currency + " " +
+                                            exchangeToNameMap.get(fromExchangeRate.getExchangeId()) + " → " +
+                                            exchangeToNameMap.get(toExchangeRate.getExchangeId()) + " " +
+                                            String.format("%.2f%%", profitPercentage) + " " + String.format("%.0f", breakEvenINR));
+
+                                    notificationCurrencies.add(currency);
+                                }
                             }
                         }
                     }
@@ -256,12 +366,15 @@ public class RateService extends Service {
                             if (profitPercentage > 1) {
                                 double breakEvenINR = ((sellCost * fromFee.getTransferFee()) /
                                         (sellCost - buyCost)) * sellCost;
-                                profitToStringMap.put(profitPercentage, currency + " " +
-                                        exchangeToNameMap.get(fromExchangeRate.getExchangeId()) + " → " +
-                                        exchangeToNameMap.get(toExchangeRate.getExchangeId()) + " " +
-                                        String.format("%.2f%%", profitPercentage) + " " + String.format("%.0f", breakEvenINR));
 
-                                notificationCurrencies.add(currency);
+                                if (breakEvenINR < 10000.0) {
+                                    profitToStringMap.put(profitPercentage, currency + " " +
+                                            exchangeToNameMap.get(fromExchangeRate.getExchangeId()) + " → " +
+                                            exchangeToNameMap.get(toExchangeRate.getExchangeId()) + " " +
+                                            String.format("%.2f%%", profitPercentage) + " " + String.format("%.0f", breakEvenINR));
+
+                                    notificationCurrencies.add(currency);
+                                }
                             }
                         }
                     }

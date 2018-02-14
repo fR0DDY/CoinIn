@@ -4,6 +4,7 @@ import com.fr0ddy.coinin.data.source.Local;
 import com.fr0ddy.coinin.data.source.Remote;
 import com.fr0ddy.coinin.data.source.local.db.model.CurrentExchangeRate;
 import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
+import com.fr0ddy.coinin.data.source.remote.model.BitbnsResponse;
 import com.fr0ddy.coinin.data.source.remote.model.BuyUcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
@@ -47,8 +48,23 @@ public class ExchangeRateRepository implements ExchangeRateDataSource {
     }
 
     @Override
-    public Flowable<ZebpayResponse> fetchZebpayRates() {
-        return mExchangeRateRemoteDataSource.fetchZebpayRates();
+    public Flowable<ZebpayResponse> fetchZebpayBTCRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayBTCRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayBCHRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayBCHRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayLTCRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayLTCRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayXRPRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayXRPRates();
     }
 
     @Override
@@ -79,6 +95,11 @@ public class ExchangeRateRepository implements ExchangeRateDataSource {
     @Override
     public List<Long> saveRates(List<ExchangeRate> exchangeRates) {
         return mExchangeRateLocalDataSource.saveRates(exchangeRates);
+    }
+
+    @Override
+    public Flowable<List<BitbnsResponse>> fetchBitbnsRates() {
+        return mExchangeRateRemoteDataSource.fetchBitbnsRates();
     }
 
     @Override
