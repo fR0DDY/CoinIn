@@ -10,6 +10,7 @@ import com.fr0ddy.coinin.data.source.remote.model.CoinsecureResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsBitcoinResponse;
+import com.fr0ddy.coinin.data.source.remote.model.ThroughbitResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ZebpayResponse;
 
 import java.util.List;
@@ -44,6 +45,8 @@ public interface ExchangeRateDataSource {
     Flowable<CoinsecureResponse> fetchCoinsecureRates();
 
     Flowable<List<BitbnsResponse>> fetchBitbnsRates();
+
+    Flowable<ThroughbitResponse> fetchThroughbitRates();
 
     List<Long> saveRates(List<ExchangeRate> exchangeRates);
 

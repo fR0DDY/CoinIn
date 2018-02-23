@@ -18,6 +18,8 @@ public class CoinomeResponse {
     Data DASH;
     @SerializedName("dgb-inr")
     Data DGB;
+    @SerializedName("zec-inr")
+    Data ZEC;
 
     public Data getBTC() {
         return BTC;
@@ -49,6 +51,10 @@ public class CoinomeResponse {
 
     public Data getDGB() {
         return DGB;
+    }
+
+    public Data getZEC() {
+        return ZEC;
     }
 
     public class Data {

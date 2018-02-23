@@ -14,6 +14,7 @@ import com.fr0ddy.coinin.data.source.remote.model.CoinsecureResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsBitcoinResponse;
+import com.fr0ddy.coinin.data.source.remote.model.ThroughbitResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ZebpayResponse;
 
 import java.util.List;
@@ -105,6 +106,12 @@ public class ExchangeRateLocalDataSource implements ExchangeRateDataSource {
 
     @Override
     public Flowable<List<BitbnsResponse>> fetchBitbnsRates() {
+        // Not required in Local
+        return null;
+    }
+
+    @Override
+    public Flowable<ThroughbitResponse> fetchThroughbitRates() {
         // Not required in Local
         return null;
     }

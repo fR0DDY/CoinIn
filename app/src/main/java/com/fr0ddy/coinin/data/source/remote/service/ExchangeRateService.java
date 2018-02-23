@@ -8,6 +8,7 @@ import com.fr0ddy.coinin.data.source.remote.model.CoinsecureResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsBitcoinResponse;
+import com.fr0ddy.coinin.data.source.remote.model.ThroughbitResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ZebpayResponse;
 
 import java.util.List;
@@ -55,4 +56,7 @@ public interface ExchangeRateService {
 
     @GET("https://bitbns.com/order/getTickerAll")
     Flowable<List<BitbnsResponse>> fetchBitbnsRates();
+
+    @GET("https://www.throughbit.com/tbit_ci/index.php/cryptoprice")
+    Flowable<ThroughbitResponse> fetchThroughbitRates();
 }

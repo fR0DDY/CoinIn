@@ -24,6 +24,8 @@ public class KoinexResponse {
         Data LTC;
         Data XRP;
         Data BCH;
+        Data OMG;
+        Data REQ;
 
         public Data getETH() {
             return ETH;
@@ -63,6 +65,14 @@ public class KoinexResponse {
 
         public void setBCH(Data BCH) {
             this.BCH = BCH;
+        }
+
+        public Data getOMG() {
+            return OMG;
+        }
+
+        public Data getREQ() {
+            return REQ;
         }
 
         @Override
