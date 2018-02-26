@@ -90,7 +90,7 @@ public class RateService extends Service {
                 Timber.i("Background service running");
                 Date date = new Date();
 
-                Flowable<List<ExchangeRate>> zebpay = Flowable.zip(mExchangeRateRepository.fetchZebpayBTCRates(), mExchangeRateRepository.fetchZebpayBCHRates(), mExchangeRateRepository.fetchZebpayLTCRates(), mExchangeRateRepository.fetchZebpayXRPRates(), (zebpayBTCResponse, zebpayBCHResponse, zebpayLTCResponse, zebpayXRPResponse) -> {
+                Flowable<List<ExchangeRate>> zebpay = Flowable.zip(mExchangeRateRepository.fetchZebpayBTCRates(), mExchangeRateRepository.fetchZebpayBCHRates(), mExchangeRateRepository.fetchZebpayLTCRates(), mExchangeRateRepository.fetchZebpayETHRates(), mExchangeRateRepository.fetchZebpayXRPRates(), (zebpayBTCResponse, zebpayBCHResponse, zebpayLTCResponse, zebpayETHResponse, zebpayXRPResponse) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
                     ExchangeRate zebpayBTCRate = new ExchangeRate(ZEBPAY_ID, "BTC", date, zebpayBTCResponse.getBuyPrice(), zebpayBTCResponse.getSellPrice());
                     exchangeRates.add(zebpayBTCRate);
@@ -100,6 +100,8 @@ public class RateService extends Service {
                     exchangeRates.add(zebpayLTCRate);
                     ExchangeRate zebpayXRPRate = new ExchangeRate(ZEBPAY_ID, "XRP", date, zebpayXRPResponse.getBuyPrice(), zebpayXRPResponse.getSellPrice());
                     exchangeRates.add(zebpayXRPRate);
+                    ExchangeRate zebpayETHRate = new ExchangeRate(ZEBPAY_ID, "ETH", date, zebpayETHResponse.getBuyPrice(), zebpayETHResponse.getSellPrice());
+                    exchangeRates.add(zebpayETHRate);
                     return exchangeRates;
                 });
 

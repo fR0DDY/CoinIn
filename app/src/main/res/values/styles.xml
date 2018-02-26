@@ -16,12 +16,6 @@
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back_white_24px</item>
     </style>
 
-    <style name="AppThemeFullScreen" parent="AppTheme">
-        <item name="colorPrimary">@color/white</item>
-        <item name="colorPrimaryDark">@color/white</item>
-        <item name="android:windowBackground">@color/white</item>
-    </style>
-
     <style name="MaterialDrawer.DrawerArrowStyle" parent="Widget.AppCompat.DrawerArrowToggle">
         <item name="spinBars">false</item>
         <item name="color">@color/white</item>
@@ -36,10 +30,6 @@
     </style>
 
     <style name="TextAppearance.Text.Light" parent="android:TextAppearance">
-        <item name="android:fontFamily">sans-serif</item>
-    </style>
-
-    <style name="TextAppearance.Text.Italic" parent="android:TextAppearance">
         <item name="android:fontFamily">sans-serif</item>
     </style>
 
@@ -66,23 +56,6 @@
         <item name="android:textAppearance">@style/TextAppearance.Text.Bold</item>
         <item name="android:textColor">@color/text_heading</item>
         <item name="android:textStyle">bold</item>
-    </style>
-
-    <style name="TextStyle.Comment" parent="TextStyle">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textAppearance">@style/TextAppearance.Text.Italic</item>
-    </style>
-
-    <style name="Toolbar" parent="Base.ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:minHeight">?attr/actionBarSize</item>
-        <item name="colorControlNormal">@color/white</item>
-    </style>
-
-    <style name="Toolbar.TitleText" parent="TextStyle.Heading">
-        <item name="android:textColor">@color/white</item>
-        <item name="android:textSize">22sp</item>
     </style>
 
 </resources>
