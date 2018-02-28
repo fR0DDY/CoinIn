@@ -22,6 +22,7 @@ public final class AppConstants {
     public static final int POCKETBITS_ID = 7;
     public static final int COINSECURE_ID = 8;
     public static final int BITBNS_ID = 9;
+    public static final int OXYBIT_ID = 10;
 
     private AppConstants() {
 

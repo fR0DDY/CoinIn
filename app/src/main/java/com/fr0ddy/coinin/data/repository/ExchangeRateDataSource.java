@@ -8,6 +8,7 @@ import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinsecureResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
+import com.fr0ddy.coinin.data.source.remote.model.OxybitResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsBitcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ThroughbitResponse;
@@ -49,6 +50,8 @@ public interface ExchangeRateDataSource {
     Flowable<List<BitbnsResponse>> fetchBitbnsRates();
 
     Flowable<ThroughbitResponse> fetchThroughbitRates();
+
+    Flowable<OxybitResponse> fetchOxybitRates();
 
     List<Long> saveRates(List<ExchangeRate> exchangeRates);
 

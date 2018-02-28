@@ -10,8 +10,11 @@ public class BitbnsResponse {
     Data BTC;
     Data XRP;
     Data NEO;
+    Data GAS;
     Data ETH;
     Data XLM;
+    Data RPX;
+    Data DBC;
 
     public class Data {
         @SerializedName("sellPrice")
@@ -84,5 +87,29 @@ public class BitbnsResponse {
 
     public void setXLM(Data XLM) {
         this.XLM = XLM;
+    }
+
+    public Data getGAS() {
+        return GAS;
+    }
+
+    public void setGAS(Data GAS) {
+        this.GAS = GAS;
+    }
+
+    public Data getRPX() {
+        return RPX;
+    }
+
+    public void setRPX(Data RPX) {
+        this.RPX = RPX;
+    }
+
+    public Data getDBC() {
+        return DBC;
+    }
+
+    public void setDBC(Data DBC) {
+        this.DBC = DBC;
     }
 }

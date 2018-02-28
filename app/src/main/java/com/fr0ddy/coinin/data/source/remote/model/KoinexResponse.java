@@ -26,6 +26,7 @@ public class KoinexResponse {
         Data BCH;
         Data OMG;
         Data REQ;
+        Data ZRX;
 
         public Data getETH() {
             return ETH;
@@ -73,6 +74,22 @@ public class KoinexResponse {
 
         public Data getREQ() {
             return REQ;
+        }
+
+        public void setOMG(Data OMG) {
+            this.OMG = OMG;
+        }
+
+        public void setREQ(Data REQ) {
+            this.REQ = REQ;
+        }
+
+        public Data getZRX() {
+            return ZRX;
+        }
+
+        public void setZRX(Data ZRX) {
+            this.ZRX = ZRX;
         }
 
         @Override

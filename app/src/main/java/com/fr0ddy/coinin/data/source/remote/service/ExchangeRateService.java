@@ -6,6 +6,7 @@ import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinsecureResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
+import com.fr0ddy.coinin.data.source.remote.model.OxybitResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsBitcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ThroughbitResponse;
@@ -62,4 +63,7 @@ public interface ExchangeRateService {
 
     @GET("https://www.throughbit.com/tbit_ci/index.php/cryptoprice")
     Flowable<ThroughbitResponse> fetchThroughbitRates();
+
+    @GET("https://api.oxybit.com/trade/ticker")
+    Flowable<OxybitResponse> fetchOxybitRates();
 }
