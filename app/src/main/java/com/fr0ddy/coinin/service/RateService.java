@@ -218,6 +218,12 @@ public class RateService extends Service {
                         } else if (response.getDBC() != null) {
                             ExchangeRate rate = new ExchangeRate(BITBNS_ID, "DBC", date, response.getDBC().getSellPrice(), response.getDBC().getBuyPrice());
                             exchangeRates.add(rate);
+                        } else if (response.getLTC() != null) {
+                            ExchangeRate rate = new ExchangeRate(BITBNS_ID, "LTC", date, response.getLTC().getSellPrice(), response.getLTC().getBuyPrice());
+                            exchangeRates.add(rate);
+                        } else if (response.getXMR() != null) {
+                            ExchangeRate rate = new ExchangeRate(BITBNS_ID, "XMR", date, response.getXMR().getSellPrice(), response.getXMR().getBuyPrice());
+                            exchangeRates.add(rate);
                         }
                     }
 

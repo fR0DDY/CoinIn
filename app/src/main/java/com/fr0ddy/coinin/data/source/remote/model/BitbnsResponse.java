@@ -15,6 +15,8 @@ public class BitbnsResponse {
     Data XLM;
     Data RPX;
     Data DBC;
+    Data LTC;
+    Data XMR;
 
     public class Data {
         @SerializedName("sellPrice")
@@ -111,5 +113,21 @@ public class BitbnsResponse {
 
     public void setDBC(Data DBC) {
         this.DBC = DBC;
+    }
+
+    public Data getLTC() {
+        return LTC;
+    }
+
+    public void setLTC(Data LTC) {
+        this.LTC = LTC;
+    }
+
+    public Data getXMR() {
+        return XMR;
+    }
+
+    public void setXMR(Data XMR) {
+        this.XMR = XMR;
     }
 }
