@@ -27,6 +27,9 @@ public class KoinexResponse {
         Data OMG;
         Data REQ;
         Data ZRX;
+        Data AE;
+        Data BAT;
+        Data GNT;
 
         public Data getETH() {
             return ETH;
@@ -90,6 +93,30 @@ public class KoinexResponse {
 
         public void setZRX(Data ZRX) {
             this.ZRX = ZRX;
+        }
+
+        public Data getAE() {
+            return AE;
+        }
+
+        public void setAE(Data AE) {
+            this.AE = AE;
+        }
+
+        public Data getBAT() {
+            return BAT;
+        }
+
+        public void setBAT(Data BAT) {
+            this.BAT = BAT;
+        }
+
+        public Data getGNT() {
+            return GNT;
+        }
+
+        public void setGNT(Data GNT) {
+            this.GNT = GNT;
         }
 
         @Override
