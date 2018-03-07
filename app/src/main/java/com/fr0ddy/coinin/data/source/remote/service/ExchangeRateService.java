@@ -5,6 +5,7 @@ import com.fr0ddy.coinin.data.source.remote.model.BuyUcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinsecureResponse;
+import com.fr0ddy.coinin.data.source.remote.model.CoinslabResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
 import com.fr0ddy.coinin.data.source.remote.model.OxybitResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
@@ -66,4 +67,7 @@ public interface ExchangeRateService {
 
     @GET("https://api.oxybit.com/trade/ticker")
     Flowable<OxybitResponse> fetchOxybitRates();
+
+    @GET("https://www.coinslab.com/api/v1/ticker/btc/inr")
+    Flowable<CoinslabResponse> fetchCoinslabRates();
 }

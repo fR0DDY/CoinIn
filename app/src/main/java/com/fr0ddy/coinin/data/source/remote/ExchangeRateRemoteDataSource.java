@@ -8,6 +8,7 @@ import com.fr0ddy.coinin.data.source.remote.model.BuyUcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinsecureResponse;
+import com.fr0ddy.coinin.data.source.remote.model.CoinslabResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
 import com.fr0ddy.coinin.data.source.remote.model.OxybitResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
@@ -110,6 +111,11 @@ public class ExchangeRateRemoteDataSource implements ExchangeRateDataSource {
     @Override
     public Flowable<OxybitResponse> fetchOxybitRates() {
         return exchangeRateService.fetchOxybitRates();
+    }
+
+    @Override
+    public Flowable<CoinslabResponse> fetchCoinslabRates() {
+        return exchangeRateService.fetchCoinslabRates();
     }
 
     @Override

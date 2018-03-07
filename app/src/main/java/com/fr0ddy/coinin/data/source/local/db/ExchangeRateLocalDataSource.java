@@ -11,6 +11,7 @@ import com.fr0ddy.coinin.data.source.remote.model.BuyUcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinsecureResponse;
+import com.fr0ddy.coinin.data.source.remote.model.CoinslabResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
 import com.fr0ddy.coinin.data.source.remote.model.OxybitResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
@@ -125,6 +126,12 @@ public class ExchangeRateLocalDataSource implements ExchangeRateDataSource {
 
     @Override
     public Flowable<OxybitResponse> fetchOxybitRates() {
+        // Not required in Local
+        return null;
+    }
+
+    @Override
+    public Flowable<CoinslabResponse> fetchCoinslabRates() {
         // Not required in Local
         return null;
     }

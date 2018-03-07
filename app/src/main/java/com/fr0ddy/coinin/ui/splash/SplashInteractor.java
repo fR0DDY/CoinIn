@@ -18,6 +18,7 @@ import static com.fr0ddy.coinin.utils.AppConstants.BUYUCOIN_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.COINDELTA_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.COINOME_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.COINSECURE_ID;
+import static com.fr0ddy.coinin.utils.AppConstants.COINSLAB_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.KOINEX_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.OXYBIT_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.POCKETBITS_ID;
@@ -52,8 +53,9 @@ public class SplashInteractor extends BaseInteractor
         Exchange coinsecure = new Exchange(COINSECURE_ID, "Coinsecure", "IND");
         Exchange bitbns = new Exchange(BITBNS_ID, "Bitbns", "IND");
         Exchange oxybit = new Exchange(OXYBIT_ID, "Oxybit", "IND");
+        Exchange coinslab = new Exchange(COINSLAB_ID, "Coinslab", "IND");
 
-        List<Exchange> exchanges = Arrays.asList(koinex, throughbit, zebpay, coinome, buyUcoin, coindelta, pocketBits, coinsecure, bitbns, oxybit);
+        List<Exchange> exchanges = Arrays.asList(koinex, throughbit, zebpay, coinome, buyUcoin, coindelta, pocketBits, coinsecure, bitbns, oxybit, coinslab);
 
         return Observable.fromCallable(() -> mExchangeRepository.insertExchanges(exchanges));
     }
@@ -181,7 +183,9 @@ public class SplashInteractor extends BaseInteractor
         ExchangeFees oxybitFees32 = new ExchangeFees(102, OXYBIT_ID, "NEO", 0.0, 0.0, 0.01);
         ExchangeFees oxybitFees33 = new ExchangeFees(103, OXYBIT_ID, "GAS", 0.0, 0.0, 0.1);
 
-        List<ExchangeFees> exchangeFees = Arrays.asList(koinexETHFees, koinexBTCFees, koinexBCHFees, koinexLTCFees, koinexXRPFees, throughbitETHFees, throughbitBTCFees, zebpayBTCFees, coinomeBTCFees, zebpayLTCFees, zebpayXRPFees, coinomeBCHFees, coinomeLTCFees, buyUcoinETHFees, buyUcoinBTCFees, buyUcoinBCHFees, buyUcoinLTCFees, buyUcoinXRPFees, coindeltaETHFees, coindeltaBTCFees, coindeltaBCHFees, coindeltaLTCFees, coindeltaXRPFees, pocketBitsETHFees, pocketBitsBTCFees, pocketBitsBCHFees, pocketBitsLTCFees, pocketBitsXRPFees, pocketBitsBTGFees, pocketBitsDGBFees, pocketBitsXLMFees, pocketBitsSCFees, pocketBitsXVGFees, pocketBitsVOXFees, coinsecureBTCFees, zebpayBCHFees, coinomeDASHFees, buyUcoinDASHFees, buyUcoinNEOFees, buyUcoinETCFees, buyUcoinQTUMFees, buyUcoinXMRFees, buyUcoinZECFees, buyUcoinOMGFees, coindeltaOMGFees, coindeltaQTUMFees, pocketBitsDASHFees, pocketBitsETCFees, pocketBitsXMRFees, pocketBitsNEOFees, pocketBitsOMGFees, pocketBitsZECFees, bitBnsBTCFees, bitBnsXRPFees, bitBnsNEOFees, bitBnsETHFees, bitBnsXLMFees, coinomeDGBFees, koinexOMGFees, koinexREQFees, zebpayETHFees, coinomeZECFees, oxybitFees1, oxybitFees2, oxybitFees3, oxybitFees4, oxybitFees5, oxybitFees6, oxybitFees7, oxybitFees8, oxybitFees9, oxybitFees10, oxybitFees11, oxybitFees12, oxybitFees13, oxybitFees14, oxybitFees15, oxybitFees16, oxybitFees17, oxybitFees18, oxybitFees19, oxybitFees20, oxybitFees21, oxybitFees22, oxybitFees23, oxybitFees24, oxybitFees25, oxybitFees26, oxybitFees27, oxybitFees28, oxybitFees29, oxybitFees30, oxybitFees31, koinexZRXFees, bitBnsGASFees, bitBnsRPXFees, bitBnsDBCFees, bitBnsLTCFees, bitBnsXMRFees, koinexAEFees, koinexBATFees, koinexGNTFees, oxybitFees32, oxybitFees33, bitBnsSIAFees, bitBnsDOGEFees, bitBnsBCHFees, bitBnsDASHFees, pocketBitsTRXFees);
+        ExchangeFees coinslabFees = new ExchangeFees(108, COINSLAB_ID, "BTC", 0.0, 0.0, 0.0002);
+
+        List<ExchangeFees> exchangeFees = Arrays.asList(koinexETHFees, koinexBTCFees, koinexBCHFees, koinexLTCFees, koinexXRPFees, throughbitETHFees, throughbitBTCFees, zebpayBTCFees, coinomeBTCFees, zebpayLTCFees, zebpayXRPFees, coinomeBCHFees, coinomeLTCFees, buyUcoinETHFees, buyUcoinBTCFees, buyUcoinBCHFees, buyUcoinLTCFees, buyUcoinXRPFees, coindeltaETHFees, coindeltaBTCFees, coindeltaBCHFees, coindeltaLTCFees, coindeltaXRPFees, pocketBitsETHFees, pocketBitsBTCFees, pocketBitsBCHFees, pocketBitsLTCFees, pocketBitsXRPFees, pocketBitsBTGFees, pocketBitsDGBFees, pocketBitsXLMFees, pocketBitsSCFees, pocketBitsXVGFees, pocketBitsVOXFees, coinsecureBTCFees, zebpayBCHFees, coinomeDASHFees, buyUcoinDASHFees, buyUcoinNEOFees, buyUcoinETCFees, buyUcoinQTUMFees, buyUcoinXMRFees, buyUcoinZECFees, buyUcoinOMGFees, coindeltaOMGFees, coindeltaQTUMFees, pocketBitsDASHFees, pocketBitsETCFees, pocketBitsXMRFees, pocketBitsNEOFees, pocketBitsOMGFees, pocketBitsZECFees, bitBnsBTCFees, bitBnsXRPFees, bitBnsNEOFees, bitBnsETHFees, bitBnsXLMFees, coinomeDGBFees, koinexOMGFees, koinexREQFees, zebpayETHFees, coinomeZECFees, oxybitFees1, oxybitFees2, oxybitFees3, oxybitFees4, oxybitFees5, oxybitFees6, oxybitFees7, oxybitFees8, oxybitFees9, oxybitFees10, oxybitFees11, oxybitFees12, oxybitFees13, oxybitFees14, oxybitFees15, oxybitFees16, oxybitFees17, oxybitFees18, oxybitFees19, oxybitFees20, oxybitFees21, oxybitFees22, oxybitFees23, oxybitFees24, oxybitFees25, oxybitFees26, oxybitFees27, oxybitFees28, oxybitFees29, oxybitFees30, oxybitFees31, koinexZRXFees, bitBnsGASFees, bitBnsRPXFees, bitBnsDBCFees, bitBnsLTCFees, bitBnsXMRFees, koinexAEFees, koinexBATFees, koinexGNTFees, oxybitFees32, oxybitFees33, bitBnsSIAFees, bitBnsDOGEFees, bitBnsBCHFees, bitBnsDASHFees, pocketBitsTRXFees, coinslabFees);
 
         return Observable.fromCallable(() -> mExchangeRepository.insertExchangeFees(exchangeFees));
     }

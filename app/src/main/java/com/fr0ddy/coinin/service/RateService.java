@@ -48,6 +48,7 @@ import static com.fr0ddy.coinin.utils.AppConstants.BUYUCOIN_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.COINDELTA_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.COINOME_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.COINSECURE_ID;
+import static com.fr0ddy.coinin.utils.AppConstants.COINSLAB_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.KOINEX_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.POCKETBITS_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.THROUGHBIT_ID;
@@ -170,7 +171,7 @@ public class RateService extends Service {
                 });
 
 
-                Flowable<List<ExchangeRate>> exchangeRatesGroup = Flowable.zip(mExchangeRateRepository.fetchCoindeltaRates(), mExchangeRateRepository.fetchBitbnsRates(), mExchangeRateRepository.fetchThroughbitRates(), mExchangeRateRepository.fetchOxybitRates(), (coindeltaResponse, bitbnsResponse, throughbitResponse, oxybitResponse) -> {
+                Flowable<List<ExchangeRate>> exchangeRatesGroup = Flowable.zip(mExchangeRateRepository.fetchCoindeltaRates(), mExchangeRateRepository.fetchBitbnsRates(), mExchangeRateRepository.fetchThroughbitRates(), mExchangeRateRepository.fetchOxybitRates(), mExchangeRateRepository.fetchCoinslabRates(), (coindeltaResponse, bitbnsResponse, throughbitResponse, oxybitResponse, coinslabResponse) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
                     for (CoindeltaResponse data : coindeltaResponse) {
                         if ("btc-inr".equalsIgnoreCase(data.getMarketName())) {
@@ -252,6 +253,8 @@ public class RateService extends Service {
                         }
                     }
                     exchangeRates.addAll(oxybitResponse.getExchangeRates(date));
+
+                    exchangeRates.add(new ExchangeRate(COINSLAB_ID, "BTC", date, coinslabResponse.getBuyPrice(), coinslabResponse.getSellPrice()));
                     return exchangeRates;
                 });
 
@@ -416,7 +419,7 @@ public class RateService extends Service {
                                 double breakEvenINR = ((sellCost * fromFee.getTransferFee()) /
                                         (sellCost - buyCost)) * (sellCost / 1000.0);
 
-                                if (breakEvenINR < 10000.0) {
+                                if (breakEvenINR < 5000.0) {
                                     profitToStringMap.put(profitPercentage, currency + " " +
                                             exchangeToNameMap.get(fromExchangeRate.getExchangeId()) + " → " +
                                             exchangeToNameMap.get(toExchangeRate.getExchangeId()) + " " +
@@ -445,7 +448,7 @@ public class RateService extends Service {
                                 double breakEvenINR = ((sellCost * fromFee.getTransferFee()) /
                                         (sellCost - buyCost)) * (sellCost / 1000.0);
 
-                                if (breakEvenINR < 10000.0) {
+                                if (breakEvenINR < 5000.0) {
                                     profitToStringMap.put(profitPercentage, currency + " " +
                                             exchangeToNameMap.get(fromExchangeRate.getExchangeId()) + " → " +
                                             exchangeToNameMap.get(toExchangeRate.getExchangeId()) + " " +
