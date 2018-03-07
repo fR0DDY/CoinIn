@@ -77,6 +77,10 @@ public class OxybitResponse {
     Data MCO;
     @SerializedName("ant-inr")
     Data ANT;
+    @SerializedName("neo-inr")
+    Data NEO;
+    @SerializedName("gas-inr")
+    Data GAS;
 
     public class Data {
         @SerializedName("askprice")
@@ -142,6 +146,8 @@ public class OxybitResponse {
         exchangeRates.add(new ExchangeRate(OXYBIT_ID, "STORJ", date, STORJ.getLowestAsk(), STORJ.getHighestBid()));
         exchangeRates.add(new ExchangeRate(OXYBIT_ID, "MCO", date, MCO.getLowestAsk(), MCO.getHighestBid()));
         exchangeRates.add(new ExchangeRate(OXYBIT_ID, "ANT", date, ANT.getLowestAsk(), ANT.getHighestBid()));
+        exchangeRates.add(new ExchangeRate(OXYBIT_ID, "NEO", date, NEO.getLowestAsk(), NEO.getHighestBid()));
+        exchangeRates.add(new ExchangeRate(OXYBIT_ID, "GAS", date, GAS.getLowestAsk(), GAS.getHighestBid()));
         return exchangeRates;
     }
 

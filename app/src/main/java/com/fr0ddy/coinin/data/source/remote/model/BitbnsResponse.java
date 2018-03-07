@@ -17,6 +17,10 @@ public class BitbnsResponse {
     Data DBC;
     Data LTC;
     Data XMR;
+    Data DOGE;
+    Data DASH;
+    Data SIA;
+    Data BCH;
 
     public class Data {
         @SerializedName("sellPrice")
@@ -129,5 +133,37 @@ public class BitbnsResponse {
 
     public void setXMR(Data XMR) {
         this.XMR = XMR;
+    }
+
+    public Data getDOGE() {
+        return DOGE;
+    }
+
+    public void setDOGE(Data DOGE) {
+        this.DOGE = DOGE;
+    }
+
+    public Data getDASH() {
+        return DASH;
+    }
+
+    public void setDASH(Data DASH) {
+        this.DASH = DASH;
+    }
+
+    public Data getSIA() {
+        return SIA;
+    }
+
+    public void setSIA(Data SIA) {
+        this.SIA = SIA;
+    }
+
+    public Data getBCH() {
+        return BCH;
+    }
+
+    public void setBCH(Data BCH) {
+        this.BCH = BCH;
     }
 }
