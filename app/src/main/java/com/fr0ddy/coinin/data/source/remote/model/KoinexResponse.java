@@ -30,6 +30,7 @@ public class KoinexResponse {
         Data AE;
         Data BAT;
         Data GNT;
+        Data TRX;
 
         public Data getETH() {
             return ETH;
@@ -117,6 +118,14 @@ public class KoinexResponse {
 
         public void setGNT(Data GNT) {
             this.GNT = GNT;
+        }
+
+        public Data getTRX() {
+            return TRX;
+        }
+
+        public void setTRX(Data TRX) {
+            this.TRX = TRX;
         }
 
         @Override

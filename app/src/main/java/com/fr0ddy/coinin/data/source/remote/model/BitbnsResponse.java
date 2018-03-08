@@ -21,6 +21,7 @@ public class BitbnsResponse {
     Data DASH;
     Data SIA;
     Data BCH;
+    Data TRX;
 
     public class Data {
         @SerializedName("sellPrice")
@@ -165,5 +166,13 @@ public class BitbnsResponse {
 
     public void setBCH(Data BCH) {
         this.BCH = BCH;
+    }
+
+    public Data getTRX() {
+        return TRX;
+    }
+
+    public void setTRX(Data TRX) {
+        this.TRX = TRX;
     }
 }

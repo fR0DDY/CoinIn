@@ -240,6 +240,9 @@ public class RateService extends Service {
                         } else if (response.getBCH() != null) {
                             ExchangeRate rate = new ExchangeRate(BITBNS_ID, "BCH", date, response.getBCH().getSellPrice(), response.getBCH().getBuyPrice());
                             exchangeRates.add(rate);
+                        } else if (response.getTRX() != null) {
+                            ExchangeRate rate = new ExchangeRate(BITBNS_ID, "TRX", date, response.getTRX().getSellPrice(), response.getTRX().getBuyPrice());
+                            exchangeRates.add(rate);
                         }
                     }
 
@@ -259,7 +262,7 @@ public class RateService extends Service {
                 });
 
 
-                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), mExchangeRateRepository.fetchBuyUcoinRates(), mExchangeRateRepository.fetchCoinomeRates(), mExchangeRateRepository.fetchCoinsecureRates(), pocketBits, exchangeRatesGroup, zebpay, (koinexResponse, buyUcoinResponse, coinomeResponse, coinsecureResponse, pocketbitsResponse, exchangeRateList, zebpayRates) -> {
+                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), mExchangeRateRepository.fetchCoinomeRates(), mExchangeRateRepository.fetchCoinsecureRates(), pocketBits, exchangeRatesGroup, zebpay, (koinexResponse, coinomeResponse, coinsecureResponse, pocketbitsResponse, exchangeRateList, zebpayRates) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
 
                     ExchangeRate koinexETHRate = new ExchangeRate(KOINEX_ID, "ETH", date, Double.parseDouble(koinexResponse.getStats().getETH().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getETH().getHighestBid()));
@@ -284,6 +287,8 @@ public class RateService extends Service {
 
                     ExchangeRate koinexGNTRate = new ExchangeRate(KOINEX_ID, "GNT", date, Double.parseDouble(koinexResponse.getStats().getGNT().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getGNT().getHighestBid()));
 
+                    ExchangeRate koinexTRXRate = new ExchangeRate(KOINEX_ID, "TRX", date, Double.parseDouble(koinexResponse.getStats().getTRX().getLowestAsk()), Double.parseDouble(koinexResponse.getStats().getTRX().getHighestBid()));
+
                     ExchangeRate coinomeBTCRate = new ExchangeRate(COINOME_ID, "BTC", date, Double.parseDouble(coinomeResponse.getBTC().getLowestAsk()), Double.parseDouble(coinomeResponse.getBTC().getHighestBid()));
 
                     ExchangeRate coinomeBCHRate = new ExchangeRate(COINOME_ID, "BCH", date, Double.parseDouble(coinomeResponse.getBCH().getLowestAsk()), Double.parseDouble(coinomeResponse.getBCH().getHighestBid()));
@@ -296,7 +301,7 @@ public class RateService extends Service {
 
                     ExchangeRate coinomeZECRate = new ExchangeRate(COINOME_ID, "ZEC", date, Double.parseDouble(coinomeResponse.getZEC().getLowestAsk()), Double.parseDouble(coinomeResponse.getZEC().getHighestBid()));
 
-                    ExchangeRate buyUcoinETHRate = new ExchangeRate(BUYUCOIN_ID, "ETH", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getEthBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getEthSellPrice()));
+                    /*ExchangeRate buyUcoinETHRate = new ExchangeRate(BUYUCOIN_ID, "ETH", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getEthBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getEthSellPrice()));
 
                     ExchangeRate buyUcoinBTCRate = new ExchangeRate(BUYUCOIN_ID, "BTC", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getBtcBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getBtcSellPrice()));
 
@@ -318,7 +323,7 @@ public class RateService extends Service {
 
                     ExchangeRate buyUcoinDASHRate = new ExchangeRate(BUYUCOIN_ID, "DASH", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getDashBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getDashSellPrice()));
 
-                    ExchangeRate buyUcoinOMGRate = new ExchangeRate(BUYUCOIN_ID, "OMG", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getOmgBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getOmgSellPrice()));
+                    ExchangeRate buyUcoinOMGRate = new ExchangeRate(BUYUCOIN_ID, "OMG", date, Double.parseDouble(buyUcoinResponse.getData().get(0).getOmgBuyPrice()), Double.parseDouble(buyUcoinResponse.getData().get(0).getOmgSellPrice()));*/
 
 
                     ExchangeRate coinsecureBTCRate = new ExchangeRate(COINSECURE_ID, "BTC", date, coinsecureResponse.getMessage().getLowestAsk() / 100.0, coinsecureResponse.getMessage().getHighestBid() / 100.0);
@@ -337,13 +342,14 @@ public class RateService extends Service {
                     exchangeRates.add(koinexAERate);
                     exchangeRates.add(koinexBATRate);
                     exchangeRates.add(koinexGNTRate);
+                    exchangeRates.add(koinexTRXRate);
                     exchangeRates.add(coinomeBTCRate);
                     exchangeRates.add(coinomeBCHRate);
                     exchangeRates.add(coinomeLTCRate);
                     exchangeRates.add(coinomeDASHRate);
                     exchangeRates.add(coinomeDGBRate);
                     exchangeRates.add(coinomeZECRate);
-                    exchangeRates.add(buyUcoinETHRate);
+                    /*exchangeRates.add(buyUcoinETHRate);
                     exchangeRates.add(buyUcoinBTCRate);
                     exchangeRates.add(buyUcoinBCHRate);
                     exchangeRates.add(buyUcoinLTCRate);
@@ -355,7 +361,7 @@ public class RateService extends Service {
                     exchangeRates.add(buyUcoinXRPRate);
                     exchangeRates.add(buyUcoinNEORate);
                     exchangeRates.add(buyUcoinDASHRate);
-                    exchangeRates.add(buyUcoinOMGRate);
+                    exchangeRates.add(buyUcoinOMGRate);*/
                     exchangeRates.add(coinsecureBTCRate);
                     exchangeRates.addAll(pocketbitsResponse);
 
