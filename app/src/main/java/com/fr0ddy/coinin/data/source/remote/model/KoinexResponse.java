@@ -1,6 +1,13 @@
 package com.fr0ddy.coinin.data.source.remote.model;
 
+import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import static com.fr0ddy.coinin.utils.AppConstants.KOINEX_ID;
 
 /**
  * Created by gaurav on 25/11/17.
@@ -31,6 +38,9 @@ public class KoinexResponse {
         Data BAT;
         Data GNT;
         Data TRX;
+        Data XLM;
+        Data NEO;
+        Data GAS;
 
         public Data getETH() {
             return ETH;
@@ -128,6 +138,30 @@ public class KoinexResponse {
             this.TRX = TRX;
         }
 
+        public Data getXLM() {
+            return XLM;
+        }
+
+        public void setXLM(Data XLM) {
+            this.XLM = XLM;
+        }
+
+        public Data getNEO() {
+            return NEO;
+        }
+
+        public void setNEO(Data NEO) {
+            this.NEO = NEO;
+        }
+
+        public Data getGAS() {
+            return GAS;
+        }
+
+        public void setGAS(Data GAS) {
+            this.GAS = GAS;
+        }
+
         @Override
         public String toString() {
             return "Stats{" +
@@ -220,5 +254,48 @@ public class KoinexResponse {
         return "KoinexResponse{" +
                 "stats=" + stats +
                 '}';
+    }
+
+    public List<ExchangeRate> getExchangeRates(Date date) {
+        List<ExchangeRate> exchangeRates = new ArrayList<>();
+        ExchangeRate koinexETHRate = new ExchangeRate(KOINEX_ID, "ETH", date, Double.parseDouble(getStats().getETH().getLowestAsk()), Double.parseDouble(getStats().getETH().getHighestBid()));
+
+        ExchangeRate koinexBTCRate = new ExchangeRate(KOINEX_ID, "BTC", date, Double.parseDouble(getStats().getBTC().getLowestAsk()), Double.parseDouble(getStats().getBTC().getHighestBid()));
+
+        ExchangeRate koinexBCHRate = new ExchangeRate(KOINEX_ID, "BCH", date, Double.parseDouble(getStats().getBCH().getLowestAsk()), Double.parseDouble(getStats().getBCH().getHighestBid()));
+
+        ExchangeRate koinexLTCRate = new ExchangeRate(KOINEX_ID, "LTC", date, Double.parseDouble(getStats().getLTC().getLowestAsk()), Double.parseDouble(getStats().getLTC().getHighestBid()));
+
+        ExchangeRate koinexXRPRate = new ExchangeRate(KOINEX_ID, "XRP", date, Double.parseDouble(getStats().getXRP().getLowestAsk()), Double.parseDouble(getStats().getXRP().getHighestBid()));
+
+        ExchangeRate koinexOMGRate = new ExchangeRate(KOINEX_ID, "OMG", date, Double.parseDouble(getStats().getOMG().getLowestAsk()), Double.parseDouble(getStats().getOMG().getHighestBid()));
+
+        ExchangeRate koinexREQRate = new ExchangeRate(KOINEX_ID, "REQ", date, Double.parseDouble(getStats().getREQ().getLowestAsk()), Double.parseDouble(getStats().getREQ().getHighestBid()));
+
+        ExchangeRate koinexZRXRate = new ExchangeRate(KOINEX_ID, "ZRX", date, Double.parseDouble(getStats().getZRX().getLowestAsk()), Double.parseDouble(getStats().getZRX().getHighestBid()));
+
+        ExchangeRate koinexAERate = new ExchangeRate(KOINEX_ID, "AE", date, Double.parseDouble(getStats().getAE().getLowestAsk()), Double.parseDouble(getStats().getAE().getHighestBid()));
+
+        ExchangeRate koinexBATRate = new ExchangeRate(KOINEX_ID, "BAT", date, Double.parseDouble(getStats().getBAT().getLowestAsk()), Double.parseDouble(getStats().getBAT().getHighestBid()));
+
+        ExchangeRate koinexGNTRate = new ExchangeRate(KOINEX_ID, "GNT", date, Double.parseDouble(getStats().getGNT().getLowestAsk()), Double.parseDouble(getStats().getGNT().getHighestBid()));
+
+        ExchangeRate koinexTRXRate = new ExchangeRate(KOINEX_ID, "TRX", date, Double.parseDouble(getStats().getTRX().getLowestAsk()), Double.parseDouble(getStats().getTRX().getHighestBid()));
+
+        ExchangeRate koinexXLMRate = new ExchangeRate(KOINEX_ID, "XLM", date, Double.parseDouble(getStats().getXLM().getLowestAsk()), Double.parseDouble(getStats().getXLM().getHighestBid()));
+        exchangeRates.add(koinexETHRate);
+        exchangeRates.add(koinexBTCRate);
+        exchangeRates.add(koinexBCHRate);
+        exchangeRates.add(koinexLTCRate);
+        exchangeRates.add(koinexXRPRate);
+        exchangeRates.add(koinexOMGRate);
+        exchangeRates.add(koinexREQRate);
+        exchangeRates.add(koinexZRXRate);
+        exchangeRates.add(koinexAERate);
+        exchangeRates.add(koinexBATRate);
+        exchangeRates.add(koinexGNTRate);
+        exchangeRates.add(koinexTRXRate);
+        exchangeRates.add(koinexXLMRate);
+        return exchangeRates;
     }
 }

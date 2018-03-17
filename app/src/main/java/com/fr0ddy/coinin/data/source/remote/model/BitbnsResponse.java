@@ -1,6 +1,13 @@
 package com.fr0ddy.coinin.data.source.remote.model;
 
+import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import static com.fr0ddy.coinin.utils.AppConstants.BITBNS_ID;
 
 /**
  * Created by gaurav on 11/02/18.
@@ -19,7 +26,7 @@ public class BitbnsResponse {
     Data XMR;
     Data DOGE;
     Data DASH;
-    Data SIA;
+    Data SC;
     Data BCH;
     Data TRX;
 
@@ -153,11 +160,11 @@ public class BitbnsResponse {
     }
 
     public Data getSIA() {
-        return SIA;
+        return SC;
     }
 
     public void setSIA(Data SIA) {
-        this.SIA = SIA;
+        this.SC = SIA;
     }
 
     public Data getBCH() {
@@ -174,5 +181,58 @@ public class BitbnsResponse {
 
     public void setTRX(Data TRX) {
         this.TRX = TRX;
+    }
+
+    public static List<ExchangeRate> getExchangeRates(List<BitbnsResponse> bitbnsResponse, Date date) {
+        List<ExchangeRate> exchangeRates = new ArrayList<>();
+        for (BitbnsResponse response : bitbnsResponse) {
+            if (response.getBTC() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "BTC", date, response.getBTC().getSellPrice(), response.getBTC().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getXRP() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "XRP", date, response.getXRP().getSellPrice(), response.getXRP().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getNEO() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "NEO", date, response.getNEO().getSellPrice(), response.getNEO().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getETH() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "ETH", date, response.getETH().getSellPrice(), response.getETH().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getXLM() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "XLM", date, response.getXLM().getSellPrice(), response.getXLM().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getGAS() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "GAS", date, response.getGAS().getSellPrice(), response.getGAS().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getRPX() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "RPX", date, response.getRPX().getSellPrice(), response.getRPX().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getDBC() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "DBC", date, response.getDBC().getSellPrice(), response.getDBC().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getLTC() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "LTC", date, response.getLTC().getSellPrice(), response.getLTC().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getXMR() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "XMR", date, response.getXMR().getSellPrice(), response.getXMR().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getDOGE() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "DOGE", date, response.getDOGE().getSellPrice(), response.getDOGE().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getDASH() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "DASH", date, response.getDASH().getSellPrice(), response.getDASH().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getSIA() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "SC", date, response.getSIA().getSellPrice(), response.getSIA().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getBCH() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "BCH", date, response.getBCH().getSellPrice(), response.getBCH().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getTRX() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "TRX", date, response.getTRX().getSellPrice(), response.getTRX().getBuyPrice());
+                exchangeRates.add(rate);
+            }
+        }
+        return exchangeRates;
     }
 }

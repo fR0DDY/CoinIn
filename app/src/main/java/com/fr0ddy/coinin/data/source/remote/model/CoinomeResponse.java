@@ -1,6 +1,13 @@
 package com.fr0ddy.coinin.data.source.remote.model;
 
+import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
 import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import static com.fr0ddy.coinin.utils.AppConstants.COINOME_ID;
 
 /**
  * Created by gaurav on 15/12/17.
@@ -20,6 +27,8 @@ public class CoinomeResponse {
     Data DGB;
     @SerializedName("zec-inr")
     Data ZEC;
+    @SerializedName("qtum-inr")
+    Data QTUM;
 
     public Data getBTC() {
         return BTC;
@@ -55,6 +64,26 @@ public class CoinomeResponse {
 
     public Data getZEC() {
         return ZEC;
+    }
+
+    public void setDASH(Data DASH) {
+        this.DASH = DASH;
+    }
+
+    public void setDGB(Data DGB) {
+        this.DGB = DGB;
+    }
+
+    public void setZEC(Data ZEC) {
+        this.ZEC = ZEC;
+    }
+
+    public Data getQTUM() {
+        return QTUM;
+    }
+
+    public void setQTUM(Data QTUM) {
+        this.QTUM = QTUM;
     }
 
     public class Data {
@@ -111,5 +140,28 @@ public class CoinomeResponse {
                 ", LTC=" + LTC +
                 ", BCH=" + BCH +
                 '}';
+    }
+
+    public List<ExchangeRate> getExchangeRates(Date date) {
+        List<ExchangeRate> exchangeRates = new ArrayList<>();
+        ExchangeRate coinomeBTCRate = new ExchangeRate(COINOME_ID, "BTC", date, Double.parseDouble(getBTC().getLowestAsk()), Double.parseDouble(getBTC().getHighestBid()));
+
+        ExchangeRate coinomeBCHRate = new ExchangeRate(COINOME_ID, "BCH", date, Double.parseDouble(getBCH().getLowestAsk()), Double.parseDouble(getBCH().getHighestBid()));
+
+        ExchangeRate coinomeLTCRate = new ExchangeRate(COINOME_ID, "LTC", date, Double.parseDouble(getLTC().getLowestAsk()), Double.parseDouble(getLTC().getHighestBid()));
+
+        ExchangeRate coinomeDASHRate = new ExchangeRate(COINOME_ID, "DASH", date, Double.parseDouble(getDASH().getLowestAsk()), Double.parseDouble(getDASH().getHighestBid()));
+
+        ExchangeRate coinomeDGBRate = new ExchangeRate(COINOME_ID, "DGB", date, Double.parseDouble(getDGB().getLowestAsk()), Double.parseDouble(getDGB().getHighestBid()));
+
+        ExchangeRate coinomeZECRate = new ExchangeRate(COINOME_ID, "ZEC", date, Double.parseDouble(getZEC().getLowestAsk()), Double.parseDouble(getZEC().getHighestBid()));
+
+        exchangeRates.add(coinomeBTCRate);
+        exchangeRates.add(coinomeBCHRate);
+        exchangeRates.add(coinomeLTCRate);
+        exchangeRates.add(coinomeDASHRate);
+        exchangeRates.add(coinomeDGBRate);
+        exchangeRates.add(coinomeZECRate);
+        return exchangeRates;
     }
 }
