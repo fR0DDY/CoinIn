@@ -29,6 +29,9 @@ public class BitbnsResponse {
     Data SC;
     Data BCH;
     Data TRX;
+    Data ETN;
+    Data ONT;
+    Data ZIL;
 
     public class Data {
         @SerializedName("sellPrice")
@@ -183,6 +186,38 @@ public class BitbnsResponse {
         this.TRX = TRX;
     }
 
+    public Data getSC() {
+        return SC;
+    }
+
+    public void setSC(Data SC) {
+        this.SC = SC;
+    }
+
+    public Data getETN() {
+        return ETN;
+    }
+
+    public void setETN(Data ETN) {
+        this.ETN = ETN;
+    }
+
+    public Data getONT() {
+        return ONT;
+    }
+
+    public void setONT(Data ONT) {
+        this.ONT = ONT;
+    }
+
+    public Data getZIL() {
+        return ZIL;
+    }
+
+    public void setZIL(Data ZIL) {
+        this.ZIL = ZIL;
+    }
+
     public static List<ExchangeRate> getExchangeRates(List<BitbnsResponse> bitbnsResponse, Date date) {
         List<ExchangeRate> exchangeRates = new ArrayList<>();
         for (BitbnsResponse response : bitbnsResponse) {
@@ -230,6 +265,15 @@ public class BitbnsResponse {
                 exchangeRates.add(rate);
             } else if (response.getTRX() != null) {
                 ExchangeRate rate = new ExchangeRate(BITBNS_ID, "TRX", date, response.getTRX().getSellPrice(), response.getTRX().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getETN() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "ETN", date, response.getETN().getSellPrice(), response.getETN().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getONT() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "ONT", date, response.getONT().getSellPrice(), response.getONT().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getZIL() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "ZIL", date, response.getZIL().getSellPrice(), response.getZIL().getBuyPrice());
                 exchangeRates.add(rate);
             }
         }

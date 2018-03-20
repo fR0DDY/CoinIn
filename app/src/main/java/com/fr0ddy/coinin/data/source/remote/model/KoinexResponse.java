@@ -41,6 +41,8 @@ public class KoinexResponse {
         Data XLM;
         Data NEO;
         Data GAS;
+        Data AION;
+        Data NCASH;
 
         public Data getETH() {
             return ETH;
@@ -160,6 +162,22 @@ public class KoinexResponse {
 
         public void setGAS(Data GAS) {
             this.GAS = GAS;
+        }
+
+        public Data getAION() {
+            return AION;
+        }
+
+        public void setAION(Data AION) {
+            this.AION = AION;
+        }
+
+        public Data getNCASH() {
+            return NCASH;
+        }
+
+        public void setNCASH(Data NCASH) {
+            this.NCASH = NCASH;
         }
 
         @Override
@@ -283,6 +301,10 @@ public class KoinexResponse {
         ExchangeRate koinexTRXRate = new ExchangeRate(KOINEX_ID, "TRX", date, Double.parseDouble(getStats().getTRX().getLowestAsk()), Double.parseDouble(getStats().getTRX().getHighestBid()));
 
         ExchangeRate koinexXLMRate = new ExchangeRate(KOINEX_ID, "XLM", date, Double.parseDouble(getStats().getXLM().getLowestAsk()), Double.parseDouble(getStats().getXLM().getHighestBid()));
+
+        exchangeRates.add(new ExchangeRate(KOINEX_ID, "AION", date, Double.parseDouble(getStats().getAION().getLowestAsk()), Double.parseDouble(getStats().getAION().getHighestBid())));
+
+        exchangeRates.add(new ExchangeRate(KOINEX_ID, "NCASH", date, Double.parseDouble(getStats().getNCASH().getLowestAsk()), Double.parseDouble(getStats().getNCASH().getHighestBid())));
         exchangeRates.add(koinexETHRate);
         exchangeRates.add(koinexBTCRate);
         exchangeRates.add(koinexBCHRate);
