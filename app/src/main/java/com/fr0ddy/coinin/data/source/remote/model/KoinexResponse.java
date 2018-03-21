@@ -305,6 +305,12 @@ public class KoinexResponse {
         exchangeRates.add(new ExchangeRate(KOINEX_ID, "AION", date, Double.parseDouble(getStats().getAION().getLowestAsk()), Double.parseDouble(getStats().getAION().getHighestBid())));
 
         exchangeRates.add(new ExchangeRate(KOINEX_ID, "NCASH", date, Double.parseDouble(getStats().getNCASH().getLowestAsk()), Double.parseDouble(getStats().getNCASH().getHighestBid())));
+
+
+        exchangeRates.add(new ExchangeRate(KOINEX_ID, "NEO", date, Double.parseDouble(getStats().getNEO().getLowestAsk()), Double.parseDouble(getStats().getNEO().getHighestBid())));
+
+        exchangeRates.add(new ExchangeRate(KOINEX_ID, "GAS", date, Double.parseDouble(getStats().getGAS().getLowestAsk()), Double.parseDouble(getStats().getGAS().getHighestBid())));
+
         exchangeRates.add(koinexETHRate);
         exchangeRates.add(koinexBTCRate);
         exchangeRates.add(koinexBCHRate);

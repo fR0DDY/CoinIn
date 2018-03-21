@@ -118,7 +118,7 @@ public class RateService extends Service {
                 });*/
 
 
-                Flowable<List<ExchangeRate>> exchangeRatesGroup = Flowable.zip(mExchangeRateRepository.fetchCoindeltaRates(), mExchangeRateRepository.fetchBitbnsRates(), mExchangeRateRepository.fetchThroughbitRates(), mExchangeRateRepository.fetchOxybitRates(), mExchangeRateRepository.fetchCoinslabRates(), mExchangeRateRepository.fetchBuyUcoinRates(), (coindeltaResponse, bitbnsResponse, throughbitResponse, oxybitResponse, coinslabResponse, buyUcoinResponse) -> {
+                Flowable<List<ExchangeRate>> exchangeRatesGroup = Flowable.zip(mExchangeRateRepository.fetchCoindeltaRates(), mExchangeRateRepository.fetchBitbnsRates(), mExchangeRateRepository.fetchThroughbitRates(), mExchangeRateRepository.fetchOxybitRates(), mExchangeRateRepository.fetchCoinslabRates(), (coindeltaResponse, bitbnsResponse, throughbitResponse, oxybitResponse, coinslabResponse) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
 
                     exchangeRates.addAll(CoindeltaResponse.getExchangeRates(coindeltaResponse, date));
@@ -129,14 +129,14 @@ public class RateService extends Service {
 
                     exchangeRates.addAll(oxybitResponse.getExchangeRates(date));
 
-                    exchangeRates.addAll(buyUcoinResponse.getExchangeRates(date));
+                    //exchangeRates.addAll(buyUcoinResponse.getExchangeRates(date));
 
                     exchangeRates.add(new ExchangeRate(COINSLAB_ID, "BTC", date, coinslabResponse.getBuyPrice(), coinslabResponse.getSellPrice()));
                     return exchangeRates;
                 });
 
 
-                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), mExchangeRateRepository.fetchCoinomeRates(), mExchangeRateRepository.fetchCoinsecureRates(), exchangeRatesGroup, zebpay, (koinexResponse, coinomeResponse, coinsecureResponse, exchangeRateList, zebpayRates) -> {
+                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), mExchangeRateRepository.fetchCoinsecureRates(), exchangeRatesGroup, zebpay, mExchangeRateRepository.fetchCoinomeRates(), (koinexResponse, coinsecureResponse, exchangeRateList, zebpayRates, coinomeResponse) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
 
                     ExchangeRate coinsecureBTCRate = new ExchangeRate(COINSECURE_ID, "BTC", date, coinsecureResponse.getMessage().getLowestAsk() / 100.0, coinsecureResponse.getMessage().getHighestBid() / 100.0);
@@ -196,10 +196,10 @@ public class RateService extends Service {
                     if (fromExchangeRate.getBuyRate() < toExchangeRate.getSellRate()) {
                         ExchangeFees fromFee = exchangeToExchangeFeesMap.get(fromExchangeRate.getExchangeId() + "_" + fromExchangeRate.getCurrency());
                         ExchangeFees toFee = exchangeToExchangeFeesMap.get(toExchangeRate.getExchangeId() + "_" + fromExchangeRate.getCurrency());
-                        double buyCost = 1000 * (fromExchangeRate.getBuyRate() + fromExchangeRate.getBuyRate() * fromFee.getBuyFee());
+                        double buyCost = 10000 * (fromExchangeRate.getBuyRate() + fromExchangeRate.getBuyRate() * fromFee.getBuyFee());
                         double transferFee = (fromExchangeRate.getBuyRate() + fromExchangeRate.getBuyRate() * fromFee.getBuyFee()) * fromFee.getTransferFee();
 
-                        double sellCost = 1000 * (toExchangeRate.getSellRate() - toExchangeRate.getSellRate() * toFee.getSellFee());
+                        double sellCost = 10000 * (toExchangeRate.getSellRate() - toExchangeRate.getSellRate() * toFee.getSellFee());
 
                         double profit = sellCost - transferFee - buyCost;
 
@@ -207,7 +207,7 @@ public class RateService extends Service {
                             double profitPercentage = (profit * 100.0) / buyCost;
                             if (profitPercentage > 1) {
                                 double breakEvenINR = ((sellCost * fromFee.getTransferFee()) /
-                                        (sellCost - buyCost)) * (sellCost / 1000.0);
+                                        (sellCost - buyCost)) * (sellCost / 10000.0);
 
                                 if (breakEvenINR < 5000.0) {
                                     profitToStringMap.put(profitPercentage, currency + " " +
@@ -225,10 +225,10 @@ public class RateService extends Service {
                     if (fromExchangeRate.getBuyRate() < toExchangeRate.getSellRate()) {
                         ExchangeFees fromFee = exchangeToExchangeFeesMap.get(fromExchangeRate.getExchangeId() + "_" + fromExchangeRate.getCurrency());
                         ExchangeFees toFee = exchangeToExchangeFeesMap.get(toExchangeRate.getExchangeId() + "_" + fromExchangeRate.getCurrency());
-                        double buyCost = 1000 * (fromExchangeRate.getBuyRate() + fromExchangeRate.getBuyRate() * fromFee.getBuyFee());
+                        double buyCost = 10000 * (fromExchangeRate.getBuyRate() + fromExchangeRate.getBuyRate() * fromFee.getBuyFee());
                         double transferFee = (fromExchangeRate.getBuyRate() + fromExchangeRate.getBuyRate() * fromFee.getBuyFee()) * fromFee.getTransferFee();
 
-                        double sellCost = 1000 * (toExchangeRate.getSellRate() - toExchangeRate.getSellRate() * toFee.getSellFee());
+                        double sellCost = 10000 * (toExchangeRate.getSellRate() - toExchangeRate.getSellRate() * toFee.getSellFee());
 
                         double profit = sellCost - transferFee - buyCost;
 
@@ -236,7 +236,7 @@ public class RateService extends Service {
                             double profitPercentage = (profit * 100.0) / buyCost;
                             if (profitPercentage > 1) {
                                 double breakEvenINR = ((sellCost * fromFee.getTransferFee()) /
-                                        (sellCost - buyCost)) * (sellCost / 1000.0);
+                                        (sellCost - buyCost)) * (sellCost / 10000.0);
 
                                 if (breakEvenINR < 5000.0) {
                                     profitToStringMap.put(profitPercentage, currency + " " +
