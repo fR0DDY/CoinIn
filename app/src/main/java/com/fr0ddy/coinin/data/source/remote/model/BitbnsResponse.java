@@ -32,6 +32,8 @@ public class BitbnsResponse {
     Data ETN;
     Data ONT;
     Data ZIL;
+    Data EOS;
+    Data POLY;
 
     public class Data {
         @SerializedName("sellPrice")
@@ -218,6 +220,22 @@ public class BitbnsResponse {
         this.ZIL = ZIL;
     }
 
+    public Data getEOS() {
+        return EOS;
+    }
+
+    public void setEOS(Data EOS) {
+        this.EOS = EOS;
+    }
+
+    public Data getPOLY() {
+        return POLY;
+    }
+
+    public void setPOLY(Data POLY) {
+        this.POLY = POLY;
+    }
+
     public static List<ExchangeRate> getExchangeRates(List<BitbnsResponse> bitbnsResponse, Date date) {
         List<ExchangeRate> exchangeRates = new ArrayList<>();
         for (BitbnsResponse response : bitbnsResponse) {
@@ -274,6 +292,12 @@ public class BitbnsResponse {
                 exchangeRates.add(rate);
             } else if (response.getZIL() != null) {
                 ExchangeRate rate = new ExchangeRate(BITBNS_ID, "ZIL", date, response.getZIL().getSellPrice(), response.getZIL().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getEOS() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "EOS", date, response.getEOS().getSellPrice(), response.getEOS().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getPOLY() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "POLY", date, response.getPOLY().getSellPrice(), response.getPOLY().getBuyPrice());
                 exchangeRates.add(rate);
             }
         }

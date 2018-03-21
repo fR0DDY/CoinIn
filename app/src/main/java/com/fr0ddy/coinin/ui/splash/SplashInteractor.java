@@ -177,11 +177,13 @@ public class SplashInteractor extends BaseInteractor
         ExchangeFees bitBnsSIAFees = new ExchangeFees(104, BITBNS_ID, "SC", 0.0025, 0.0025, 1);
         ExchangeFees bitBnsDOGEFees = new ExchangeFees(105, BITBNS_ID, "DOGE", 0.0025, 0.0025, 2);
         ExchangeFees bitBnsBCHFees = new ExchangeFees(106, BITBNS_ID, "BCH", 0.0025, 0.0025, 0.001);
-        ExchangeFees bitBnsDASHFees = new ExchangeFees(107, BITBNS_ID, "DASH", 0.0025, 0.0025, 0.001);
-        ExchangeFees bitBnsTRXFees = new ExchangeFees(110, BITBNS_ID, "TRX", 0.0025, 0.0025, 30);
-        ExchangeFees bitBnsETNFees = new ExchangeFees(135, BITBNS_ID, "ETN", 0.0025, 0.0025, 30);
-        ExchangeFees bitBnsONTFees = new ExchangeFees(136, BITBNS_ID, "ONT", 0.0025, 0.0025, 30);
-        ExchangeFees bitBnsZILFees = new ExchangeFees(137, BITBNS_ID, "ZIL", 0.0025, 0.0025, 30);
+        ExchangeFees bitBnsDASHFees = new ExchangeFees(107, BITBNS_ID, "DASH", 0.0025, 0.0025, 0.02);
+        ExchangeFees bitBnsTRXFees = new ExchangeFees(110, BITBNS_ID, "TRX", 0.0025, 0.0025, 50);
+        ExchangeFees bitBnsETNFees = new ExchangeFees(135, BITBNS_ID, "ETN", 0.0025, 0.0025, 1);
+        ExchangeFees bitBnsONTFees = new ExchangeFees(136, BITBNS_ID, "ONT", 0.0025, 0.0025, 0.1);
+        ExchangeFees bitBnsZILFees = new ExchangeFees(137, BITBNS_ID, "ZIL", 0.0025, 0.0025, 50);
+        ExchangeFees bitBnsEOSFees = new ExchangeFees(142, BITBNS_ID, "EOS", 0.0025, 0.0025, 0.5);
+        ExchangeFees bitBnsPOLYFees = new ExchangeFees(143, BITBNS_ID, "POLY", 0.0025, 0.0025, 5);
 
         ExchangeFees oxybitFees1 = new ExchangeFees(62, OXYBIT_ID, "BTC", 0.0, 0.0, 0.0005);
         ExchangeFees oxybitFees2 = new ExchangeFees(63, OXYBIT_ID, "ETH", 0.0, 0.0, 0.005);
