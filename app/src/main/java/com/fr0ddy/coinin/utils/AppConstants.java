@@ -24,6 +24,7 @@ public final class AppConstants {
     public static final int BITBNS_ID = 9;
     public static final int OXYBIT_ID = 10;
     public static final int COINSLAB_ID = 11;
+    public static final int UNOCOIN_ID = 12;
 
     private AppConstants() {
 

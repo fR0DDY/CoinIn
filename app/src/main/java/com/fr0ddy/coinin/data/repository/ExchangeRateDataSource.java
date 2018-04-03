@@ -13,6 +13,7 @@ import com.fr0ddy.coinin.data.source.remote.model.OxybitResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsBitcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ThroughbitResponse;
+import com.fr0ddy.coinin.data.source.remote.model.UnocoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ZebpayResponse;
 
 import java.util.List;
@@ -55,6 +56,8 @@ public interface ExchangeRateDataSource {
     Flowable<OxybitResponse> fetchOxybitRates();
 
     Flowable<CoinslabResponse> fetchCoinslabRates();
+
+    Flowable<UnocoinResponse> fetchUnocoinRates();
 
     List<Long> saveRates(List<ExchangeRate> exchangeRates);
 

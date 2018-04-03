@@ -29,6 +29,8 @@ public class CoinomeResponse {
     Data ZEC;
     @SerializedName("qtum-inr")
     Data QTUM;
+    @SerializedName("btg-inr")
+    Data BTG;
 
     public Data getBTC() {
         return BTC;
@@ -84,6 +86,14 @@ public class CoinomeResponse {
 
     public void setQTUM(Data QTUM) {
         this.QTUM = QTUM;
+    }
+
+    public Data getBTG() {
+        return BTG;
+    }
+
+    public void setBTG(Data BTG) {
+        this.BTG = BTG;
     }
 
     public class Data {
@@ -155,6 +165,10 @@ public class CoinomeResponse {
         ExchangeRate coinomeDGBRate = new ExchangeRate(COINOME_ID, "DGB", date, Double.parseDouble(getDGB().getLowestAsk()), Double.parseDouble(getDGB().getHighestBid()));
 
         ExchangeRate coinomeZECRate = new ExchangeRate(COINOME_ID, "ZEC", date, Double.parseDouble(getZEC().getLowestAsk()), Double.parseDouble(getZEC().getHighestBid()));
+
+        exchangeRates.add(new ExchangeRate(COINOME_ID, "QTUM", date, Double.parseDouble(getQTUM().getLowestAsk()), Double.parseDouble(getQTUM().getHighestBid())));
+
+        exchangeRates.add(new ExchangeRate(COINOME_ID, "BTG", date, Double.parseDouble(getBTG().getLowestAsk()), Double.parseDouble(getBTG().getHighestBid())));
 
         exchangeRates.add(coinomeBTCRate);
         exchangeRates.add(coinomeBCHRate);

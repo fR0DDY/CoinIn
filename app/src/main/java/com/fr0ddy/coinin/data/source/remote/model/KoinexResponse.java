@@ -43,6 +43,8 @@ public class KoinexResponse {
         Data GAS;
         Data AION;
         Data NCASH;
+        Data EOS;
+        Data XRB;
 
         public Data getETH() {
             return ETH;
@@ -180,6 +182,22 @@ public class KoinexResponse {
             this.NCASH = NCASH;
         }
 
+        public Data getEOS() {
+            return EOS;
+        }
+
+        public void setEOS(Data EOS) {
+            this.EOS = EOS;
+        }
+
+        public Data getXRB() {
+            return XRB;
+        }
+
+        public void setXRB(Data XRB) {
+            this.XRB = XRB;
+        }
+
         @Override
         public String toString() {
             return "Stats{" +
@@ -310,6 +328,10 @@ public class KoinexResponse {
         exchangeRates.add(new ExchangeRate(KOINEX_ID, "NEO", date, Double.parseDouble(getStats().getNEO().getLowestAsk()), Double.parseDouble(getStats().getNEO().getHighestBid())));
 
         exchangeRates.add(new ExchangeRate(KOINEX_ID, "GAS", date, Double.parseDouble(getStats().getGAS().getLowestAsk()), Double.parseDouble(getStats().getGAS().getHighestBid())));
+
+        exchangeRates.add(new ExchangeRate(KOINEX_ID, "EOS", date, Double.parseDouble(getStats().getEOS().getLowestAsk()), Double.parseDouble(getStats().getEOS().getHighestBid())));
+
+        exchangeRates.add(new ExchangeRate(KOINEX_ID, "NANO", date, Double.parseDouble(getStats().getXRB().getLowestAsk()), Double.parseDouble(getStats().getXRB().getHighestBid())));
 
         exchangeRates.add(koinexETHRate);
         exchangeRates.add(koinexBTCRate);

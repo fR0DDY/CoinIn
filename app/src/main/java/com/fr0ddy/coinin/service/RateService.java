@@ -90,7 +90,6 @@ public class RateService extends Service {
             public void run() {
                 Timber.i("Background service running");
                 Date date = new Date();
-
                 Flowable<List<ExchangeRate>> zebpay = Flowable.zip(mExchangeRateRepository.fetchZebpayBTCRates(), mExchangeRateRepository.fetchZebpayBCHRates(), mExchangeRateRepository.fetchZebpayLTCRates(), mExchangeRateRepository.fetchZebpayETHRates(), mExchangeRateRepository.fetchZebpayXRPRates(), (zebpayBTCResponse, zebpayBCHResponse, zebpayLTCResponse, zebpayETHResponse, zebpayXRPResponse) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
                     ExchangeRate zebpayBTCRate = new ExchangeRate(ZEBPAY_ID, "BTC", date, zebpayBTCResponse.getBuyPrice(), zebpayBTCResponse.getSellPrice());
@@ -136,7 +135,7 @@ public class RateService extends Service {
                 });
 
 
-                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), mExchangeRateRepository.fetchCoinsecureRates(), exchangeRatesGroup, zebpay, mExchangeRateRepository.fetchCoinomeRates(), (koinexResponse, coinsecureResponse, exchangeRateList, zebpayRates, coinomeResponse) -> {
+                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), mExchangeRateRepository.fetchCoinsecureRates(), exchangeRatesGroup, mExchangeRateRepository.fetchCoinomeRates(), zebpay, mExchangeRateRepository.fetchUnocoinRates(), (koinexResponse, coinsecureResponse, exchangeRateList, coinomeResponse, zebpayRates, unocoinResponse) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
 
                     ExchangeRate coinsecureBTCRate = new ExchangeRate(COINSECURE_ID, "BTC", date, coinsecureResponse.getMessage().getLowestAsk() / 100.0, coinsecureResponse.getMessage().getHighestBid() / 100.0);
@@ -148,6 +147,7 @@ public class RateService extends Service {
 
                     exchangeRates.add(coinsecureBTCRate);
                     //exchangeRates.addAll(pocketbitsResponse);
+                    exchangeRates.addAll(unocoinResponse.getExchangeRates(date));
 
                     checkArbitrage(exchangeRates);
                     return exchangeRates;

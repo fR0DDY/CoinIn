@@ -11,6 +11,7 @@ import com.fr0ddy.coinin.data.source.remote.model.OxybitResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsBitcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ThroughbitResponse;
+import com.fr0ddy.coinin.data.source.remote.model.UnocoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ZebpayResponse;
 
 import java.util.List;
@@ -70,4 +71,7 @@ public interface ExchangeRateService {
 
     @GET("https://www.coinslab.com/api/v1/ticker/btc/inr")
     Flowable<CoinslabResponse> fetchCoinslabRates();
+
+    @GET("https://www.unocoin.com/trade?exchange")
+    Flowable<UnocoinResponse> fetchUnocoinRates();
 }

@@ -34,6 +34,13 @@ public class BitbnsResponse {
     Data ZIL;
     Data EOS;
     Data POLY;
+    Data DGB;
+    Data NCASH;
+    Data ADA;
+    Data ICX;
+    Data VEN;
+    Data REQ;
+    Data OMG;
 
     public class Data {
         @SerializedName("sellPrice")
@@ -236,6 +243,62 @@ public class BitbnsResponse {
         this.POLY = POLY;
     }
 
+    public Data getDGB() {
+        return DGB;
+    }
+
+    public void setDGB(Data DGB) {
+        this.DGB = DGB;
+    }
+
+    public Data getNCASH() {
+        return NCASH;
+    }
+
+    public void setNCASH(Data NCASH) {
+        this.NCASH = NCASH;
+    }
+
+    public Data getADA() {
+        return ADA;
+    }
+
+    public void setADA(Data ADA) {
+        this.ADA = ADA;
+    }
+
+    public Data getICX() {
+        return ICX;
+    }
+
+    public void setICX(Data ICX) {
+        this.ICX = ICX;
+    }
+
+    public Data getVEN() {
+        return VEN;
+    }
+
+    public void setVEN(Data VEN) {
+        this.VEN = VEN;
+    }
+
+    public Data getREQ() {
+        return REQ;
+    }
+
+    public void setREQ(Data REQ) {
+        this.REQ = REQ;
+    }
+
+    public Data getOMG() {
+        return OMG;
+    }
+
+    public void setOMG(Data OMG) {
+        this.OMG = OMG;
+    }
+
     public static List<ExchangeRate> getExchangeRates(List<BitbnsResponse> bitbnsResponse, Date date) {
         List<ExchangeRate> exchangeRates = new ArrayList<>();
         for (BitbnsResponse response : bitbnsResponse) {
@@ -298,6 +361,27 @@ public class BitbnsResponse {
                 exchangeRates.add(rate);
             } else if (response.getPOLY() != null) {
                 ExchangeRate rate = new ExchangeRate(BITBNS_ID, "POLY", date, response.getPOLY().getSellPrice(), response.getPOLY().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getDGB() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "DGB", date, response.getDGB().getSellPrice(), response.getDGB().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getNCASH() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "NCASH", date, response.getNCASH().getSellPrice(), response.getNCASH().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getADA() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "ADA", date, response.getADA().getSellPrice(), response.getADA().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getICX() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "ICX", date, response.getICX().getSellPrice(), response.getICX().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getVEN() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "VET", date, response.getVEN().getSellPrice(), response.getVEN().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getREQ() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "REQ", date, response.getREQ().getSellPrice(), response.getREQ().getBuyPrice());
+                exchangeRates.add(rate);
+            } else if (response.getOMG() != null) {
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "OMG", date, response.getOMG().getSellPrice(), response.getOMG().getBuyPrice());
                 exchangeRates.add(rate);
             }
         }
