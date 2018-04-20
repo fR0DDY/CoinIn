@@ -12,6 +12,7 @@ import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsBitcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ThroughbitResponse;
 import com.fr0ddy.coinin.data.source.remote.model.UnocoinResponse;
+import com.fr0ddy.coinin.data.source.remote.model.WazirXResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ZebpayResponse;
 
 import java.util.List;
@@ -74,4 +75,7 @@ public interface ExchangeRateService {
 
     @GET("https://www.unocoin.com/trade?exchange")
     Flowable<UnocoinResponse> fetchUnocoinRates();
+
+    @GET("https://api.wazirx.com/api/v2/tickers")
+    Flowable<WazirXResponse> fetchWazirXRates();
 }

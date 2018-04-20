@@ -18,6 +18,7 @@ import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsBitcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ThroughbitResponse;
 import com.fr0ddy.coinin.data.source.remote.model.UnocoinResponse;
+import com.fr0ddy.coinin.data.source.remote.model.WazirXResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ZebpayResponse;
 
 import java.util.List;
@@ -144,10 +145,15 @@ public class ExchangeRateLocalDataSource implements ExchangeRateDataSource {
     }
 
     @Override
+    public Flowable<WazirXResponse> fetchWazirXRates() {
+        // Not required in Local
+        return null;
+    }
+
+    @Override
     public List<Long> saveRates(List<ExchangeRate> exchangeRates) {
         return mExchangeRateDao.insertExchangeRates(exchangeRates);
     }
-
 
     @Override
     public Flowable<List<ExchangeRate>> getRates() {

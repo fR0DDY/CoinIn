@@ -90,6 +90,36 @@ public class CoindeltaResponse {
             } else if ("gas-inr".equalsIgnoreCase(data.getMarketName())) {
                 ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "GAS", date, data.getLowestAsk(), data.getHighestBid());
                 exchangeRates.add(rate);
+            } else if ("aion-inr".equalsIgnoreCase(data.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "AION", date, data.getLowestAsk(), data.getHighestBid());
+                exchangeRates.add(rate);
+            } else if ("bat-inr".equalsIgnoreCase(data.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "BAT", date, data.getLowestAsk(), data.getHighestBid());
+                exchangeRates.add(rate);
+            } else if ("cnd-inr".equalsIgnoreCase(data.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "CND", date, data.getLowestAsk(), data.getHighestBid());
+                exchangeRates.add(rate);
+            } else if ("cvc-inr".equalsIgnoreCase(data.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "CVC", date, data.getLowestAsk(), data.getHighestBid());
+                exchangeRates.add(rate);
+            } else if ("mana-inr".equalsIgnoreCase(data.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "MANA", date, data.getLowestAsk(), data.getHighestBid());
+                exchangeRates.add(rate);
+            } else if ("eng-inr".equalsIgnoreCase(data.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "ENG", date, data.getLowestAsk(), data.getHighestBid());
+                exchangeRates.add(rate);
+            } else if ("gnt-inr".equalsIgnoreCase(data.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "GNT", date, data.getLowestAsk(), data.getHighestBid());
+                exchangeRates.add(rate);
+            } else if ("icx-inr".equalsIgnoreCase(data.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "ICX", date, data.getLowestAsk(), data.getHighestBid());
+                exchangeRates.add(rate);
+            } else if ("spank-inr".equalsIgnoreCase(data.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "SPANK", date, data.getLowestAsk(), data.getHighestBid());
+                exchangeRates.add(rate);
+            } else if ("trx-inr".equalsIgnoreCase(data.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "TRX", date, data.getLowestAsk(), data.getHighestBid());
+                exchangeRates.add(rate);
             }
         }
         return  exchangeRates;

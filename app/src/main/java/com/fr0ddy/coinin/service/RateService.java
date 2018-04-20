@@ -117,7 +117,7 @@ public class RateService extends Service {
                 });*/
 
 
-                Flowable<List<ExchangeRate>> exchangeRatesGroup = Flowable.zip(mExchangeRateRepository.fetchCoindeltaRates(), mExchangeRateRepository.fetchBitbnsRates(), mExchangeRateRepository.fetchThroughbitRates(), mExchangeRateRepository.fetchOxybitRates(), mExchangeRateRepository.fetchCoinslabRates(), (coindeltaResponse, bitbnsResponse, throughbitResponse, oxybitResponse, coinslabResponse) -> {
+                Flowable<List<ExchangeRate>> exchangeRatesGroup = Flowable.zip(mExchangeRateRepository.fetchCoindeltaRates(), mExchangeRateRepository.fetchBitbnsRates(), mExchangeRateRepository.fetchThroughbitRates(), mExchangeRateRepository.fetchOxybitRates(), mExchangeRateRepository.fetchWazirXRates(), (coindeltaResponse, bitbnsResponse, throughbitResponse, oxybitResponse, wazirXResponse) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
 
                     exchangeRates.addAll(CoindeltaResponse.getExchangeRates(coindeltaResponse, date));
@@ -128,24 +128,26 @@ public class RateService extends Service {
 
                     exchangeRates.addAll(oxybitResponse.getExchangeRates(date));
 
+                    exchangeRates.addAll(wazirXResponse.getExchangeRates(date));
+
                     //exchangeRates.addAll(buyUcoinResponse.getExchangeRates(date));
 
-                    exchangeRates.add(new ExchangeRate(COINSLAB_ID, "BTC", date, coinslabResponse.getBuyPrice(), coinslabResponse.getSellPrice()));
+                    //exchangeRates.add(new ExchangeRate(COINSLAB_ID, "BTC", date, coinslabResponse.getBuyPrice(), coinslabResponse.getSellPrice()));
                     return exchangeRates;
                 });
 
 
-                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), mExchangeRateRepository.fetchCoinsecureRates(), exchangeRatesGroup, mExchangeRateRepository.fetchCoinomeRates(), zebpay, mExchangeRateRepository.fetchUnocoinRates(), (koinexResponse, coinsecureResponse, exchangeRateList, coinomeResponse, zebpayRates, unocoinResponse) -> {
+                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), exchangeRatesGroup, mExchangeRateRepository.fetchCoinomeRates(), mExchangeRateRepository.fetchUnocoinRates(), (koinexResponse, exchangeRateList, coinomeResponse, unocoinResponse) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
 
-                    ExchangeRate coinsecureBTCRate = new ExchangeRate(COINSECURE_ID, "BTC", date, coinsecureResponse.getMessage().getLowestAsk() / 100.0, coinsecureResponse.getMessage().getHighestBid() / 100.0);
+                    //ExchangeRate coinsecureBTCRate = new ExchangeRate(COINSECURE_ID, "BTC", date, coinsecureResponse.getMessage().getLowestAsk() / 100.0, coinsecureResponse.getMessage().getHighestBid() / 100.0);
 
-                    exchangeRates.addAll(zebpayRates);
+                    //exchangeRates.addAll(zebpayRates);
                     exchangeRates.addAll(exchangeRateList);
                     exchangeRates.addAll(koinexResponse.getExchangeRates(date));
                     exchangeRates.addAll(coinomeResponse.getExchangeRates(date));
 
-                    exchangeRates.add(coinsecureBTCRate);
+                    //exchangeRates.add(coinsecureBTCRate);
                     //exchangeRates.addAll(pocketbitsResponse);
                     exchangeRates.addAll(unocoinResponse.getExchangeRates(date));
 
