@@ -28,6 +28,10 @@ public class WazirXResponse {
     Data TRX;
     @SerializedName("dashinr")
     Data DASH;
+    @SerializedName("eosinr")
+    Data EOS;
+    @SerializedName("zilinr")
+    Data ZIL;
 
     public class Data {
         @SerializedName("sell")
@@ -61,6 +65,8 @@ public class WazirXResponse {
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "ETH", date, Double.parseDouble(ETH.sell), Double.parseDouble(ETH.buy)));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "TRX", date, Double.parseDouble(TRX.sell), Double.parseDouble(TRX.buy)));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "DASH", date, Double.parseDouble(DASH.sell), Double.parseDouble(DASH.buy)));
+        exchangeRates.add(new ExchangeRate(WAZIRX_ID, "EOS", date, Double.parseDouble(EOS.sell), Double.parseDouble(EOS.buy)));
+        exchangeRates.add(new ExchangeRate(WAZIRX_ID, "ZIL", date, Double.parseDouble(ZIL.sell), Double.parseDouble(ZIL.buy)));
         return exchangeRates;
     }
 }

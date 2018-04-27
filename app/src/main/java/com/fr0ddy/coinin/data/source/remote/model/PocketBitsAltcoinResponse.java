@@ -99,6 +99,33 @@ public class PocketBitsAltcoinResponse {
             } else if ("TRX".equalsIgnoreCase(response.getMarketName())) {
                 ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "TRX", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
                 exchangeRates.add(rate);
+            } else if ("ZRX".equalsIgnoreCase(response.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "ZRX", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                exchangeRates.add(rate);
+            } else if ("REP".equalsIgnoreCase(response.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "REP", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                exchangeRates.add(rate);
+            } else if ("BAT".equalsIgnoreCase(response.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "BAT", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                exchangeRates.add(rate);
+            } else if ("QTUM".equalsIgnoreCase(response.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "QTUM", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                exchangeRates.add(rate);
+            } else if ("ADA".equalsIgnoreCase(response.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "ADA", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                exchangeRates.add(rate);
+            } else if ("DOGE".equalsIgnoreCase(response.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "DOGE", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                exchangeRates.add(rate);
+            } else if ("GNT".equalsIgnoreCase(response.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "GNT", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                exchangeRates.add(rate);
+            } else if ("STORJ".equalsIgnoreCase(response.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "STORJ", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                exchangeRates.add(rate);
+            } else if ("UBQ".equalsIgnoreCase(response.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(POCKETBITS_ID, "UBQ", date, Double.parseDouble(response.getBuyPrice()), Double.parseDouble(response.getSellPrice()));
+                exchangeRates.add(rate);
             }
         }
         return exchangeRates;

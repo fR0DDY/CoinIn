@@ -21,7 +21,6 @@ import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
 import com.fr0ddy.coinin.data.source.remote.model.BitbnsResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
-import com.fr0ddy.coinin.data.source.remote.model.ThroughbitResponse;
 import com.fr0ddy.coinin.di.component.DaggerServiceComponent;
 import com.fr0ddy.coinin.ui.home.HomeActivity;
 import com.fr0ddy.coinin.utils.rx.SchedulerProvider;
@@ -43,15 +42,7 @@ import javax.inject.Inject;
 import io.reactivex.Flowable;
 import timber.log.Timber;
 
-import static com.fr0ddy.coinin.utils.AppConstants.BITBNS_ID;
-import static com.fr0ddy.coinin.utils.AppConstants.BUYUCOIN_ID;
-import static com.fr0ddy.coinin.utils.AppConstants.COINDELTA_ID;
-import static com.fr0ddy.coinin.utils.AppConstants.COINOME_ID;
-import static com.fr0ddy.coinin.utils.AppConstants.COINSECURE_ID;
-import static com.fr0ddy.coinin.utils.AppConstants.COINSLAB_ID;
-import static com.fr0ddy.coinin.utils.AppConstants.KOINEX_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.POCKETBITS_ID;
-import static com.fr0ddy.coinin.utils.AppConstants.THROUGHBIT_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.ZEBPAY_ID;
 
 
@@ -90,7 +81,8 @@ public class RateService extends Service {
             public void run() {
                 Timber.i("Background service running");
                 Date date = new Date();
-                Flowable<List<ExchangeRate>> zebpay = Flowable.zip(mExchangeRateRepository.fetchZebpayBTCRates(), mExchangeRateRepository.fetchZebpayBCHRates(), mExchangeRateRepository.fetchZebpayLTCRates(), mExchangeRateRepository.fetchZebpayETHRates(), mExchangeRateRepository.fetchZebpayXRPRates(), (zebpayBTCResponse, zebpayBCHResponse, zebpayLTCResponse, zebpayETHResponse, zebpayXRPResponse) -> {
+
+                Flowable<List<ExchangeRate>> zebpay = Flowable.zip(mExchangeRateRepository.fetchZebpayBTCRates(), mExchangeRateRepository.fetchZebpayBCHRates(), mExchangeRateRepository.fetchZebpayLTCRates(), mExchangeRateRepository.fetchZebpayETHRates(), mExchangeRateRepository.fetchZebpayXRPRates(), mExchangeRateRepository.fetchZebpayEOSRates(), mExchangeRateRepository.fetchZebpayOMGRates(), (zebpayBTCResponse, zebpayBCHResponse, zebpayLTCResponse, zebpayETHResponse, zebpayXRPResponse, zebpayEOSResponse, zebpayOMGResponse) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
                     ExchangeRate zebpayBTCRate = new ExchangeRate(ZEBPAY_ID, "BTC", date, zebpayBTCResponse.getBuyPrice(), zebpayBTCResponse.getSellPrice());
                     exchangeRates.add(zebpayBTCRate);
@@ -102,10 +94,14 @@ public class RateService extends Service {
                     exchangeRates.add(zebpayXRPRate);
                     ExchangeRate zebpayETHRate = new ExchangeRate(ZEBPAY_ID, "ETH", date, zebpayETHResponse.getBuyPrice(), zebpayETHResponse.getSellPrice());
                     exchangeRates.add(zebpayETHRate);
+                    ExchangeRate zebpayEOSRate = new ExchangeRate(ZEBPAY_ID, "EOS", date, zebpayEOSResponse.getBuyPrice(), zebpayEOSResponse.getSellPrice());
+                    exchangeRates.add(zebpayEOSRate);
+                    ExchangeRate zebpayOMGRate = new ExchangeRate(ZEBPAY_ID, "OMG", date, zebpayOMGResponse.getBuyPrice(), zebpayOMGResponse.getSellPrice());
+                    exchangeRates.add(zebpayOMGRate);
                     return exchangeRates;
                 });
 
-                /*Flowable<List<ExchangeRate>> pocketBits = Flowable.zip(mExchangeRateRepository.fetchPocketBitsBitcoinRates(), mExchangeRateRepository.fetchPocketBitsAltcoinRates(), (pocketBitsBitcoinResponse, pocketBitsAltcoinResponses) -> {
+                Flowable<List<ExchangeRate>> pocketBits = Flowable.zip(mExchangeRateRepository.fetchPocketBitsBitcoinRates(), mExchangeRateRepository.fetchPocketBitsAltcoinRates(), (pocketBitsBitcoinResponse, pocketBitsAltcoinResponses) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
 
                     ExchangeRate pocketBitsBTCRate = new ExchangeRate(POCKETBITS_ID, "BTC", date, Double.parseDouble(pocketBitsBitcoinResponse.getRates().getBuyPrice()), Double.parseDouble(pocketBitsBitcoinResponse.getRates().getSellPrice()));
@@ -114,10 +110,10 @@ public class RateService extends Service {
 
                     exchangeRates.addAll(PocketBitsAltcoinResponse.getExchangeRates(pocketBitsAltcoinResponses, date));
                     return exchangeRates;
-                });*/
+                });
 
 
-                Flowable<List<ExchangeRate>> exchangeRatesGroup = Flowable.zip(mExchangeRateRepository.fetchCoindeltaRates(), mExchangeRateRepository.fetchBitbnsRates(), mExchangeRateRepository.fetchThroughbitRates(), mExchangeRateRepository.fetchOxybitRates(), mExchangeRateRepository.fetchWazirXRates(), (coindeltaResponse, bitbnsResponse, throughbitResponse, oxybitResponse, wazirXResponse) -> {
+                Flowable<List<ExchangeRate>> exchangeRatesGroup = Flowable.zip(mExchangeRateRepository.fetchCoindeltaRates(), mExchangeRateRepository.fetchBitbnsRates(), mExchangeRateRepository.fetchThroughbitRates(), mExchangeRateRepository.fetchWazirXRates(), (coindeltaResponse, bitbnsResponse, throughbitResponse, wazirXResponse) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
 
                     exchangeRates.addAll(CoindeltaResponse.getExchangeRates(coindeltaResponse, date));
@@ -126,7 +122,7 @@ public class RateService extends Service {
 
                     exchangeRates.addAll(BitbnsResponse.getExchangeRates(bitbnsResponse, date));
 
-                    exchangeRates.addAll(oxybitResponse.getExchangeRates(date));
+                    //exchangeRates.addAll(oxybitResponse.getExchangeRates(date));
 
                     exchangeRates.addAll(wazirXResponse.getExchangeRates(date));
 
@@ -137,21 +133,23 @@ public class RateService extends Service {
                 });
 
 
-                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), exchangeRatesGroup, mExchangeRateRepository.fetchCoinomeRates(), mExchangeRateRepository.fetchUnocoinRates(), (koinexResponse, exchangeRateList, coinomeResponse, unocoinResponse) -> {
+                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), exchangeRatesGroup, mExchangeRateRepository.fetchCoinomeRates(), mExchangeRateRepository.fetchUnocoinRates(), pocketBits, zebpay, (koinexResponse, exchangeRateList, coinomeResponse, unocoinResponse, pocketbitsResponse, zebpayRates) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
 
                     //ExchangeRate coinsecureBTCRate = new ExchangeRate(COINSECURE_ID, "BTC", date, coinsecureResponse.getMessage().getLowestAsk() / 100.0, coinsecureResponse.getMessage().getHighestBid() / 100.0);
 
-                    //exchangeRates.addAll(zebpayRates);
+                    exchangeRates.addAll(zebpayRates);
                     exchangeRates.addAll(exchangeRateList);
                     exchangeRates.addAll(koinexResponse.getExchangeRates(date));
                     exchangeRates.addAll(coinomeResponse.getExchangeRates(date));
 
                     //exchangeRates.add(coinsecureBTCRate);
-                    //exchangeRates.addAll(pocketbitsResponse);
+                    exchangeRates.addAll(pocketbitsResponse);
                     exchangeRates.addAll(unocoinResponse.getExchangeRates(date));
 
                     checkArbitrage(exchangeRates);
+
+                    checkIntraExchangeArbitrage(koinexResponse.getMultiCoinExchangeRates(date));
                     return exchangeRates;
                 }).subscribeOn(schedulerProvider.io())
                         .observeOn(schedulerProvider.computation())
@@ -159,7 +157,83 @@ public class RateService extends Service {
                                 , throwable -> Timber.e(throwable));
 
             }
-        }, 0,60000);
+        }, 0, 60000);
+    }
+
+    private void checkIntraExchangeArbitrage(Map<String, Map<String, ExchangeRate>> multiCoinExchangeRates) {
+        TreeMap<Double, String> profitToStringMap = new TreeMap<>(Collections.reverseOrder());
+        Set<String> notificationCurrencies = new HashSet<>();
+        for (String baseCurrency : multiCoinExchangeRates.keySet()) {
+            if (!"INR".equalsIgnoreCase(baseCurrency)) {
+                for (String exchangeCurrency : multiCoinExchangeRates.get(baseCurrency).keySet()) {
+                    double sellPrice = multiCoinExchangeRates.get("INR").get(exchangeCurrency).getSellRate() * 0.998;
+                    double buyPrice = multiCoinExchangeRates.get(baseCurrency).get(exchangeCurrency).getBuyRate() * multiCoinExchangeRates.get("INR").get(baseCurrency).getBuyRate() * 1.0025;
+                    double profit = sellPrice - buyPrice;
+                    if (profit > 0) {
+                        double profitPercentage = (profit * 100.0) / buyPrice;
+                        if (profitPercentage > 0) {
+                            profitToStringMap.put(profitPercentage, "INR → " +
+                                    baseCurrency + " → " +
+                                    exchangeCurrency + " → INR " +
+                                    String.format("%.2f%%", profitPercentage));
+                            notificationCurrencies.add(exchangeCurrency);
+                        }
+                    }
+                }
+                for (String exchangeCurrency : multiCoinExchangeRates.get(baseCurrency).keySet()) {
+                    double sellPrice = multiCoinExchangeRates.get(baseCurrency).get(exchangeCurrency).getSellRate() * multiCoinExchangeRates.get("INR").get(baseCurrency).getSellRate() * 0.998;
+                    double buyPrice = multiCoinExchangeRates.get("INR").get(exchangeCurrency).getBuyRate() * 1.0025;
+                    double profit = sellPrice - buyPrice;
+                    if (profit > 0) {
+                        double profitPercentage = (profit * 100.0) / buyPrice;
+                        if (profitPercentage > 0) {
+                            profitToStringMap.put(profitPercentage, "INR → " +
+                                    exchangeCurrency + " → " +
+                                    baseCurrency + " → INR " +
+                                    String.format("%.2f%%", profitPercentage));
+                            notificationCurrencies.add(exchangeCurrency);
+                        }
+                    }
+                }
+            }
+        }
+        if (profitToStringMap.size() > 0) {
+            String contentText = "";
+            for (String currency : notificationCurrencies) {
+                contentText += currency + " ";
+            }
+            Intent intent = HomeActivity.getStartIntent(this);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+
+
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+                    .setContentTitle("Koinex Arbitrage")
+                    .setContentText(contentText)
+                    .setAutoCancel(false)
+                    .setSmallIcon(R.drawable.ic_launcher_background)
+                    .setColor(this.getResources().getColor(R.color.colorPrimary))
+                    .setContentIntent(pendingIntent);
+
+            if (profitToStringMap.firstKey() > 5) {
+                Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                notificationBuilder.setSound(alarmSound);
+            }
+
+            NotificationCompat.InboxStyle notificationInboxStyle = new NotificationCompat.InboxStyle(notificationBuilder)
+                    .setBigContentTitle("Arbitrage Opportunity");
+
+            for (Map.Entry<Double, String> entry : profitToStringMap.entrySet()) {
+                notificationInboxStyle.addLine(entry.getValue());
+            }
+
+            if (profitToStringMap.size() == 1) {
+                notificationInboxStyle.addLine("Nothing more.");
+            }
+
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            notificationManager.notify(2, notificationInboxStyle.build());
+        }
     }
 
     private void checkArbitrage(List<ExchangeRate> exchangeRates) {
