@@ -32,6 +32,8 @@ public class WazirXResponse {
     Data EOS;
     @SerializedName("zilinr")
     Data ZIL;
+    @SerializedName("ncashinr")
+    Data NCASH;
 
     public class Data {
         @SerializedName("sell")
@@ -67,6 +69,7 @@ public class WazirXResponse {
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "DASH", date, Double.parseDouble(DASH.sell), Double.parseDouble(DASH.buy)));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "EOS", date, Double.parseDouble(EOS.sell), Double.parseDouble(EOS.buy)));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "ZIL", date, Double.parseDouble(ZIL.sell), Double.parseDouble(ZIL.buy)));
+        exchangeRates.add(new ExchangeRate(WAZIRX_ID, "NCASH", date, Double.parseDouble(NCASH.sell), Double.parseDouble(NCASH.buy)));
         return exchangeRates;
     }
 }

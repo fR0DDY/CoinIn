@@ -68,25 +68,28 @@ public class SplashInteractor extends BaseInteractor
     @Override
     public Observable<List<Long>> saveDefaultExchangeFees() {
 
-        ExchangeFees koinexETHFees = new ExchangeFees(1, KOINEX_ID, "ETH", 0.002, 0.002, 0.003);
-        ExchangeFees koinexBTCFees = new ExchangeFees(2, KOINEX_ID, "BTC", 0.002, 0.002, 0.0005);
-        ExchangeFees koinexBCHFees = new ExchangeFees(3, KOINEX_ID, "BCH", 0.002, 0.002, 0.001);
-        ExchangeFees koinexLTCFees = new ExchangeFees(4, KOINEX_ID, "LTC", 0.002, 0.002, 0.01);
-        ExchangeFees koinexXRPFees = new ExchangeFees(5, KOINEX_ID, "XRP", 0.002, 0.002, 0.02);
-        ExchangeFees koinexOMGFees = new ExchangeFees(58, KOINEX_ID, "OMG", 0.002, 0.002, 0.1);
-        ExchangeFees koinexREQFees = new ExchangeFees(59, KOINEX_ID, "REQ", 0.002, 0.002, 10);
-        ExchangeFees koinexZRXFees = new ExchangeFees(93, KOINEX_ID, "ZRX", 0.002, 0.002, 5);
-        ExchangeFees koinexAEFees = new ExchangeFees(99, KOINEX_ID, "AE", 0.002, 0.002, 2.5);
-        ExchangeFees koinexBATFees = new ExchangeFees(100, KOINEX_ID, "BAT", 0.002, 0.002, 10);
-        ExchangeFees koinexGNTFees = new ExchangeFees(101, KOINEX_ID, "GNT", 0.002, 0.002, 10);
-        ExchangeFees koinexTRXFees = new ExchangeFees(111, KOINEX_ID, "TRX", 0.002, 0.002, 60);
-        ExchangeFees koinexXLMFees = new ExchangeFees(113, KOINEX_ID, "XLM", 0.002, 0.002, 0.02);
-        ExchangeFees koinexNEOFees = new ExchangeFees(114, KOINEX_ID, "NEO", 0.002, 0.002, 0);
-        ExchangeFees koinexGASFees = new ExchangeFees(115, KOINEX_ID, "GAS", 0.002, 0.002, 0);
-        ExchangeFees koinexAIONFees = new ExchangeFees(138, KOINEX_ID, "AION", 0.002, 0.002, 0.7);
-        ExchangeFees koinexNCASHFees = new ExchangeFees(139, KOINEX_ID, "NCASH", 0.002, 0.002, 60);
-        ExchangeFees koinexEOSFees = new ExchangeFees(146, KOINEX_ID, "EOS", 0.002, 0.002, 0.4);
-        ExchangeFees koinexNANOFees = new ExchangeFees(147, KOINEX_ID, "NANO", 0.002, 0.002, 0.05);
+        ExchangeFees koinexETHFees = new ExchangeFees(1, KOINEX_ID, "ETH", 0.0015, 0.0015, 0.003);
+        ExchangeFees koinexBTCFees = new ExchangeFees(2, KOINEX_ID, "BTC", 0.0015, 0.0015, 0.0005);
+        ExchangeFees koinexBCHFees = new ExchangeFees(3, KOINEX_ID, "BCH", 0.0015, 0.0015, 0.001);
+        ExchangeFees koinexLTCFees = new ExchangeFees(4, KOINEX_ID, "LTC", 0.0015, 0.0015, 0.01);
+        ExchangeFees koinexXRPFees = new ExchangeFees(5, KOINEX_ID, "XRP", 0.0015, 0.0015, 0.02);
+        ExchangeFees koinexOMGFees = new ExchangeFees(58, KOINEX_ID, "OMG", 0.0015, 0.0015, 0.1);
+        ExchangeFees koinexREQFees = new ExchangeFees(59, KOINEX_ID, "REQ", 0.0015, 0.0015, 10);
+        ExchangeFees koinexZRXFees = new ExchangeFees(93, KOINEX_ID, "ZRX", 0.0015, 0.0015, 5);
+        ExchangeFees koinexAEFees = new ExchangeFees(99, KOINEX_ID, "AE", 0.0015, 0.0015, 2.5);
+        ExchangeFees koinexBATFees = new ExchangeFees(100, KOINEX_ID, "BAT", 0.0015, 0.0015, 10);
+        ExchangeFees koinexGNTFees = new ExchangeFees(101, KOINEX_ID, "GNT", 0.0015, 0.0015, 10);
+        ExchangeFees koinexTRXFees = new ExchangeFees(111, KOINEX_ID, "TRX", 0.0015, 0.0015, 60);
+        ExchangeFees koinexXLMFees = new ExchangeFees(113, KOINEX_ID, "XLM", 0.0015, 0.0015, 0.02);
+        ExchangeFees koinexNEOFees = new ExchangeFees(114, KOINEX_ID, "NEO", 0.0015, 0.0015, 0);
+        ExchangeFees koinexGASFees = new ExchangeFees(115, KOINEX_ID, "GAS", 0.0015, 0.0015, 0);
+        ExchangeFees koinexAIONFees = new ExchangeFees(138, KOINEX_ID, "AION", 0.0015, 0.0015, 0.7);
+        ExchangeFees koinexNCASHFees = new ExchangeFees(139, KOINEX_ID, "NCASH", 0.0015, 0.0015, 60);
+        ExchangeFees koinexEOSFees = new ExchangeFees(146, KOINEX_ID, "EOS", 0.0015, 0.0015, 0.4);
+        ExchangeFees koinexNANOFees = new ExchangeFees(147, KOINEX_ID, "NANO", 0.0015, 0.0015, 0.05);
+        ExchangeFees koinexONTFees = new ExchangeFees(196, KOINEX_ID, "ONT", 0.0015, 0.0015, 0.0);
+        ExchangeFees koinexZILFees = new ExchangeFees(197, KOINEX_ID, "ZIL", 0.0015, 0.0015, 40);
+        ExchangeFees koinexIOSTFees = new ExchangeFees(206, KOINEX_ID, "IOST", 0.0015, 0.0015, 60);
 
         ExchangeFees throughbitETHFees = new ExchangeFees(6, THROUGHBIT_ID, "ETH", 0.00885, 0.00885, 0.002);
         ExchangeFees throughbitBTCFees = new ExchangeFees(7, THROUGHBIT_ID, "BTC", 0.00885, 0.00885, 0.00005);
@@ -98,6 +101,7 @@ public class SplashInteractor extends BaseInteractor
         ExchangeFees zebpayETHFees = new ExchangeFees(60, ZEBPAY_ID, "ETH", 0.00295, 0.00295, 0.002);
         ExchangeFees zebpayEOSFees = new ExchangeFees(194, ZEBPAY_ID, "EOS", 0.00295, 0.00295, 0.4);
         ExchangeFees zebpayOMGFees = new ExchangeFees(195, ZEBPAY_ID, "OMG", 0.00295, 0.00295, 0.15);
+        ExchangeFees zebpayTRXFees = new ExchangeFees(199, ZEBPAY_ID, "TRX", 0.00295, 0.00295, 60);
 
         ExchangeFees coinomeBTCFees = new ExchangeFees(9, COINOME_ID, "BTC", 0.00354, 0.00354, 0.0005);
         ExchangeFees coinomeBCHFees = new ExchangeFees(10, COINOME_ID, "BCH", 0.00354, 0.00354, 0.001);
@@ -225,6 +229,11 @@ public class SplashInteractor extends BaseInteractor
         ExchangeFees bitBnsREQFees = new ExchangeFees(152, BITBNS_ID, "REQ", 0.0025, 0.0025, 10);
         ExchangeFees bitBnsWAVESFees = new ExchangeFees(174, BITBNS_ID, "WAVES", 0.0025, 0.0025, 0.01);
         ExchangeFees bitBnsWANFees = new ExchangeFees(175, BITBNS_ID, "WAN", 0.0025, 0.0025, 0.01);
+        ExchangeFees bitBnsACTFees = new ExchangeFees(201, BITBNS_ID, "ACT", 0.0025, 0.0025, 0.01);
+        ExchangeFees bitBnsDGDFees = new ExchangeFees(202, BITBNS_ID, "DGD", 0.0025, 0.0025, 0.01);
+        ExchangeFees bitBnsPOWRFees = new ExchangeFees(203, BITBNS_ID, "POWR", 0.0025, 0.0025, 8);
+        ExchangeFees bitBnsQLCFees = new ExchangeFees(204, BITBNS_ID, "QLC", 0.0025, 0.0025, 0.1);
+        ExchangeFees bitBnsWPRFees = new ExchangeFees(205, BITBNS_ID, "WPR", 0.0025, 0.0025, 30);
 
         ExchangeFees oxybitFees1 = new ExchangeFees(62, OXYBIT_ID, "BTC", 10.0, 0.0, 0.0005);
         ExchangeFees oxybitFees2 = new ExchangeFees(63, OXYBIT_ID, "ETH", 10.0, 0.0, 0.005);
@@ -278,9 +287,11 @@ public class SplashInteractor extends BaseInteractor
         ExchangeFees wazirxFees7 = new ExchangeFees(182, WAZIRX_ID, "BCH", 0.00295, 0.00295, 0.001);
         ExchangeFees wazirxFees8 = new ExchangeFees(192, WAZIRX_ID, "EOS", 0.00295, 0.00295, 0.39);
         ExchangeFees wazirxFees9 = new ExchangeFees(193, WAZIRX_ID, "ZIL", 0.00295, 0.00295, 50);
+        ExchangeFees wazirxFees10 = new ExchangeFees(198, WAZIRX_ID, "NCASH", 0.00295, 0.00295, 60);
+        ExchangeFees wazirxFees11 = new ExchangeFees(200, WAZIRX_ID, "BAT", 0.00295, 0.00295, 10);
 
 
-        List<ExchangeFees> exchangeFees = Arrays.asList(koinexETHFees, koinexBTCFees, koinexBCHFees, koinexLTCFees, koinexXRPFees, throughbitETHFees, throughbitBTCFees, zebpayBTCFees, coinomeBTCFees, zebpayLTCFees, zebpayXRPFees, coinomeBCHFees, coinomeLTCFees, buyUcoinETHFees, buyUcoinBTCFees, buyUcoinBCHFees, buyUcoinLTCFees, buyUcoinXRPFees, coindeltaETHFees, coindeltaBTCFees, coindeltaBCHFees, coindeltaLTCFees, coindeltaXRPFees, pocketBitsETHFees, pocketBitsBTCFees, pocketBitsBCHFees, pocketBitsLTCFees, pocketBitsXRPFees, pocketBitsBTGFees, pocketBitsDGBFees, pocketBitsXLMFees, pocketBitsSCFees, pocketBitsXVGFees, pocketBitsVOXFees, coinsecureBTCFees, zebpayBCHFees, coinomeDASHFees, buyUcoinDASHFees, buyUcoinNEOFees, buyUcoinETCFees, buyUcoinQTUMFees, buyUcoinXMRFees, buyUcoinZECFees, buyUcoinOMGFees, coindeltaOMGFees, coindeltaQTUMFees, pocketBitsDASHFees, pocketBitsETCFees, pocketBitsXMRFees, pocketBitsNEOFees, pocketBitsOMGFees, pocketBitsZECFees, bitBnsBTCFees, bitBnsXRPFees, bitBnsNEOFees, bitBnsETHFees, bitBnsXLMFees, coinomeDGBFees, koinexOMGFees, koinexREQFees, zebpayETHFees, coinomeZECFees, oxybitFees1, oxybitFees2, oxybitFees3, oxybitFees4, oxybitFees5, oxybitFees6, oxybitFees7, oxybitFees8, oxybitFees9, oxybitFees10, oxybitFees11, oxybitFees12, oxybitFees13, oxybitFees14, oxybitFees15, oxybitFees16, oxybitFees17, oxybitFees18, oxybitFees19, oxybitFees20, oxybitFees21, oxybitFees22, oxybitFees23, oxybitFees24, oxybitFees25, oxybitFees26, oxybitFees27, oxybitFees28, oxybitFees29, oxybitFees30, oxybitFees31, koinexZRXFees, bitBnsGASFees, bitBnsRPXFees, bitBnsDBCFees, bitBnsLTCFees, bitBnsXMRFees, koinexAEFees, koinexBATFees, koinexGNTFees, oxybitFees32, oxybitFees33, bitBnsSIAFees, bitBnsDOGEFees, bitBnsBCHFees, bitBnsDASHFees, pocketBitsTRXFees, coinslabFees, bitBnsTRXFees, koinexTRXFees, coinomeQTUMFees, koinexXLMFees, koinexNEOFees, koinexGASFees, coindeltaZILFees, coindeltaZRXFees, buyUcoinNEMFees, buyUcoinGNTFees, buyUcoinSTRATFees, buyUcoinSTEEMFees, buyUcoinREPFees, buyUcoinLSKFees, buyUcoinFCTFees, buyUcoinCVCFees, buyUcoinSCFees, buyUcoinPAYFees, buyUcoinDOGEFees, buyUcoinDGBFees, buyUcoinNXTFees, buyUcoinBATFees, buyUcoinBTSFees, buyUcoinCLOAKFees, buyUcoinPIVXFees, buyUcoinDCNFees, bitBnsETNFees, bitBnsONTFees, bitBnsZILFees, koinexAIONFees, koinexNCASHFees, coindeltaKNCFees, coindeltaEOSFees, bitBnsEOSFees, bitBnsPOLYFees, bitBnsDGBFees, bitBnsNCASHFees, koinexEOSFees, koinexNANOFees, bitBnsADAFees, bitBnsICXFees, bitBnsVENFees, bitBnsOMGFees, bitBnsREQFees, coindeltaZECFees, coindeltaNEOFees, coindeltaGASFees, coinomeBTGFees, unocoinFees1, unocoinFees2, unocoinFees3, unocoinFees4, unocoinFees5, unocoinFees6, coindeltaAIONFees, coindeltaBATFees, coindeltaCNDFees, coindeltaCVCFees, coindeltaMANAFees, coindeltaENGFees, coindeltaGNTFees, coindeltaICXFees, coindeltaSPANKFees, coindeltaTRXFees, bitBnsWAVESFees, bitBnsWANFees, wazirxFees1, wazirxFees2, wazirxFees3, wazirxFees4, wazirxFees5, wazirxFees6, wazirxFees7, pocketBitsZRXFees, pocketBitsREPFees, pocketBitsBATFees, pocketBitsQTUMFees, pocketBitsADAFees, pocketBitsDOGEFees, pocketBitsGNTFees, pocketBitsSTORJFees, pocketBitsUBQFees, wazirxFees8, wazirxFees9, zebpayEOSFees, zebpayOMGFees);
+        List<ExchangeFees> exchangeFees = Arrays.asList(koinexETHFees, koinexBTCFees, koinexBCHFees, koinexLTCFees, koinexXRPFees, throughbitETHFees, throughbitBTCFees, zebpayBTCFees, coinomeBTCFees, zebpayLTCFees, zebpayXRPFees, coinomeBCHFees, coinomeLTCFees, buyUcoinETHFees, buyUcoinBTCFees, buyUcoinBCHFees, buyUcoinLTCFees, buyUcoinXRPFees, coindeltaETHFees, coindeltaBTCFees, coindeltaBCHFees, coindeltaLTCFees, coindeltaXRPFees, pocketBitsETHFees, pocketBitsBTCFees, pocketBitsBCHFees, pocketBitsLTCFees, pocketBitsXRPFees, pocketBitsBTGFees, pocketBitsDGBFees, pocketBitsXLMFees, pocketBitsSCFees, pocketBitsXVGFees, pocketBitsVOXFees, coinsecureBTCFees, zebpayBCHFees, coinomeDASHFees, buyUcoinDASHFees, buyUcoinNEOFees, buyUcoinETCFees, buyUcoinQTUMFees, buyUcoinXMRFees, buyUcoinZECFees, buyUcoinOMGFees, coindeltaOMGFees, coindeltaQTUMFees, pocketBitsDASHFees, pocketBitsETCFees, pocketBitsXMRFees, pocketBitsNEOFees, pocketBitsOMGFees, pocketBitsZECFees, bitBnsBTCFees, bitBnsXRPFees, bitBnsNEOFees, bitBnsETHFees, bitBnsXLMFees, coinomeDGBFees, koinexOMGFees, koinexREQFees, zebpayETHFees, coinomeZECFees, oxybitFees1, oxybitFees2, oxybitFees3, oxybitFees4, oxybitFees5, oxybitFees6, oxybitFees7, oxybitFees8, oxybitFees9, oxybitFees10, oxybitFees11, oxybitFees12, oxybitFees13, oxybitFees14, oxybitFees15, oxybitFees16, oxybitFees17, oxybitFees18, oxybitFees19, oxybitFees20, oxybitFees21, oxybitFees22, oxybitFees23, oxybitFees24, oxybitFees25, oxybitFees26, oxybitFees27, oxybitFees28, oxybitFees29, oxybitFees30, oxybitFees31, koinexZRXFees, bitBnsGASFees, bitBnsRPXFees, bitBnsDBCFees, bitBnsLTCFees, bitBnsXMRFees, koinexAEFees, koinexBATFees, koinexGNTFees, oxybitFees32, oxybitFees33, bitBnsSIAFees, bitBnsDOGEFees, bitBnsBCHFees, bitBnsDASHFees, pocketBitsTRXFees, coinslabFees, bitBnsTRXFees, koinexTRXFees, coinomeQTUMFees, koinexXLMFees, koinexNEOFees, koinexGASFees, coindeltaZILFees, coindeltaZRXFees, buyUcoinNEMFees, buyUcoinGNTFees, buyUcoinSTRATFees, buyUcoinSTEEMFees, buyUcoinREPFees, buyUcoinLSKFees, buyUcoinFCTFees, buyUcoinCVCFees, buyUcoinSCFees, buyUcoinPAYFees, buyUcoinDOGEFees, buyUcoinDGBFees, buyUcoinNXTFees, buyUcoinBATFees, buyUcoinBTSFees, buyUcoinCLOAKFees, buyUcoinPIVXFees, buyUcoinDCNFees, bitBnsETNFees, bitBnsONTFees, bitBnsZILFees, koinexAIONFees, koinexNCASHFees, coindeltaKNCFees, coindeltaEOSFees, bitBnsEOSFees, bitBnsPOLYFees, bitBnsDGBFees, bitBnsNCASHFees, koinexEOSFees, koinexNANOFees, bitBnsADAFees, bitBnsICXFees, bitBnsVENFees, bitBnsOMGFees, bitBnsREQFees, coindeltaZECFees, coindeltaNEOFees, coindeltaGASFees, coinomeBTGFees, unocoinFees1, unocoinFees2, unocoinFees3, unocoinFees4, unocoinFees5, unocoinFees6, coindeltaAIONFees, coindeltaBATFees, coindeltaCNDFees, coindeltaCVCFees, coindeltaMANAFees, coindeltaENGFees, coindeltaGNTFees, coindeltaICXFees, coindeltaSPANKFees, coindeltaTRXFees, bitBnsWAVESFees, bitBnsWANFees, wazirxFees1, wazirxFees2, wazirxFees3, wazirxFees4, wazirxFees5, wazirxFees6, wazirxFees7, pocketBitsZRXFees, pocketBitsREPFees, pocketBitsBATFees, pocketBitsQTUMFees, pocketBitsADAFees, pocketBitsDOGEFees, pocketBitsGNTFees, pocketBitsSTORJFees, pocketBitsUBQFees, wazirxFees8, wazirxFees9, zebpayEOSFees, zebpayOMGFees, koinexONTFees, koinexZILFees, wazirxFees10, zebpayTRXFees, wazirxFees11, bitBnsACTFees, bitBnsDGDFees, bitBnsPOWRFees, bitBnsQLCFees, bitBnsWPRFees, koinexIOSTFees);
 
         return Observable.fromCallable(() -> mExchangeRepository.insertExchangeFees(exchangeFees));
     }

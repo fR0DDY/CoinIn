@@ -97,6 +97,47 @@ public class ExchangeRateLocalDataSource implements ExchangeRateDataSource {
     }
 
     @Override
+    public Flowable<ZebpayResponse> fetchZebpayTRXRates() {
+        // Not required in Local
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayETHBTCRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayBCHBTCRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayLTCBTCRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayEOSBTCRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayOMGBTCRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayTRXBTCRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayXRPBTCRates() {
+        return null;
+    }
+
+    @Override
     public Flowable<BuyUcoinResponse> fetchBuyUcoinRates() {
         // Not required in Local
         return null;

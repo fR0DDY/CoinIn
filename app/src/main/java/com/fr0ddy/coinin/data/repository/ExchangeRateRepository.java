@@ -88,6 +88,46 @@ public class ExchangeRateRepository implements ExchangeRateDataSource {
     }
 
     @Override
+    public Flowable<ZebpayResponse> fetchZebpayTRXRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayTRXRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayETHBTCRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayETHBTCRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayBCHBTCRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayBCHBTCRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayLTCBTCRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayLTCBTCRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayEOSBTCRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayEOSBTCRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayOMGBTCRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayOMGBTCRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayTRXBTCRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayTRXBTCRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayXRPBTCRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayXRPBTCRates();
+    }
+
+    @Override
     public Flowable<BuyUcoinResponse> fetchBuyUcoinRates() {
         return mExchangeRateRemoteDataSource.fetchBuyUcoinRates();
     }

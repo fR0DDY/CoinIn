@@ -41,6 +41,13 @@ public class BitbnsResponse {
     Data VEN;
     Data REQ;
     Data OMG;
+    Data ACT;
+    Data WAVES;
+    Data WAN;
+    Data DGD;
+    Data POWR;
+    Data QLC;
+    Data WPR;
 
     public class Data {
         @SerializedName("sellPrice")
@@ -383,6 +390,20 @@ public class BitbnsResponse {
             } else if (response.getOMG() != null) {
                 ExchangeRate rate = new ExchangeRate(BITBNS_ID, "OMG", date, response.getOMG().getSellPrice(), response.getOMG().getBuyPrice());
                 exchangeRates.add(rate);
+            } else if (response.ACT != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "ACT", date, response.ACT.getSellPrice(), response.ACT.getBuyPrice()));
+            } else if (response.WAVES != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "WAVES", date, response.WAVES.getSellPrice(), response.WAVES.getBuyPrice()));
+            } else if (response.WAN != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "WAN", date, response.WAN.getSellPrice(), response.WAN.getBuyPrice()));
+            } else if (response.DGD != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "DGD", date, response.DGD.getSellPrice(), response.DGD.getBuyPrice()));
+            } else if (response.POWR != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "POWR", date, response.POWR.getSellPrice(), response.POWR.getBuyPrice()));
+            } else if (response.QLC != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "QLC", date, response.QLC.getSellPrice(), response.QLC.getBuyPrice()));
+            } else if (response.WPR != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "WPR", date, response.WPR.getSellPrice(), response.WPR.getBuyPrice()));
             }
         }
         return exchangeRates;

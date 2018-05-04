@@ -31,6 +31,7 @@ public class KoinexResponse {
         BaseCurrency inr;
         BaseCurrency bitcoin;
         BaseCurrency ether;
+        BaseCurrency ripple;
 
         public class BaseCurrency {
             Data ETH;
@@ -52,6 +53,9 @@ public class KoinexResponse {
             Data NCASH;
             Data EOS;
             Data XRB;
+            Data ONT;
+            Data ZIL;
+            Data IOST;
 
             public Data getETH() {
                 return ETH;
@@ -341,6 +345,12 @@ public class KoinexResponse {
 
         exchangeRates.add(new ExchangeRate(KOINEX_ID, "NANO", date, Double.parseDouble(stats.inr.getXRB().getLowestAsk()), Double.parseDouble(stats.inr.getXRB().getHighestBid())));
 
+        exchangeRates.add(new ExchangeRate(KOINEX_ID, "ONT", date, Double.parseDouble(stats.inr.ONT.getLowestAsk()), Double.parseDouble(stats.inr.ONT.getHighestBid())));
+
+        exchangeRates.add(new ExchangeRate(KOINEX_ID, "ZIL", date, Double.parseDouble(stats.inr.ZIL.getLowestAsk()), Double.parseDouble(stats.inr.ZIL.getHighestBid())));
+
+        exchangeRates.add(new ExchangeRate(KOINEX_ID, "IOST", date, Double.parseDouble(stats.inr.IOST.getLowestAsk()), Double.parseDouble(stats.inr.IOST.getHighestBid())));
+
         exchangeRates.add(koinexETHRate);
         exchangeRates.add(koinexBTCRate);
         exchangeRates.add(koinexBCHRate);
@@ -371,6 +381,11 @@ public class KoinexResponse {
         inrExchangeRates.put("TRX", new ExchangeRate(KOINEX_ID, "TRX", date, Double.parseDouble(stats.inr.TRX.getLowestAsk()), Double.parseDouble(stats.inr.TRX.getHighestBid())));
         inrExchangeRates.put("NCASH", new ExchangeRate(KOINEX_ID, "NCASH", date, Double.parseDouble(stats.inr.NCASH.getLowestAsk()), Double.parseDouble(stats.inr.NCASH.getHighestBid())));
         inrExchangeRates.put("EOS", new ExchangeRate(KOINEX_ID, "EOS", date, Double.parseDouble(stats.inr.EOS.getLowestAsk()), Double.parseDouble(stats.inr.EOS.getHighestBid())));
+        inrExchangeRates.put("AE", new ExchangeRate(KOINEX_ID, "AE", date, Double.parseDouble(stats.inr.AE.getLowestAsk()), Double.parseDouble(stats.inr.AE.getHighestBid())));
+        inrExchangeRates.put("GNT", new ExchangeRate(KOINEX_ID, "GNT", date, Double.parseDouble(stats.inr.GNT.getLowestAsk()), Double.parseDouble(stats.inr.GNT.getHighestBid())));
+        inrExchangeRates.put("ONT", new ExchangeRate(KOINEX_ID, "ONT", date, Double.parseDouble(stats.inr.ONT.getLowestAsk()), Double.parseDouble(stats.inr.ONT.getHighestBid())));
+        inrExchangeRates.put("ZIL", new ExchangeRate(KOINEX_ID, "ZIL", date, Double.parseDouble(stats.inr.ZIL.getLowestAsk()), Double.parseDouble(stats.inr.ZIL.getHighestBid())));
+        inrExchangeRates.put("IOST", new ExchangeRate(KOINEX_ID, "IOST", date, Double.parseDouble(stats.inr.IOST.getLowestAsk()), Double.parseDouble(stats.inr.IOST.getHighestBid())));
         exchangeRates.put("INR", inrExchangeRates);
 
         Map<String, ExchangeRate> bitcoinExchangeRates = new HashMap<>();
@@ -440,6 +455,53 @@ public class KoinexResponse {
         } catch (Exception e) {
         }
         exchangeRates.put("ETH", etherExchangeRates);
+
+        Map<String, ExchangeRate> rippleExchangeRates = new HashMap<>();
+        try {
+            rippleExchangeRates.put("AE", new ExchangeRate(KOINEX_ID, "AE", date, Double.parseDouble(stats.ripple.AE.getLowestAsk()), Double.parseDouble(stats.ripple.AE.getHighestBid())));
+        } catch (Exception e) {
+        }
+        try {
+            rippleExchangeRates.put("EOS", new ExchangeRate(KOINEX_ID, "EOS", date, Double.parseDouble(stats.ripple.EOS.getLowestAsk()), Double.parseDouble(stats.ripple.EOS.getHighestBid())));
+        } catch (Exception e) {
+        }
+        try {
+            rippleExchangeRates.put("GNT", new ExchangeRate(KOINEX_ID, "GNT", date, Double.parseDouble(stats.ripple.GNT.getLowestAsk()), Double.parseDouble(stats.ripple.GNT.getHighestBid())));
+        } catch (Exception e) {
+        }
+        try {
+            rippleExchangeRates.put("LTC", new ExchangeRate(KOINEX_ID, "LTC", date, Double.parseDouble(stats.ripple.LTC.getLowestAsk()), Double.parseDouble(stats.ripple.LTC.getHighestBid())));
+        } catch (Exception e) {
+        }
+        try {
+            rippleExchangeRates.put("NCASH", new ExchangeRate(KOINEX_ID, "NCASH", date, Double.parseDouble(stats.ripple.NCASH.getLowestAsk()), Double.parseDouble(stats.ripple.NCASH.getHighestBid())));
+        } catch (Exception e) {
+        }
+        try {
+            rippleExchangeRates.put("OMG", new ExchangeRate(KOINEX_ID, "OMG", date, Double.parseDouble(stats.ripple.OMG.getLowestAsk()), Double.parseDouble(stats.ripple.OMG.getHighestBid())));
+        } catch (Exception e) {
+        }
+        try {
+            rippleExchangeRates.put("REQ", new ExchangeRate(KOINEX_ID, "REQ", date, Double.parseDouble(stats.ripple.REQ.getLowestAsk()), Double.parseDouble(stats.ripple.REQ.getHighestBid())));
+        } catch (Exception e) {
+        }
+        try {
+            rippleExchangeRates.put("TRX", new ExchangeRate(KOINEX_ID, "TRX", date, Double.parseDouble(stats.ripple.TRX.getLowestAsk()), Double.parseDouble(stats.ripple.TRX.getHighestBid())));
+        } catch (Exception e) {
+        }
+        try {
+            rippleExchangeRates.put("ONT", new ExchangeRate(KOINEX_ID, "ONT", date, Double.parseDouble(stats.ripple.ONT.getLowestAsk()), Double.parseDouble(stats.ripple.ONT.getHighestBid())));
+        } catch (Exception e) {
+        }
+        try {
+            rippleExchangeRates.put("ZIL", new ExchangeRate(KOINEX_ID, "ZIL", date, Double.parseDouble(stats.ripple.ZIL.getLowestAsk()), Double.parseDouble(stats.ripple.ZIL.getHighestBid())));
+        } catch (Exception e) {
+        }
+        try {
+            rippleExchangeRates.put("IOST", new ExchangeRate(KOINEX_ID, "IOST", date, Double.parseDouble(stats.ripple.IOST.getLowestAsk()), Double.parseDouble(stats.ripple.IOST.getHighestBid())));
+        } catch (Exception e) {
+        }
+        exchangeRates.put("XRP", rippleExchangeRates);
 
         return exchangeRates;
     }

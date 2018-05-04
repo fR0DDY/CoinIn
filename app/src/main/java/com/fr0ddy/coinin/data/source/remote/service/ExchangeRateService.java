@@ -52,6 +52,30 @@ public interface ExchangeRateService {
     @GET("https://www.zebapi.com/api/v1/market/ticker-new/omg/inr")
     Flowable<ZebpayResponse> fetchZebpayOMGRates();
 
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/trx/inr")
+    Flowable<ZebpayResponse> fetchZebpayTRXRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/eth/btc")
+    Flowable<ZebpayResponse> fetchZebpayETHBTCRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/bch/btc")
+    Flowable<ZebpayResponse> fetchZebpayBCHBTCRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/ltc/btc")
+    Flowable<ZebpayResponse> fetchZebpayLTCBTCRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/eos/btc")
+    Flowable<ZebpayResponse> fetchZebpayEOSBTCRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/omg/btc")
+    Flowable<ZebpayResponse> fetchZebpayOMGBTCRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/trx/btc")
+    Flowable<ZebpayResponse> fetchZebpayTRXBTCRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/xrp/btc")
+    Flowable<ZebpayResponse> fetchZebpayXRPBTCRates();
+
     @GET("https://www.buyucoin.com/api/v1.2/currency/markets")
     Flowable<BuyUcoinResponse> fetchBuyUcoinRates();
 
