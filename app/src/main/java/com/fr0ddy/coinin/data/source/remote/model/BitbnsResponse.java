@@ -48,6 +48,17 @@ public class BitbnsResponse {
     Data POWR;
     Data QLC;
     Data WPR;
+    Data XEM;
+    Data XVG;
+    Data BLZ;
+    Data LRC;
+    Data NEXO;
+    Data SUB;
+    Data ZRX;
+    Data CPX;
+    Data REP;
+    Data EFX;
+    Data LOOM;
 
     public class Data {
         @SerializedName("sellPrice")
@@ -404,6 +415,28 @@ public class BitbnsResponse {
                 exchangeRates.add(new ExchangeRate(BITBNS_ID, "QLC", date, response.QLC.getSellPrice(), response.QLC.getBuyPrice()));
             } else if (response.WPR != null) {
                 exchangeRates.add(new ExchangeRate(BITBNS_ID, "WPR", date, response.WPR.getSellPrice(), response.WPR.getBuyPrice()));
+            } else if (response.XEM != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "XEM", date, response.XEM.getSellPrice(), response.XEM.getBuyPrice()));
+            } else if (response.XVG != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "XVG", date, response.XVG.getSellPrice(), response.XVG.getBuyPrice()));
+            } else if (response.BLZ != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "BLZ", date, response.BLZ.getSellPrice(), response.BLZ.getBuyPrice()));
+            } else if (response.LRC != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "LRC", date, response.LRC.getSellPrice(), response.LRC.getBuyPrice()));
+            } else if (response.NEXO != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "NEXO", date, response.NEXO.getSellPrice(), response.NEXO.getBuyPrice()));
+            } else if (response.SUB != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "SUB", date, response.SUB.getSellPrice(), response.SUB.getBuyPrice()));
+            } else if (response.ZRX != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "ZRX", date, response.ZRX.getSellPrice(), response.ZRX.getBuyPrice()));
+            } else if (response.CPX != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "CPX", date, response.CPX.getSellPrice(), response.CPX.getBuyPrice()));
+            } else if (response.REP != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "REP", date, response.REP.getSellPrice(), response.REP.getBuyPrice()));
+            } else if (response.EFX != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "EFX", date, response.EFX.getSellPrice(), response.EFX.getBuyPrice()));
+            } else if (response.LOOM != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "LOOM", date, response.LOOM.getSellPrice(), response.LOOM.getBuyPrice()));
             }
         }
         return exchangeRates;

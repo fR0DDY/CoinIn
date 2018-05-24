@@ -21,6 +21,14 @@ public class UnocoinResponse {
     Data XRP;
     Data ETH;
     Data BTG;
+    Data BAT;
+    Data BRD;
+    Data FUN;
+    Data GNT;
+    Data ZIL;
+    Data CVC;
+    Data REP;
+    Data ZRX;
 
     public class Data {
         @SerializedName("lowest_ask")
@@ -53,6 +61,14 @@ public class UnocoinResponse {
         exchangeRates.add(new ExchangeRate(UNOCOIN_ID, "XRP", date, Double.parseDouble(XRP.getLowestAsk()), Double.parseDouble(XRP.getHighestBid())));
         exchangeRates.add(new ExchangeRate(UNOCOIN_ID, "ETH", date, Double.parseDouble(ETH.getLowestAsk()), Double.parseDouble(ETH.getHighestBid())));
         exchangeRates.add(new ExchangeRate(UNOCOIN_ID, "BTG", date, Double.parseDouble(BTG.getLowestAsk()), Double.parseDouble(BTG.getHighestBid())));
+        exchangeRates.add(new ExchangeRate(UNOCOIN_ID, "BAT", date, Double.parseDouble(BAT.getLowestAsk()), Double.parseDouble(BAT.getHighestBid())));
+        exchangeRates.add(new ExchangeRate(UNOCOIN_ID, "BRD", date, Double.parseDouble(BRD.getLowestAsk()), Double.parseDouble(BRD.getHighestBid())));
+        exchangeRates.add(new ExchangeRate(UNOCOIN_ID, "FUN", date, Double.parseDouble(FUN.getLowestAsk()), Double.parseDouble(FUN.getHighestBid())));
+        exchangeRates.add(new ExchangeRate(UNOCOIN_ID, "GNT", date, Double.parseDouble(GNT.getLowestAsk()), Double.parseDouble(GNT.getHighestBid())));
+        exchangeRates.add(new ExchangeRate(UNOCOIN_ID, "ZIL", date, Double.parseDouble(ZIL.getLowestAsk()), Double.parseDouble(ZIL.getHighestBid())));
+        exchangeRates.add(new ExchangeRate(UNOCOIN_ID, "CVC", date, Double.parseDouble(CVC.getLowestAsk()), Double.parseDouble(CVC.getHighestBid())));
+        exchangeRates.add(new ExchangeRate(UNOCOIN_ID, "REP", date, Double.parseDouble(REP.getLowestAsk()), Double.parseDouble(REP.getHighestBid())));
+        exchangeRates.add(new ExchangeRate(UNOCOIN_ID, "ZRX", date, Double.parseDouble(ZRX.getLowestAsk()), Double.parseDouble(ZRX.getHighestBid())));
         return exchangeRates;
     }
 }

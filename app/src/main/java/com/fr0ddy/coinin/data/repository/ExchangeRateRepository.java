@@ -128,6 +128,11 @@ public class ExchangeRateRepository implements ExchangeRateDataSource {
     }
 
     @Override
+    public Flowable<ZebpayResponse> fetchZebpayTRXXRPRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayTRXXRPRates();
+    }
+
+    @Override
     public Flowable<BuyUcoinResponse> fetchBuyUcoinRates() {
         return mExchangeRateRemoteDataSource.fetchBuyUcoinRates();
     }

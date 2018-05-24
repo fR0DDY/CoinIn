@@ -76,6 +76,9 @@ public interface ExchangeRateService {
     @GET("https://www.zebapi.com/api/v1/market/ticker-new/xrp/btc")
     Flowable<ZebpayResponse> fetchZebpayXRPBTCRates();
 
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/trx/xrp")
+    Flowable<ZebpayResponse> fetchZebpayTRXXRPRates();
+
     @GET("https://www.buyucoin.com/api/v1.2/currency/markets")
     Flowable<BuyUcoinResponse> fetchBuyUcoinRates();
 

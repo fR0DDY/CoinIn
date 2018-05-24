@@ -60,6 +60,8 @@ public interface ExchangeRateDataSource {
 
     Flowable<ZebpayResponse> fetchZebpayXRPBTCRates();
 
+    Flowable<ZebpayResponse> fetchZebpayTRXXRPRates();
+
     Flowable<BuyUcoinResponse> fetchBuyUcoinRates();
 
     Flowable<List<CoindeltaResponse>> fetchCoindeltaRates();

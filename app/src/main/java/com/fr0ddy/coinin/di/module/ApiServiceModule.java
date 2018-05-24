@@ -44,6 +44,7 @@ public class ApiServiceModule {
         return new OkHttpClient.Builder()
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
+                .cache(null)
                 .addInterceptor(httpInterceptor).build();
     }
 

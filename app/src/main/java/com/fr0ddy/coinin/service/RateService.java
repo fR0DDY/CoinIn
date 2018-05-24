@@ -1,12 +1,15 @@
 package com.fr0ddy.coinin.service;
 
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
@@ -26,7 +29,6 @@ import com.fr0ddy.coinin.ui.home.HomeActivity;
 import com.fr0ddy.coinin.utils.rx.SchedulerProvider;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -132,7 +134,7 @@ public class RateService extends Service {
                     return exchangeRates;
                 });
 
-                Flowable<List<ExchangeRate>> zebpay = Flowable.zip(zebpayINRRates, mExchangeRateRepository.fetchZebpayETHBTCRates(), mExchangeRateRepository.fetchZebpayBCHBTCRates(), mExchangeRateRepository.fetchZebpayLTCBTCRates(), mExchangeRateRepository.fetchZebpayEOSBTCRates(), mExchangeRateRepository.fetchZebpayOMGBTCRates(), mExchangeRateRepository.fetchZebpayTRXBTCRates(), mExchangeRateRepository.fetchZebpayXRPBTCRates(), (exchangeRates, zebpayETHResponse, zebpayBCHResponse, zebpayLTCResponse, zebpayEOSResponse, zebpayOMGResponse, zebpayTRXResponse, zebpayXRPResponse) -> {
+                Flowable<List<ExchangeRate>> zebpay = Flowable.zip(zebpayINRRates, mExchangeRateRepository.fetchZebpayETHBTCRates(), mExchangeRateRepository.fetchZebpayBCHBTCRates(), mExchangeRateRepository.fetchZebpayLTCBTCRates(), mExchangeRateRepository.fetchZebpayEOSBTCRates(), mExchangeRateRepository.fetchZebpayOMGBTCRates(), mExchangeRateRepository.fetchZebpayTRXBTCRates(), mExchangeRateRepository.fetchZebpayXRPBTCRates(), mExchangeRateRepository.fetchZebpayTRXXRPRates(), (exchangeRates, zebpayETHResponse, zebpayBCHResponse, zebpayLTCResponse, zebpayEOSResponse, zebpayOMGResponse, zebpayTRXResponse, zebpayXRPResponse, zebpayTRXXRPResponse) -> {
                     Map<String, ExchangeRate> btcExchangeRates = new HashMap<>();
                     btcExchangeRates.put("BCH", new ExchangeRate(ZEBPAY_ID, "BCH", date, zebpayBCHResponse.getBuyPrice(), zebpayBCHResponse.getSellPrice()));
                     btcExchangeRates.put("LTC", new ExchangeRate(ZEBPAY_ID, "LTC", date, zebpayLTCResponse.getBuyPrice(), zebpayLTCResponse.getSellPrice()));
@@ -142,9 +144,13 @@ public class RateService extends Service {
                     btcExchangeRates.put("OMG", new ExchangeRate(ZEBPAY_ID, "OMG", date, zebpayOMGResponse.getBuyPrice(), zebpayOMGResponse.getSellPrice()));
                     btcExchangeRates.put("TRX", new ExchangeRate(ZEBPAY_ID, "TRX", date, zebpayTRXResponse.getBuyPrice(), zebpayTRXResponse.getSellPrice()));
                     exchangeRates.put("BTC", btcExchangeRates);
+                    Map<String, ExchangeRate> xrpExchangeRates = new HashMap<>();
+                    xrpExchangeRates.put("TRX", new ExchangeRate(ZEBPAY_ID, "TRX", date, zebpayTRXXRPResponse.getBuyPrice(), zebpayTRXXRPResponse.getSellPrice()));
+                    exchangeRates.put("XRP", xrpExchangeRates);
                     checkIntraExchangeArbitrage(ZEBPAY_ID, "Zebpay", exchangeRates, 0.00295, 0.00295);
                     List<ExchangeRate> inrRates = new ArrayList<>();
-                    for (ExchangeRate rates: exchangeRates.get("INR").values()) inrRates.add(rates);
+                    for (ExchangeRate rates : exchangeRates.get("INR").values())
+                        inrRates.add(rates);
                     return inrRates;
                 });
 
@@ -189,10 +195,9 @@ public class RateService extends Service {
                     if (profit > 0) {
                         double profitPercentage = (profit * 100.0) / buyPrice;
                         if (profitPercentage > 0) {
-                            profitToStringMap.put(profitPercentage, "INR → " +
-                                    baseCurrency + " → " +
-                                    exchangeCurrency + " → INR " +
-                                    String.format("%.2f%%", profitPercentage));
+                            profitToStringMap.put(profitPercentage, String.format("%.2f%%", profitPercentage) + " INR → " +
+                                    baseCurrency + "(" + multiCoinExchangeRates.get(baseCurrency).get(exchangeCurrency).getBuyRate() + ") → " +
+                                    exchangeCurrency + " → INR");
                             notificationCurrencies.add(exchangeCurrency);
                         }
                     }
@@ -204,10 +209,9 @@ public class RateService extends Service {
                     if (profit > 0) {
                         double profitPercentage = (profit * 100.0) / buyPrice;
                         if (profitPercentage > 0) {
-                            profitToStringMap.put(profitPercentage, "INR → " +
-                                    exchangeCurrency + " → " +
-                                    baseCurrency + " → INR " +
-                                    String.format("%.2f%%", profitPercentage));
+                            profitToStringMap.put(profitPercentage, String.format("%.2f%%", profitPercentage) + " INR → " +
+                                    exchangeCurrency + "(" + multiCoinExchangeRates.get(baseCurrency).get(exchangeCurrency).getSellRate() + ") → " +
+                                    baseCurrency + " → INR");
                             notificationCurrencies.add(exchangeCurrency);
                         }
                     }
@@ -222,8 +226,14 @@ public class RateService extends Service {
             Intent intent = HomeActivity.getStartIntent(this);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
+            String notificationLevel = "Medium";
+            if (profitToStringMap.firstKey() > 5) {
+                notificationLevel = "Urgent";
+            } else if (profitToStringMap.firstKey() > 1) {
+                notificationLevel = "High";
+            }
 
-            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, notificationLevel + (exchangeId + 1))
                     .setContentTitle(exchangeName + " Arbitrage")
                     .setContentText(contentText)
                     .setAutoCancel(false)
@@ -231,9 +241,17 @@ public class RateService extends Service {
                     .setColor(this.getResources().getColor(R.color.colorPrimary))
                     .setContentIntent(pendingIntent);
 
-            if (profitToStringMap.firstKey() > 2) {
-                Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                notificationBuilder.setSound(alarmSound);
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.O) {
+                if (profitToStringMap.firstKey() > 10) {
+                    Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_ALARM);
+                    notificationBuilder.setSound(alarmSound);
+                } else if (profitToStringMap.firstKey() > 5) {
+                    Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_RINGTONE);
+                    notificationBuilder.setSound(alarmSound);
+                } else if (profitToStringMap.firstKey() > 1) {
+                    Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+                    notificationBuilder.setSound(alarmSound);
+                }
             }
 
             NotificationCompat.InboxStyle notificationInboxStyle = new NotificationCompat.InboxStyle(notificationBuilder)
@@ -249,6 +267,17 @@ public class RateService extends Service {
 
             NotificationManager notificationManager =
                     (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationChannel notificationChannel = new NotificationChannel(notificationLevel + (exchangeId + 1), exchangeName + " Arbitrage", profitToStringMap.firstKey() > 5 ? NotificationManager.IMPORTANCE_HIGH : profitToStringMap.firstKey() > 1 ? NotificationManager.IMPORTANCE_DEFAULT : NotificationManager.IMPORTANCE_LOW);
+
+                // Configure the notification channel.
+                notificationChannel.setDescription("Arbitrage Notification");
+                notificationChannel.enableLights(true);
+                notificationChannel.setLightColor(Color.RED);
+                notificationChannel.setVibrationPattern(new long[]{0, 1000, 500, 1000});
+                notificationChannel.enableVibration(true);
+                notificationManager.createNotificationChannel(notificationChannel);
+            }
             notificationManager.notify(exchangeId + 1, notificationInboxStyle.build());
         }
     }
@@ -302,11 +331,11 @@ public class RateService extends Service {
                                 double breakEvenINR = ((sellCost * fromFee.getTransferFee()) /
                                         (sellCost - buyCost)) * (sellCost / 10000.0);
 
-                                if (breakEvenINR < 5000.0) {
-                                    profitToStringMap.put(profitPercentage, currency + " " +
-                                            exchangeToNameMap.get(fromExchangeRate.getExchangeId()) + " → " +
-                                            exchangeToNameMap.get(toExchangeRate.getExchangeId()) + " " +
-                                            String.format("%.2f%%", profitPercentage) + " " + String.format("%.0f", breakEvenINR));
+                                if (breakEvenINR < 3000.0) {
+                                    profitToStringMap.put(profitPercentage, String.format("%.2f%%", profitPercentage) + " " + String.format("%.0f", breakEvenINR) +
+                                            " " + currency + " " +
+                                            exchangeToNameMap.get(fromExchangeRate.getExchangeId()) + "(" + String.format(fromExchangeRate.getBuyRate() > 1000 ? "%.0f" : "%.2f", fromExchangeRate.getBuyRate()) + ") → " +
+                                            exchangeToNameMap.get(toExchangeRate.getExchangeId()) + "(" + String.format(toExchangeRate.getSellRate() > 1000 ? "%.0f" : "%.2f", toExchangeRate.getSellRate()) + ")");
 
                                     notificationCurrencies.add(currency);
                                 }
@@ -331,11 +360,11 @@ public class RateService extends Service {
                                 double breakEvenINR = ((sellCost * fromFee.getTransferFee()) /
                                         (sellCost - buyCost)) * (sellCost / 10000.0);
 
-                                if (breakEvenINR < 5000.0) {
-                                    profitToStringMap.put(profitPercentage, currency + " " +
-                                            exchangeToNameMap.get(fromExchangeRate.getExchangeId()) + " → " +
-                                            exchangeToNameMap.get(toExchangeRate.getExchangeId()) + " " +
-                                            String.format("%.2f%%", profitPercentage) + " " + String.format("%.0f", breakEvenINR));
+                                if (breakEvenINR < 3000.0) {
+                                    profitToStringMap.put(profitPercentage, String.format("%.2f%%", profitPercentage) + " " + String.format("%.0f", breakEvenINR) +
+                                            " " + currency + " " +
+                                            exchangeToNameMap.get(fromExchangeRate.getExchangeId()) + "(" + String.format(fromExchangeRate.getBuyRate() > 1000 ? "%.0f" : "%.2f", fromExchangeRate.getBuyRate()) + ") → " +
+                                            exchangeToNameMap.get(toExchangeRate.getExchangeId()) + "(" + String.format(toExchangeRate.getSellRate() > 1000 ? "%.0f" : "%.2f", toExchangeRate.getSellRate()) + ")");
 
                                     notificationCurrencies.add(currency);
                                 }
@@ -354,19 +383,20 @@ public class RateService extends Service {
             Intent intent = HomeActivity.getStartIntent(this);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
 
+            String notificationLevel = "Medium";
+            if (profitToStringMap.firstKey() > 10) {
+                notificationLevel = "Urgent";
+            } else if (profitToStringMap.firstKey() > 5) {
+                notificationLevel = "High";
+            }
 
-            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, notificationLevel + "1")
                     .setContentTitle("Arbitrage")
                     .setContentText(contentText)
                     .setAutoCancel(false)
                     .setSmallIcon(R.drawable.ic_launcher_background)
                     .setColor(this.getResources().getColor(R.color.colorPrimary))
                     .setContentIntent(pendingIntent);
-
-            if (profitToStringMap.firstKey() > 5) {
-                Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-                notificationBuilder.setSound(alarmSound);
-            }
 
             NotificationCompat.InboxStyle notificationInboxStyle = new NotificationCompat.InboxStyle(notificationBuilder)
                     .setBigContentTitle("Arbitrage Opportunity");
@@ -381,6 +411,17 @@ public class RateService extends Service {
 
             NotificationManager notificationManager =
                     (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationChannel notificationChannel = new NotificationChannel(notificationLevel + "1", "Arbitrage Opportunity", profitToStringMap.firstKey() > 10 ? NotificationManager.IMPORTANCE_HIGH : profitToStringMap.firstKey() > 5 ? NotificationManager.IMPORTANCE_DEFAULT : NotificationManager.IMPORTANCE_LOW);
+
+                // Configure the notification channel.
+                notificationChannel.setDescription("Arbitrage Notification");
+                notificationChannel.enableLights(true);
+                notificationChannel.setLightColor(Color.RED);
+                notificationChannel.setVibrationPattern(new long[]{0, 1000, 500, 1000});
+                notificationChannel.enableVibration(true);
+                notificationManager.createNotificationChannel(notificationChannel);
+            }
             notificationManager.notify(1, notificationInboxStyle.build());
         }
     }

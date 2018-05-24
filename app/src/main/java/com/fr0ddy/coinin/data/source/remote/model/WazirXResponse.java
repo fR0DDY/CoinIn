@@ -34,6 +34,22 @@ public class WazirXResponse {
     Data ZIL;
     @SerializedName("ncashinr")
     Data NCASH;
+    @SerializedName("gntinr")
+    Data GNT;
+    @SerializedName("zrxinr")
+    Data ZRX;
+    @SerializedName("storminr")
+    Data STORM;
+    @SerializedName("reqinr")
+    Data REQ;
+    @SerializedName("subinr")
+    Data SUB;
+    @SerializedName("nulsinr")
+    Data NULS;
+    @SerializedName("icxinr")
+    Data ICX;
+    @SerializedName("omginr")
+    Data OMG;
 
     public class Data {
         @SerializedName("sell")
@@ -70,6 +86,14 @@ public class WazirXResponse {
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "EOS", date, Double.parseDouble(EOS.sell), Double.parseDouble(EOS.buy)));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "ZIL", date, Double.parseDouble(ZIL.sell), Double.parseDouble(ZIL.buy)));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "NCASH", date, Double.parseDouble(NCASH.sell), Double.parseDouble(NCASH.buy)));
+        exchangeRates.add(new ExchangeRate(WAZIRX_ID, "GNT", date, Double.parseDouble(GNT.sell), Double.parseDouble(GNT.buy)));
+        exchangeRates.add(new ExchangeRate(WAZIRX_ID, "ZRX", date, Double.parseDouble(ZRX.sell), Double.parseDouble(ZRX.buy)));
+        exchangeRates.add(new ExchangeRate(WAZIRX_ID, "STORM", date, Double.parseDouble(STORM.sell), Double.parseDouble(STORM.buy)));
+        exchangeRates.add(new ExchangeRate(WAZIRX_ID, "REQ", date, Double.parseDouble(REQ.sell), Double.parseDouble(REQ.buy)));
+        exchangeRates.add(new ExchangeRate(WAZIRX_ID, "SUB", date, Double.parseDouble(SUB.sell), Double.parseDouble(SUB.buy)));
+        exchangeRates.add(new ExchangeRate(WAZIRX_ID, "NULS", date, Double.parseDouble(NULS.sell), Double.parseDouble(NULS.buy)));
+        exchangeRates.add(new ExchangeRate(WAZIRX_ID, "ICX", date, Double.parseDouble(ICX.sell), Double.parseDouble(ICX.buy)));
+        exchangeRates.add(new ExchangeRate(WAZIRX_ID, "OMG", date, Double.parseDouble(OMG.sell), Double.parseDouble(OMG.buy)));
         return exchangeRates;
     }
 }
