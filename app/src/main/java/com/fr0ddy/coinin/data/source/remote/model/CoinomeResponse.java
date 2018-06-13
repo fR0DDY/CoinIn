@@ -33,6 +33,10 @@ public class CoinomeResponse {
     Data QTUM;
     @SerializedName("btg-inr")
     Data BTG;
+    @SerializedName("xrp-inr")
+    Data XRP;
+    @SerializedName("eth-inr")
+    Data ETH;
     @SerializedName("ltc-btc")
     Data LTC_BTC;
     @SerializedName("bch-btc")
@@ -47,6 +51,10 @@ public class CoinomeResponse {
     Data DGB_BTC;
     @SerializedName("qtum-btc")
     Data QTUM_BTC;
+    @SerializedName("xrp-btc")
+    Data XRP_BTC;
+    @SerializedName("eth-btc")
+    Data ETH_BTC;
 
     public Data getBTC() {
         return BTC;
@@ -186,6 +194,10 @@ public class CoinomeResponse {
 
         exchangeRates.add(new ExchangeRate(COINOME_ID, "BTG", date, Double.parseDouble(getBTG().getLowestAsk()), Double.parseDouble(getBTG().getHighestBid())));
 
+        exchangeRates.add(new ExchangeRate(COINOME_ID, "XRP", date, Double.parseDouble(XRP.getLowestAsk()), Double.parseDouble(XRP.getHighestBid())));
+
+        exchangeRates.add(new ExchangeRate(COINOME_ID, "ETH", date, Double.parseDouble(ETH.getLowestAsk()), Double.parseDouble(ETH.getHighestBid())));
+
         exchangeRates.add(coinomeBTCRate);
         exchangeRates.add(coinomeBCHRate);
         exchangeRates.add(coinomeLTCRate);
@@ -206,6 +218,8 @@ public class CoinomeResponse {
         inrExchangeRates.put("BTG", new ExchangeRate(COINOME_ID, "BTG", date, Double.parseDouble(BTG.getLowestAsk()), Double.parseDouble(BTG.getHighestBid())));
         inrExchangeRates.put("DGB", new ExchangeRate(COINOME_ID, "DGB", date, Double.parseDouble(DGB.getLowestAsk()), Double.parseDouble(DGB.getHighestBid())));
         inrExchangeRates.put("QTUM", new ExchangeRate(COINOME_ID, "QTUM", date, Double.parseDouble(QTUM.getLowestAsk()), Double.parseDouble(QTUM.getHighestBid())));
+        inrExchangeRates.put("XRP", new ExchangeRate(COINOME_ID, "XRP", date, Double.parseDouble(XRP.getLowestAsk()), Double.parseDouble(XRP.getHighestBid())));
+        inrExchangeRates.put("ETH", new ExchangeRate(COINOME_ID, "ETH", date, Double.parseDouble(ETH.getLowestAsk()), Double.parseDouble(ETH.getHighestBid())));
         exchangeRates.put("INR", inrExchangeRates);
 
         Map<String, ExchangeRate> bitcoinExchangeRates = new HashMap<>();
@@ -235,6 +249,14 @@ public class CoinomeResponse {
         }
         try {
             bitcoinExchangeRates.put("QTUM", new ExchangeRate(COINOME_ID, "QTUM", date, Double.parseDouble(QTUM_BTC.getLowestAsk()), Double.parseDouble(QTUM_BTC.getHighestBid())));
+        } catch (Exception e) {
+        }
+        try {
+            bitcoinExchangeRates.put("XRP", new ExchangeRate(COINOME_ID, "XRP", date, Double.parseDouble(XRP_BTC.getLowestAsk()), Double.parseDouble(XRP_BTC.getHighestBid())));
+        } catch (Exception e) {
+        }
+        try {
+            bitcoinExchangeRates.put("ETH", new ExchangeRate(COINOME_ID, "ETH", date, Double.parseDouble(ETH_BTC.getLowestAsk()), Double.parseDouble(ETH_BTC.getHighestBid())));
         } catch (Exception e) {
         }
         exchangeRates.put("BTC", bitcoinExchangeRates);

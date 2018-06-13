@@ -122,6 +122,18 @@ public class CoindeltaResponse {
             } else if ("trx-inr".equalsIgnoreCase(data.getMarketName())) {
                 ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "TRX", date, data.getLowestAsk(), data.getHighestBid());
                 exchangeRates.add(rate);
+            } else if ("act-inr".equalsIgnoreCase(data.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "ACT", date, data.getLowestAsk(), data.getHighestBid());
+                exchangeRates.add(rate);
+            } else if ("dai-inr".equalsIgnoreCase(data.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "DAI", date, data.getLowestAsk(), data.getHighestBid());
+                exchangeRates.add(rate);
+            } else if ("qkc-inr".equalsIgnoreCase(data.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "QKC", date, data.getLowestAsk(), data.getHighestBid());
+                exchangeRates.add(rate);
+            } else if ("krm-inr".equalsIgnoreCase(data.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "KRM", date, data.getLowestAsk(), data.getHighestBid());
+                exchangeRates.add(rate);
             }
         }
         return  exchangeRates;

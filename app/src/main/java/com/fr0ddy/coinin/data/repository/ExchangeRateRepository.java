@@ -10,6 +10,7 @@ import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinsecureResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinslabResponse;
+import com.fr0ddy.coinin.data.source.remote.model.KoinOkResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
 import com.fr0ddy.coinin.data.source.remote.model.OxybitResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
@@ -90,6 +91,56 @@ public class ExchangeRateRepository implements ExchangeRateDataSource {
     @Override
     public Flowable<ZebpayResponse> fetchZebpayTRXRates() {
         return mExchangeRateRemoteDataSource.fetchZebpayTRXRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayZILRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayZILRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayREPRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayREPRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayZRXRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayZRXRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayKNCRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayKNCRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayGNTRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayGNTRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayBATRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayBATRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayVENRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayVENRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayAERates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayAERates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayIOSTRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayIOSTRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayCMTRates() {
+        return mExchangeRateRemoteDataSource.fetchZebpayCMTRates();
     }
 
     @Override
@@ -190,6 +241,11 @@ public class ExchangeRateRepository implements ExchangeRateDataSource {
     @Override
     public Flowable<WazirXResponse> fetchWazirXRates() {
         return mExchangeRateRemoteDataSource.fetchWazirXRates();
+    }
+
+    @Override
+    public Flowable<KoinOkResponse> fetchKoinOkRates() {
+        return mExchangeRateRemoteDataSource.fetchKoinOkRates();
     }
 
     @Override

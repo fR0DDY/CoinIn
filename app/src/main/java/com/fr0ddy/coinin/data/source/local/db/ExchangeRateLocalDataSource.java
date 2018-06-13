@@ -12,6 +12,7 @@ import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinsecureResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinslabResponse;
+import com.fr0ddy.coinin.data.source.remote.model.KoinOkResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
 import com.fr0ddy.coinin.data.source.remote.model.OxybitResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
@@ -99,6 +100,56 @@ public class ExchangeRateLocalDataSource implements ExchangeRateDataSource {
     @Override
     public Flowable<ZebpayResponse> fetchZebpayTRXRates() {
         // Not required in Local
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayZILRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayREPRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayZRXRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayKNCRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayGNTRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayBATRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayVENRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayAERates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayIOSTRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayCMTRates() {
         return null;
     }
 
@@ -204,6 +255,12 @@ public class ExchangeRateLocalDataSource implements ExchangeRateDataSource {
 
     @Override
     public Flowable<WazirXResponse> fetchWazirXRates() {
+        // Not required in Local
+        return null;
+    }
+
+    @Override
+    public Flowable<KoinOkResponse> fetchKoinOkRates() {
         // Not required in Local
         return null;
     }

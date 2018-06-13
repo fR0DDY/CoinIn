@@ -59,6 +59,11 @@ public class BitbnsResponse {
     Data REP;
     Data EFX;
     Data LOOM;
+    Data EOSD;
+    Data QKC;
+    Data STORM;
+    Data QTUM;
+    Data GNT;
 
     public class Data {
         @SerializedName("sellPrice")
@@ -393,7 +398,7 @@ public class BitbnsResponse {
                 ExchangeRate rate = new ExchangeRate(BITBNS_ID, "ICX", date, response.getICX().getSellPrice(), response.getICX().getBuyPrice());
                 exchangeRates.add(rate);
             } else if (response.getVEN() != null) {
-                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "VET", date, response.getVEN().getSellPrice(), response.getVEN().getBuyPrice());
+                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "VEN", date, response.getVEN().getSellPrice(), response.getVEN().getBuyPrice());
                 exchangeRates.add(rate);
             } else if (response.getREQ() != null) {
                 ExchangeRate rate = new ExchangeRate(BITBNS_ID, "REQ", date, response.getREQ().getSellPrice(), response.getREQ().getBuyPrice());
@@ -437,6 +442,16 @@ public class BitbnsResponse {
                 exchangeRates.add(new ExchangeRate(BITBNS_ID, "EFX", date, response.EFX.getSellPrice(), response.EFX.getBuyPrice()));
             } else if (response.LOOM != null) {
                 exchangeRates.add(new ExchangeRate(BITBNS_ID, "LOOM", date, response.LOOM.getSellPrice(), response.LOOM.getBuyPrice()));
+            } else if (response.EOSD != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "EOSD", date, response.EOSD.getSellPrice(), response.EOSD.getBuyPrice()));
+            } else if (response.QKC != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "QKC", date, response.QKC.getSellPrice(), response.QKC.getBuyPrice()));
+            } else if (response.STORM != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "STORM", date, response.STORM.getSellPrice(), response.STORM.getBuyPrice()));
+            } else if (response.QTUM != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "QTUM", date, response.QTUM.getSellPrice(), response.QTUM.getBuyPrice()));
+            } else if (response.GNT != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "GNT", date, response.GNT.getSellPrice(), response.GNT.getBuyPrice()));
             }
         }
         return exchangeRates;
