@@ -62,6 +62,9 @@ public class KoinexResponse {
             Data CMT;
             Data ACT;
             Data SNT;
+            Data REP;
+            Data QKC;
+            Data XZC;
 
             public Data getETH() {
                 return ETH;
@@ -369,6 +372,12 @@ public class KoinexResponse {
 
         exchangeRates.add(new ExchangeRate(KOINEX_ID, "SNT", date, Double.parseDouble(stats.inr.SNT.getLowestAsk()), Double.parseDouble(stats.inr.SNT.getHighestBid())));
 
+        exchangeRates.add(new ExchangeRate(KOINEX_ID, "REP", date, Double.parseDouble(stats.inr.REP.getLowestAsk()), Double.parseDouble(stats.inr.REP.getHighestBid())));
+
+        exchangeRates.add(new ExchangeRate(KOINEX_ID, "QKC", date, Double.parseDouble(stats.inr.QKC.getLowestAsk()), Double.parseDouble(stats.inr.QKC.getHighestBid())));
+
+        exchangeRates.add(new ExchangeRate(KOINEX_ID, "XZC", date, Double.parseDouble(stats.inr.XZC.getLowestAsk()), Double.parseDouble(stats.inr.XZC.getHighestBid())));
+
         exchangeRates.add(koinexETHRate);
         exchangeRates.add(koinexBTCRate);
         exchangeRates.add(koinexBCHRate);
@@ -410,6 +419,9 @@ public class KoinexResponse {
         inrExchangeRates.put("CMT", new ExchangeRate(KOINEX_ID, "CMT", date, Double.parseDouble(stats.inr.CMT.getLowestAsk()), Double.parseDouble(stats.inr.CMT.getHighestBid())));
         inrExchangeRates.put("ACT", new ExchangeRate(KOINEX_ID, "ACT", date, Double.parseDouble(stats.inr.ACT.getLowestAsk()), Double.parseDouble(stats.inr.ACT.getHighestBid())));
         inrExchangeRates.put("SNT", new ExchangeRate(KOINEX_ID, "SNT", date, Double.parseDouble(stats.inr.SNT.getLowestAsk()), Double.parseDouble(stats.inr.SNT.getHighestBid())));
+        inrExchangeRates.put("REP", new ExchangeRate(KOINEX_ID, "REP", date, Double.parseDouble(stats.inr.REP.getLowestAsk()), Double.parseDouble(stats.inr.REP.getHighestBid())));
+        inrExchangeRates.put("QKC", new ExchangeRate(KOINEX_ID, "QKC", date, Double.parseDouble(stats.inr.QKC.getLowestAsk()), Double.parseDouble(stats.inr.QKC.getHighestBid())));
+        inrExchangeRates.put("XZC", new ExchangeRate(KOINEX_ID, "XZC", date, Double.parseDouble(stats.inr.XZC.getLowestAsk()), Double.parseDouble(stats.inr.XZC.getHighestBid())));
         exchangeRates.put("INR", inrExchangeRates);
 
         Map<String, ExchangeRate> bitcoinExchangeRates = new HashMap<>();
@@ -556,6 +568,18 @@ public class KoinexResponse {
         }
         try {
             rippleExchangeRates.put("SNT", new ExchangeRate(KOINEX_ID, "SNT", date, Double.parseDouble(stats.ripple.SNT.getLowestAsk()), Double.parseDouble(stats.ripple.SNT.getHighestBid())));
+        } catch (Exception e) {
+        }
+        try {
+            rippleExchangeRates.put("REP", new ExchangeRate(KOINEX_ID, "REP", date, Double.parseDouble(stats.ripple.REP.getLowestAsk()), Double.parseDouble(stats.ripple.REP.getHighestBid())));
+        } catch (Exception e) {
+        }
+        try {
+            rippleExchangeRates.put("QKC", new ExchangeRate(KOINEX_ID, "QKC", date, Double.parseDouble(stats.ripple.QKC.getLowestAsk()), Double.parseDouble(stats.ripple.QKC.getHighestBid())));
+        } catch (Exception e) {
+        }
+        try {
+            rippleExchangeRates.put("XZC", new ExchangeRate(KOINEX_ID, "XZC", date, Double.parseDouble(stats.ripple.XZC.getLowestAsk()), Double.parseDouble(stats.ripple.XZC.getHighestBid())));
         } catch (Exception e) {
         }
         exchangeRates.put("XRP", rippleExchangeRates);

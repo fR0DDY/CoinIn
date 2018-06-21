@@ -101,7 +101,7 @@ public class RateService extends Service {
                 });
 
 
-                Flowable<List<ExchangeRate>> exchangeRatesGroup = Flowable.zip(mExchangeRateRepository.fetchCoindeltaRates(), mExchangeRateRepository.fetchBitbnsRates(), mExchangeRateRepository.fetchWazirXRates(), mExchangeRateRepository.fetchOxybitRates(), mExchangeRateRepository.fetchThroughbitRates(), (coindeltaResponse, bitbnsResponse, wazirXResponse, oxybitResponse, throughbitResponse) -> {
+                Flowable<List<ExchangeRate>> exchangeRatesGroup = Flowable.zip(mExchangeRateRepository.fetchCoindeltaRates(), mExchangeRateRepository.fetchBitbnsRates(), mExchangeRateRepository.fetchWazirXRates(), mExchangeRateRepository.fetchThroughbitRates(), (coindeltaResponse, bitbnsResponse, wazirXResponse, throughbitResponse) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
 
                     exchangeRates.addAll(CoindeltaResponse.getExchangeRates(coindeltaResponse, date));
@@ -110,7 +110,7 @@ public class RateService extends Service {
 
                     exchangeRates.addAll(BitbnsResponse.getExchangeRates(bitbnsResponse, date));
 
-                    exchangeRates.addAll(oxybitResponse.getExchangeRates(date));
+                    //exchangeRates.addAll(oxybitResponse.getExchangeRates(date));
 
                     exchangeRates.addAll(wazirXResponse.getExchangeRates(date));
 
@@ -175,7 +175,7 @@ public class RateService extends Service {
                 });
 
 
-                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), exchangeRatesGroup, mExchangeRateRepository.fetchCoinomeRates(), mExchangeRateRepository.fetchKoinOkRates(), pocketBits, zebpay, zebpayINRRates2,  (koinexResponse, exchangeRateList, coinomeResponse, koinOkResponse, pocketbitsResponse, zebpayRates, zebpayExchangeRates) -> {
+                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), exchangeRatesGroup, mExchangeRateRepository.fetchCoinomeRates(), mExchangeRateRepository.fetchKoinOkRates(), pocketBits, zebpay, zebpayINRRates2, (koinexResponse, exchangeRateList, coinomeResponse, koinOkResponse, pocketbitsResponse, zebpayRates, zebpayExchangeRates) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
 
                     for (ExchangeRate rates : zebpayExchangeRates.get("INR").values())
@@ -220,9 +220,9 @@ public class RateService extends Service {
                     if (profit > 0) {
                         double profitPercentage = (profit * 100.0) / buyPrice;
                         if (profitPercentage > 0) {
-                            profitToStringMap.put(profitPercentage, String.format("%.2f%%", profitPercentage) + " INR → " +
+                            profitToStringMap.put(profitPercentage, String.format("%.2f%%", profitPercentage) + " INR(" + multiCoinExchangeRates.get("INR").get(baseCurrency).getBuyRate() + ") → " +
                                     baseCurrency + "(" + multiCoinExchangeRates.get(baseCurrency).get(exchangeCurrency).getBuyRate() + ") → " +
-                                    exchangeCurrency + " → INR");
+                                    exchangeCurrency + " → INR(" + multiCoinExchangeRates.get("INR").get(exchangeCurrency).getSellRate() + ")");
                             notificationCurrencies.add(exchangeCurrency);
                         }
                     }
@@ -234,9 +234,9 @@ public class RateService extends Service {
                     if (profit > 0) {
                         double profitPercentage = (profit * 100.0) / buyPrice;
                         if (profitPercentage > 0) {
-                            profitToStringMap.put(profitPercentage, String.format("%.2f%%", profitPercentage) + " INR → " +
+                            profitToStringMap.put(profitPercentage, String.format("%.2f%%", profitPercentage) + " INR(" + multiCoinExchangeRates.get("INR").get(exchangeCurrency).getBuyRate() + ") → " +
                                     exchangeCurrency + "(" + multiCoinExchangeRates.get(baseCurrency).get(exchangeCurrency).getSellRate() + ") → " +
-                                    baseCurrency + " → INR");
+                                    baseCurrency + " → INR(" + multiCoinExchangeRates.get("INR").get(baseCurrency).getSellRate() + ")");
                             notificationCurrencies.add(exchangeCurrency);
                         }
                     }
