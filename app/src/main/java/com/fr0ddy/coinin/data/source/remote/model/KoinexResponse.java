@@ -350,7 +350,7 @@ public class KoinexResponse {
 
         exchangeRates.add(new ExchangeRate(KOINEX_ID, "GAS", date, Double.parseDouble(stats.inr.getGAS().getLowestAsk()), Double.parseDouble(stats.inr.getGAS().getHighestBid())));
 
-        exchangeRates.add(new ExchangeRate(KOINEX_ID, "EOS", date, Double.parseDouble(stats.inr.getEOS().getLowestAsk()), Double.parseDouble(stats.inr.getEOS().getHighestBid())));
+        //exchangeRates.add(new ExchangeRate(KOINEX_ID, "EOS", date, Double.parseDouble(stats.inr.getEOS().getLowestAsk()), Double.parseDouble(stats.inr.getEOS().getHighestBid())));
 
         exchangeRates.add(new ExchangeRate(KOINEX_ID, "NANO", date, Double.parseDouble(stats.inr.getXRB().getLowestAsk()), Double.parseDouble(stats.inr.getXRB().getHighestBid())));
 
@@ -389,7 +389,7 @@ public class KoinexResponse {
         exchangeRates.add(koinexAERate);
         exchangeRates.add(koinexBATRate);
         exchangeRates.add(koinexGNTRate);
-        exchangeRates.add(koinexTRXRate);
+        //exchangeRates.add(koinexTRXRate);
         exchangeRates.add(koinexXLMRate);
 
         return exchangeRates;

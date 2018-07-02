@@ -6,6 +6,7 @@ import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinsecureResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinslabResponse;
+import com.fr0ddy.coinin.data.source.remote.model.GiottusResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinOkResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
 import com.fr0ddy.coinin.data.source.remote.model.OxybitResponse;
@@ -86,6 +87,9 @@ public interface ExchangeRateService {
     @GET("https://www.zebapi.com/api/v1/market/ticker-new/cmt/inr")
     Flowable<ZebpayResponse> fetchZebpayCMTRates();
 
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/ncash/inr")
+    Flowable<ZebpayResponse> fetchZebpayNCASHRates();
+
     @GET("https://www.zebapi.com/api/v1/market/ticker-new/eth/btc")
     Flowable<ZebpayResponse> fetchZebpayETHBTCRates();
 
@@ -106,6 +110,36 @@ public interface ExchangeRateService {
 
     @GET("https://www.zebapi.com/api/v1/market/ticker-new/xrp/btc")
     Flowable<ZebpayResponse> fetchZebpayXRPBTCRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/gnt/btc")
+    Flowable<ZebpayResponse> fetchZebpayGNTBTCRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/zrx/btc")
+    Flowable<ZebpayResponse> fetchZebpayZRXBTCRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/rep/btc")
+    Flowable<ZebpayResponse> fetchZebpayREPBTCRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/knc/btc")
+    Flowable<ZebpayResponse> fetchZebpayKNCBTCRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/bat/btc")
+    Flowable<ZebpayResponse> fetchZebpayBATBTCRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/ven/btc")
+    Flowable<ZebpayResponse> fetchZebpayVENBTCRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/ae/btc")
+    Flowable<ZebpayResponse> fetchZebpayAEBTCRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/zil/btc")
+    Flowable<ZebpayResponse> fetchZebpayZILBTCRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/cmt/btc")
+    Flowable<ZebpayResponse> fetchZebpayCMTBTCRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/ncash/btc")
+    Flowable<ZebpayResponse> fetchZebpayNCASHBTCRates();
 
     @GET("https://www.zebapi.com/api/v1/market/ticker-new/trx/xrp")
     Flowable<ZebpayResponse> fetchZebpayTRXXRPRates();
@@ -137,7 +171,7 @@ public interface ExchangeRateService {
     @GET("https://www.coinslab.com/api/v1/ticker/btc/inr")
     Flowable<CoinslabResponse> fetchCoinslabRates();
 
-    @GET("https://www.unocoin.com/trade?exchange")
+    @GET("https://api.unocoin.com/api/exchange/unodax-ticker")
     Flowable<UnocoinResponse> fetchUnocoinRates();
 
     @GET("https://api.wazirx.com/api/v2/tickers")
@@ -145,4 +179,7 @@ public interface ExchangeRateService {
 
     @GET("https://www.koinok.com/api/brain/ticker")
     Flowable<KoinOkResponse> fetchKoinOkRates();
+
+    @GET("https://www.giottus.com/api/ticker")
+    Flowable<GiottusResponse> fetchGiottusRates();
 }

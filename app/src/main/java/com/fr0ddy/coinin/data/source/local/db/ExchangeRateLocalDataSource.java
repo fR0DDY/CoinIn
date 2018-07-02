@@ -12,6 +12,7 @@ import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinsecureResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinslabResponse;
+import com.fr0ddy.coinin.data.source.remote.model.GiottusResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinOkResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
 import com.fr0ddy.coinin.data.source.remote.model.OxybitResponse;
@@ -154,6 +155,11 @@ public class ExchangeRateLocalDataSource implements ExchangeRateDataSource {
     }
 
     @Override
+    public Flowable<ZebpayResponse> fetchZebpayNCASHRates() {
+        return null;
+    }
+
+    @Override
     public Flowable<ZebpayResponse> fetchZebpayETHBTCRates() {
         return null;
     }
@@ -185,6 +191,56 @@ public class ExchangeRateLocalDataSource implements ExchangeRateDataSource {
 
     @Override
     public Flowable<ZebpayResponse> fetchZebpayXRPBTCRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayGNTBTCRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayZRXBTCRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayREPBTCRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayKNCBTCRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayBATBTCRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayVENBTCRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayAEBTCRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayZILBTCRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayCMTBTCRates() {
+        return null;
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayNCASHBTCRates() {
         return null;
     }
 
@@ -262,6 +318,11 @@ public class ExchangeRateLocalDataSource implements ExchangeRateDataSource {
     @Override
     public Flowable<KoinOkResponse> fetchKoinOkRates() {
         // Not required in Local
+        return null;
+    }
+
+    @Override
+    public Flowable<GiottusResponse> fetchGiottusRates() {
         return null;
     }
 

@@ -64,6 +64,14 @@ public class BitbnsResponse {
     Data STORM;
     Data QTUM;
     Data GNT;
+    Data LSK;
+    Data ETC;
+    Data NPXS;
+    Data USDT;
+    Data CLOAK;
+    Data DENT;
+    Data GRS;
+    Data KMD;
 
     public class Data {
         @SerializedName("sellPrice")
@@ -368,8 +376,8 @@ public class BitbnsResponse {
                 ExchangeRate rate = new ExchangeRate(BITBNS_ID, "BCH", date, response.getBCH().getSellPrice(), response.getBCH().getBuyPrice());
                 exchangeRates.add(rate);
             } else if (response.getTRX() != null) {
-                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "TRX", date, response.getTRX().getSellPrice(), response.getTRX().getBuyPrice());
-                exchangeRates.add(rate);
+                //ExchangeRate rate = new ExchangeRate(BITBNS_ID, "TRX", date, response.getTRX().getSellPrice(), response.getTRX().getBuyPrice());
+                //exchangeRates.add(rate);
             } else if (response.getETN() != null) {
                 ExchangeRate rate = new ExchangeRate(BITBNS_ID, "ETN", date, response.getETN().getSellPrice(), response.getETN().getBuyPrice());
                 exchangeRates.add(rate);
@@ -380,8 +388,8 @@ public class BitbnsResponse {
                 ExchangeRate rate = new ExchangeRate(BITBNS_ID, "ZIL", date, response.getZIL().getSellPrice(), response.getZIL().getBuyPrice());
                 exchangeRates.add(rate);
             } else if (response.getEOS() != null) {
-                ExchangeRate rate = new ExchangeRate(BITBNS_ID, "EOS", date, response.getEOS().getSellPrice(), response.getEOS().getBuyPrice());
-                exchangeRates.add(rate);
+                //ExchangeRate rate = new ExchangeRate(BITBNS_ID, "EOS", date, response.getEOS().getSellPrice(), response.getEOS().getBuyPrice());
+                //exchangeRates.add(rate);
             } else if (response.getPOLY() != null) {
                 ExchangeRate rate = new ExchangeRate(BITBNS_ID, "POLY", date, response.getPOLY().getSellPrice(), response.getPOLY().getBuyPrice());
                 exchangeRates.add(rate);
@@ -452,6 +460,22 @@ public class BitbnsResponse {
                 exchangeRates.add(new ExchangeRate(BITBNS_ID, "QTUM", date, response.QTUM.getSellPrice(), response.QTUM.getBuyPrice()));
             } else if (response.GNT != null) {
                 exchangeRates.add(new ExchangeRate(BITBNS_ID, "GNT", date, response.GNT.getSellPrice(), response.GNT.getBuyPrice()));
+            } else if (response.LSK != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "LSK", date, response.LSK.getSellPrice(), response.LSK.getBuyPrice()));
+            } else if (response.ETC != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "ETC", date, response.ETC.getSellPrice(), response.ETC.getBuyPrice()));
+            } else if (response.NPXS != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "NPXS", date, response.NPXS.getSellPrice(), response.NPXS.getBuyPrice()));
+            } else if (response.USDT != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "USDT", date, response.USDT.getSellPrice(), response.USDT.getBuyPrice()));
+            } else if (response.CLOAK != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "CLOAK", date, response.CLOAK.getSellPrice(), response.CLOAK.getBuyPrice()));
+            } else if (response.DENT != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "DENT", date, response.DENT.getSellPrice(), response.DENT.getBuyPrice()));
+            } else if (response.GRS != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "GRS", date, response.GRS.getSellPrice(), response.GRS.getBuyPrice()));
+            } else if (response.KMD != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "KMD", date, response.KMD.getSellPrice(), response.KMD.getBuyPrice()));
             }
         }
         return exchangeRates;

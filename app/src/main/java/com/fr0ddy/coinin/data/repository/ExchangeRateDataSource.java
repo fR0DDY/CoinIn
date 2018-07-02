@@ -8,6 +8,7 @@ import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinsecureResponse;
 import com.fr0ddy.coinin.data.source.remote.model.CoinslabResponse;
+import com.fr0ddy.coinin.data.source.remote.model.GiottusResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinOkResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
 import com.fr0ddy.coinin.data.source.remote.model.OxybitResponse;
@@ -67,6 +68,8 @@ public interface ExchangeRateDataSource {
 
     Flowable<ZebpayResponse> fetchZebpayCMTRates();
 
+    Flowable<ZebpayResponse> fetchZebpayNCASHRates();
+
     Flowable<ZebpayResponse> fetchZebpayETHBTCRates();
 
     Flowable<ZebpayResponse> fetchZebpayBCHBTCRates();
@@ -80,6 +83,26 @@ public interface ExchangeRateDataSource {
     Flowable<ZebpayResponse> fetchZebpayTRXBTCRates();
 
     Flowable<ZebpayResponse> fetchZebpayXRPBTCRates();
+
+    Flowable<ZebpayResponse> fetchZebpayGNTBTCRates();
+
+    Flowable<ZebpayResponse> fetchZebpayZRXBTCRates();
+
+    Flowable<ZebpayResponse> fetchZebpayREPBTCRates();
+
+    Flowable<ZebpayResponse> fetchZebpayKNCBTCRates();
+
+    Flowable<ZebpayResponse> fetchZebpayBATBTCRates();
+
+    Flowable<ZebpayResponse> fetchZebpayVENBTCRates();
+
+    Flowable<ZebpayResponse> fetchZebpayAEBTCRates();
+
+    Flowable<ZebpayResponse> fetchZebpayZILBTCRates();
+
+    Flowable<ZebpayResponse> fetchZebpayCMTBTCRates();
+
+    Flowable<ZebpayResponse> fetchZebpayNCASHBTCRates();
 
     Flowable<ZebpayResponse> fetchZebpayTRXXRPRates();
 
@@ -106,6 +129,8 @@ public interface ExchangeRateDataSource {
     Flowable<WazirXResponse> fetchWazirXRates();
 
     Flowable<KoinOkResponse> fetchKoinOkRates();
+
+    Flowable<GiottusResponse> fetchGiottusRates();
 
     List<Long> saveRates(List<ExchangeRate> exchangeRates);
 
