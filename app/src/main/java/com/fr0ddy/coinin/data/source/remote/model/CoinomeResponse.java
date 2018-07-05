@@ -55,6 +55,12 @@ public class CoinomeResponse {
     Data XRP_BTC;
     @SerializedName("eth-btc")
     Data ETH_BTC;
+    @SerializedName("ltc-xrp")
+    Data LTC_XRP;
+    @SerializedName("dgb-xrp")
+    Data DGB_XRP;
+    @SerializedName("bch-xrp")
+    Data BCH_XRP;
 
     public Data getBTC() {
         return BTC;
@@ -260,6 +266,21 @@ public class CoinomeResponse {
         } catch (Exception e) {
         }
         exchangeRates.put("BTC", bitcoinExchangeRates);
+
+        Map<String, ExchangeRate> rippleExchangeRates = new HashMap<>();
+        try {
+            rippleExchangeRates.put("LTC", new ExchangeRate(COINOME_ID, "LTC", date, Double.parseDouble(LTC_XRP.getLowestAsk()), Double.parseDouble(LTC_XRP.getHighestBid())));
+        } catch (Exception e) {
+        }
+        try {
+            rippleExchangeRates.put("BCH", new ExchangeRate(COINOME_ID, "BCH", date, Double.parseDouble(BCH_XRP.getLowestAsk()), Double.parseDouble(BCH_XRP.getHighestBid())));
+        } catch (Exception e) {
+        }
+        try {
+            rippleExchangeRates.put("DGB", new ExchangeRate(COINOME_ID, "DGB", date, Double.parseDouble(DGB_XRP.getLowestAsk()), Double.parseDouble(DGB_XRP.getHighestBid())));
+        } catch (Exception e) {
+        }
+        exchangeRates.put("XRP", rippleExchangeRates);
 
         return exchangeRates;
     }

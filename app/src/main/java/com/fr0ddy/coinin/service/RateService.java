@@ -199,7 +199,7 @@ public class RateService extends Service {
                 });
 
 
-                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), exchangeRatesGroup, mExchangeRateRepository.fetchCoinomeRates(), mExchangeRateRepository.fetchKoinOkRates(), pocketBits, zebpay, mExchangeRateRepository.fetchGiottusRates(), (koinexResponse, exchangeRateList, coinomeResponse, koinOkResponse, pocketbitsResponse, zebpayRates,  giottusResponse) -> {
+                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), exchangeRatesGroup, mExchangeRateRepository.fetchCoinomeRates(), mExchangeRateRepository.fetchKoinOkRates(), mExchangeRateRepository.fetchUnocoinRates(), pocketBits, zebpay, (koinexResponse, exchangeRateList, coinomeResponse, koinOkResponse, unocoinResponse, pocketbitsResponse, zebpayRates) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
 
                     //ExchangeRate coinsecureBTCRate = new ExchangeRate(COINSECURE_ID, "BTC", date, coinsecureResponse.getMessage().getLowestAsk() / 100.0, coinsecureResponse.getMessage().getHighestBid() / 100.0);
@@ -211,18 +211,18 @@ public class RateService extends Service {
 
                     //exchangeRates.add(coinsecureBTCRate);
                     exchangeRates.addAll(pocketbitsResponse);
-                    //exchangeRates.addAll(unocoinResponse.getExchangeRates(date));
+                    exchangeRates.addAll(unocoinResponse.getExchangeRates(date));
 
                     exchangeRates.addAll(koinOkResponse.getExchangeRates(date));
 
-                    exchangeRates.addAll(giottusResponse.getExchangeRates(date));
+                    //exchangeRates.addAll(giottusResponse.getExchangeRates(date));
 
                     checkArbitrage(exchangeRates);
 
                     checkIntraExchangeArbitrage(COINOME_ID, "Coinome", coinomeResponse.getMultiCoinExchangeRates(date), 0.00354, 0.00118);
                     checkIntraExchangeArbitrage(KOINEX_ID, "Koinex", koinexResponse.getMultiCoinExchangeRates(date), 0.0015, 0);
 
-                    checkIntraExchangeArbitrage(GIOTTUS_ID, "Giottus", giottusResponse.getMultiCoinExchangeRates(date), 0.0025, 0.0025);
+                    //checkIntraExchangeArbitrage(GIOTTUS_ID, "Giottus", giottusResponse.getMultiCoinExchangeRates(date), 0.0025, 0.0025);
 
                     checkIntraExchangeArbitrage(KOINOK_ID, "Koinok", koinOkResponse.getMultiCoinExchangeRates(date), 0.0025, 0);
                     return exchangeRates;
