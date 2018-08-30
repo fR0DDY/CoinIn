@@ -90,6 +90,9 @@ public interface ExchangeRateService {
     @GET("https://www.zebapi.com/api/v1/market/ticker-new/ncash/inr")
     Flowable<ZebpayResponse> fetchZebpayNCASHRates();
 
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/tusd/inr")
+    Flowable<ZebpayResponse> fetchZebpayTUSDRates();
+
     @GET("https://www.zebapi.com/api/v1/market/ticker-new/eth/btc")
     Flowable<ZebpayResponse> fetchZebpayETHBTCRates();
 
@@ -143,6 +146,9 @@ public interface ExchangeRateService {
 
     @GET("https://www.zebapi.com/api/v1/market/ticker-new/trx/xrp")
     Flowable<ZebpayResponse> fetchZebpayTRXXRPRates();
+
+    @GET("https://www.zebapi.com/api/v1/market/ticker-new/btc/tusd")
+    Flowable<ZebpayResponse> fetchZebpayBTCTUSDRates();
 
     @GET("https://www.buyucoin.com/api/v1.2/currency/markets")
     Flowable<BuyUcoinResponse> fetchBuyUcoinRates();

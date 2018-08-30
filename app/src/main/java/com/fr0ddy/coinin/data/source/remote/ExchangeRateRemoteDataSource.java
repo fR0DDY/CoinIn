@@ -238,6 +238,16 @@ public class ExchangeRateRemoteDataSource implements ExchangeRateDataSource {
     }
 
     @Override
+    public Flowable<ZebpayResponse> fetchZebpayTUSDRates() {
+        return exchangeRateService.fetchZebpayTUSDRates();
+    }
+
+    @Override
+    public Flowable<ZebpayResponse> fetchZebpayBTCTUSDRates() {
+        return exchangeRateService.fetchZebpayBTCTUSDRates();
+    }
+
+    @Override
     public Flowable<BuyUcoinResponse> fetchBuyUcoinRates() {
         return exchangeRateService.fetchBuyUcoinRates();
     }

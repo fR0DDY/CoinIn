@@ -30,6 +30,8 @@ public class KoinOkResponse {
     public List<ExchangeRate> getExchangeRates(Date date) {
         List<ExchangeRate> exchangeRates = new ArrayList<>();
         for (Data data : result) {
+            if (data.lowestAsk == null) data.lowestAsk = 0.0;
+            if (data.highestBid == null) data.highestBid = 0.0;
             if ("BTC-INR".equalsIgnoreCase(data.market)) {
                 exchangeRates.add(new ExchangeRate(KOINOK_ID, "BTC", date, data.lowestAsk, data.highestBid));
             } else if ("CAS-INR".equalsIgnoreCase(data.market)) {

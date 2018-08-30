@@ -47,10 +47,10 @@ import timber.log.Timber;
 
 import static com.fr0ddy.coinin.utils.AppConstants.COINDELTA_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.COINOME_ID;
-import static com.fr0ddy.coinin.utils.AppConstants.GIOTTUS_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.KOINEX_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.KOINOK_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.POCKETBITS_ID;
+import static com.fr0ddy.coinin.utils.AppConstants.UNOCOIN_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.WAZIRX_ID;
 import static com.fr0ddy.coinin.utils.AppConstants.ZEBPAY_ID;
 
@@ -119,7 +119,7 @@ public class RateService extends Service {
                     //exchangeRates.addAll(buyUcoinResponse.getExchangeRates(date));
 
                     //exchangeRates.add(new ExchangeRate(COINSLAB_ID, "BTC", date, coinslabResponse.getBuyPrice(), coinslabResponse.getSellPrice()));
-                    checkIntraExchangeArbitrage(COINDELTA_ID, "Coindelta", CoindeltaResponse.getMultiCoinExchangeRates(coindeltaResponse, date), 0.003, 0.003);
+                    checkIntraExchangeArbitrage(COINDELTA_ID, "Coindelta", CoindeltaResponse.getMultiCoinExchangeRates(coindeltaResponse, date), 0.0015, 0.0015);
                     checkIntraExchangeArbitrage(WAZIRX_ID, "WazirX", wazirXResponse.getMultiCoinExchangeRates(date), 0.00295, 0.00295);
                     return exchangeRates;
                 });
@@ -138,14 +138,13 @@ public class RateService extends Service {
                     return inrExchangeRates;
                 });
 
-                Flowable<Map<String, ExchangeRate>> zebpayINRRates2 = Flowable.zip(mExchangeRateRepository.fetchZebpayREPRates(), mExchangeRateRepository.fetchZebpayZRXRates(), mExchangeRateRepository.fetchZebpayKNCRates(), mExchangeRateRepository.fetchZebpayGNTRates(), mExchangeRateRepository.fetchZebpayBATRates(), mExchangeRateRepository.fetchZebpayVENRates(), mExchangeRateRepository.fetchZebpayAERates(), mExchangeRateRepository.fetchZebpayIOSTRates(), mExchangeRateRepository.fetchZebpayCMTRates(), (zebpayREPResponse, zebpayZRXResponse, zebpayKNCResponse, zebpayGNTResponse, zebpayBATResponse, zebpayVENResponse, zebpayAEResponse, zebpayIOSTResponse, zebpayCMTResponse) -> {
+                Flowable<Map<String, ExchangeRate>> zebpayINRRates2 = Flowable.zip(mExchangeRateRepository.fetchZebpayREPRates(), mExchangeRateRepository.fetchZebpayZRXRates(), mExchangeRateRepository.fetchZebpayKNCRates(), mExchangeRateRepository.fetchZebpayGNTRates(), mExchangeRateRepository.fetchZebpayBATRates(), mExchangeRateRepository.fetchZebpayAERates(), mExchangeRateRepository.fetchZebpayIOSTRates(), mExchangeRateRepository.fetchZebpayCMTRates(), (zebpayREPResponse, zebpayZRXResponse, zebpayKNCResponse, zebpayGNTResponse, zebpayBATResponse, zebpayAEResponse, zebpayIOSTResponse, zebpayCMTResponse) -> {
                     Map<String, ExchangeRate> inrExchangeRates = new HashMap<>();
                     inrExchangeRates.put("REP", new ExchangeRate(ZEBPAY_ID, "REP", date, zebpayREPResponse.getBuyPrice(), zebpayREPResponse.getSellPrice()));
                     inrExchangeRates.put("ZRX", new ExchangeRate(ZEBPAY_ID, "ZRX", date, zebpayZRXResponse.getBuyPrice(), zebpayZRXResponse.getSellPrice()));
                     inrExchangeRates.put("KNC", new ExchangeRate(ZEBPAY_ID, "KNC", date, zebpayKNCResponse.getBuyPrice(), zebpayKNCResponse.getSellPrice()));
                     inrExchangeRates.put("GNT", new ExchangeRate(ZEBPAY_ID, "GNT", date, zebpayGNTResponse.getBuyPrice(), zebpayGNTResponse.getSellPrice()));
                     inrExchangeRates.put("BAT", new ExchangeRate(ZEBPAY_ID, "BAT", date, zebpayBATResponse.getBuyPrice(), zebpayBATResponse.getSellPrice()));
-                    inrExchangeRates.put("VEN", new ExchangeRate(ZEBPAY_ID, "VEN", date, zebpayVENResponse.getBuyPrice(), zebpayVENResponse.getSellPrice()));
                     inrExchangeRates.put("AE", new ExchangeRate(ZEBPAY_ID, "AE", date, zebpayAEResponse.getBuyPrice(), zebpayAEResponse.getSellPrice()));
                     inrExchangeRates.put("IOST", new ExchangeRate(ZEBPAY_ID, "IOST", date, zebpayIOSTResponse.getBuyPrice(), zebpayIOSTResponse.getSellPrice()));
                     inrExchangeRates.put("CMT", new ExchangeRate(ZEBPAY_ID, "CMT", date, zebpayCMTResponse.getBuyPrice(), zebpayCMTResponse.getSellPrice()));
@@ -166,12 +165,11 @@ public class RateService extends Service {
                     return btcExchangeRates;
                 });
 
-                Flowable<Map<String, ExchangeRate>> zebpaybitcoinRates2 = Flowable.zip(mExchangeRateRepository.fetchZebpayREPBTCRates(), mExchangeRateRepository.fetchZebpayKNCBTCRates(), mExchangeRateRepository.fetchZebpayBATBTCRates(), mExchangeRateRepository.fetchZebpayVENBTCRates(), mExchangeRateRepository.fetchZebpayAEBTCRates(), mExchangeRateRepository.fetchZebpayZILBTCRates(), mExchangeRateRepository.fetchZebpayCMTBTCRates(), mExchangeRateRepository.fetchZebpayNCASHBTCRates(), (zebpayREPResponse, zebpayKNCResponse, zebpayBATResponse, zebpayVENResponse, zebpayAEResponse, zebpayZILResponse, zebpayCMTResponse, zebpayNCASHRespone) -> {
+                Flowable<Map<String, ExchangeRate>> zebpaybitcoinRates2 = Flowable.zip(mExchangeRateRepository.fetchZebpayREPBTCRates(), mExchangeRateRepository.fetchZebpayKNCBTCRates(), mExchangeRateRepository.fetchZebpayBATBTCRates(), mExchangeRateRepository.fetchZebpayAEBTCRates(), mExchangeRateRepository.fetchZebpayZILBTCRates(), mExchangeRateRepository.fetchZebpayCMTBTCRates(), mExchangeRateRepository.fetchZebpayNCASHBTCRates(), (zebpayREPResponse, zebpayKNCResponse, zebpayBATResponse, zebpayAEResponse, zebpayZILResponse, zebpayCMTResponse, zebpayNCASHRespone) -> {
                     Map<String, ExchangeRate> btcExchangeRates = new HashMap<>();
                     btcExchangeRates.put("REP", new ExchangeRate(ZEBPAY_ID, "REP", date, zebpayREPResponse.getBuyPrice(), zebpayREPResponse.getSellPrice()));
                     btcExchangeRates.put("KNC", new ExchangeRate(ZEBPAY_ID, "KNC", date, zebpayKNCResponse.getBuyPrice(), zebpayKNCResponse.getSellPrice()));
                     btcExchangeRates.put("BAT", new ExchangeRate(ZEBPAY_ID, "BAT", date, zebpayBATResponse.getBuyPrice(), zebpayBATResponse.getSellPrice()));
-                    btcExchangeRates.put("VEN", new ExchangeRate(ZEBPAY_ID, "VEN", date, zebpayVENResponse.getBuyPrice(), zebpayVENResponse.getSellPrice()));
                     btcExchangeRates.put("AE", new ExchangeRate(ZEBPAY_ID, "AE", date, zebpayAEResponse.getBuyPrice(), zebpayAEResponse.getSellPrice()));
                     btcExchangeRates.put("ZIL", new ExchangeRate(ZEBPAY_ID, "ZIL", date, zebpayZILResponse.getBuyPrice(), zebpayZILResponse.getSellPrice()));
                     btcExchangeRates.put("CMT", new ExchangeRate(ZEBPAY_ID, "CMT", date, zebpayCMTResponse.getBuyPrice(), zebpayCMTResponse.getSellPrice()));
@@ -179,9 +177,10 @@ public class RateService extends Service {
                     return btcExchangeRates;
                 });
 
-                Flowable<List<ExchangeRate>> zebpay = Flowable.zip(zebpayINRRates1, zebpayINRRates2, zebpaybitcoinRates1, zebpaybitcoinRates2, mExchangeRateRepository.fetchZebpayNCASHRates(), mExchangeRateRepository.fetchZebpayTRXXRPRates(), (inrRates1, inrRates2, bitcoinRates1, bitcoinRate2, zebpayNCASHResponse, zebpayTRXXRPResponse) -> {
+                Flowable<List<ExchangeRate>> zebpay = Flowable.zip(zebpayINRRates1, zebpayINRRates2, zebpaybitcoinRates1, zebpaybitcoinRates2, mExchangeRateRepository.fetchZebpayNCASHRates(), mExchangeRateRepository.fetchZebpayTRXXRPRates(), mExchangeRateRepository.fetchZebpayTUSDRates(), mExchangeRateRepository.fetchZebpayBTCTUSDRates(), (inrRates1, inrRates2, bitcoinRates1, bitcoinRate2, zebpayNCASHResponse, zebpayTRXXRPResponse, zebpayTUSDResponse, zebpayBTCTUSDResponse) -> {
                     Map<String, Map<String, ExchangeRate>> exchangeRates = new HashMap<>();
                     inrRates2.put("NCASH", new ExchangeRate(ZEBPAY_ID, "NCASH", date, zebpayNCASHResponse.getBuyPrice(), zebpayNCASHResponse.getSellPrice()));
+                    inrRates2.put("TUSD", new ExchangeRate(ZEBPAY_ID, "TUSD", date, zebpayTUSDResponse.getBuyPrice(), zebpayTUSDResponse.getSellPrice()));
                     inrRates1.putAll(inrRates2);
                     exchangeRates.put("INR", inrRates1);
                     bitcoinRates1.putAll(bitcoinRate2);
@@ -189,6 +188,10 @@ public class RateService extends Service {
                     Map<String, ExchangeRate> xrpExchangeRates = new HashMap<>();
                     xrpExchangeRates.put("TRX", new ExchangeRate(ZEBPAY_ID, "TRX", date, zebpayTRXXRPResponse.getBuyPrice(), zebpayTRXXRPResponse.getSellPrice()));
                     exchangeRates.put("XRP", xrpExchangeRates);
+
+                    Map<String, ExchangeRate> usdtExchangeRates = new HashMap<>();
+                    usdtExchangeRates.put("BTC", new ExchangeRate(ZEBPAY_ID, "BTC", date, zebpayBTCTUSDResponse.getBuyPrice(), zebpayBTCTUSDResponse.getSellPrice()));
+                    exchangeRates.put("TUSD", usdtExchangeRates);
                     checkIntraExchangeArbitrage(ZEBPAY_ID, "Zebpay", exchangeRates, 0.00295, 0.00295);
                     List<ExchangeRate> inrRates = new ArrayList<>();
                     for (ExchangeRate rates : exchangeRates.get("INR").values()) {
@@ -199,7 +202,7 @@ public class RateService extends Service {
                 });
 
 
-                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), exchangeRatesGroup, mExchangeRateRepository.fetchCoinomeRates(), mExchangeRateRepository.fetchKoinOkRates(), mExchangeRateRepository.fetchUnocoinRates(), pocketBits, zebpay, (koinexResponse, exchangeRateList, coinomeResponse, koinOkResponse, unocoinResponse, pocketbitsResponse, zebpayRates) -> {
+                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), exchangeRatesGroup, mExchangeRateRepository.fetchKoinOkRates(), mExchangeRateRepository.fetchCoinomeRates(), mExchangeRateRepository.fetchUnocoinRates(), pocketBits, zebpay, (koinexResponse, exchangeRateList, koinOkResponse, coinomeResponse, unocoinResponse, pocketbitsResponse, zebpayRates) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
 
                     //ExchangeRate coinsecureBTCRate = new ExchangeRate(COINSECURE_ID, "BTC", date, coinsecureResponse.getMessage().getLowestAsk() / 100.0, coinsecureResponse.getMessage().getHighestBid() / 100.0);
@@ -225,6 +228,10 @@ public class RateService extends Service {
                     //checkIntraExchangeArbitrage(GIOTTUS_ID, "Giottus", giottusResponse.getMultiCoinExchangeRates(date), 0.0025, 0.0025);
 
                     checkIntraExchangeArbitrage(KOINOK_ID, "Koinok", koinOkResponse.getMultiCoinExchangeRates(date), 0.0025, 0);
+
+                    checkIntraExchangeArbitrage(UNOCOIN_ID, "Unocoin", unocoinResponse.getMultiCoinExchangeRates(date), 0.00708, 0.00708);
+
+                    checkTriangularExchangeArbitrage(exchangeRates);
                     return exchangeRates;
                 }).subscribeOn(schedulerProvider.io())
                         .observeOn(schedulerProvider.computation())
@@ -233,6 +240,174 @@ public class RateService extends Service {
 
             }
         }, 0, 60000);
+    }
+
+    private void checkTriangularExchangeArbitrage(List<ExchangeRate> exchangeRates) {
+        HashMap<Integer, Double> fromExchangeFee = new HashMap<>();
+        fromExchangeFee.put(1, 0.0015);
+        fromExchangeFee.put(3, 0.00295);
+        fromExchangeFee.put(4, 0.00354);
+        fromExchangeFee.put(6, 0.003);
+        fromExchangeFee.put(9, 0.0025);
+        fromExchangeFee.put(12, 0.0025);
+        fromExchangeFee.put(13, 0.00295);
+        fromExchangeFee.put(15, 0.1);
+
+        HashMap<Integer, Double> toExchangeFee = new HashMap<>();
+        toExchangeFee.put(1, 0.0015);
+        toExchangeFee.put(3, 0.00295);
+        toExchangeFee.put(4, 0.00354);
+        toExchangeFee.put(6, 0.003);
+        toExchangeFee.put(9, 0.0025);
+        toExchangeFee.put(12, 0.0025);
+        toExchangeFee.put(13, 0.00295);
+        toExchangeFee.put(15, 0.1);
+
+        HashMap<String, List<ExchangeRate>> currencyToRateMap = new HashMap<>();
+        for (ExchangeRate exchangeRate : exchangeRates) {
+            if (exchangeRate.getExchangeId() == 1 || exchangeRate.getExchangeId() == 3 || exchangeRate.getExchangeId() == 4 ||
+                    exchangeRate.getExchangeId() == 6 || exchangeRate.getExchangeId() == 9 || exchangeRate.getExchangeId() == 15) {
+                if (!"VEN".equalsIgnoreCase(exchangeRate.getCurrency()) && !"ICX".equalsIgnoreCase(exchangeRate.getCurrency()) && !"ONT".equalsIgnoreCase(exchangeRate.getCurrency())) {
+                    List<ExchangeRate> currencyExchangeRates = currencyToRateMap.get(exchangeRate.getCurrency());
+                    if (currencyExchangeRates == null) {
+                        currencyExchangeRates = new ArrayList<>();
+                        currencyToRateMap.put(exchangeRate.getCurrency(), currencyExchangeRates);
+                    }
+                    currencyExchangeRates.add(exchangeRate);
+                }
+            }
+        }
+
+        HashMap<Integer, List<ExchangeRate>> exchangeToRateMap = new HashMap<>();
+        for (ExchangeRate exchangeRate : exchangeRates) {
+            if (exchangeRate.getExchangeId() == 1 || exchangeRate.getExchangeId() == 3 || exchangeRate.getExchangeId() == 4 ||
+                    exchangeRate.getExchangeId() == 6 || exchangeRate.getExchangeId() == 9 || exchangeRate.getExchangeId() == 15) {
+                if (!"VEN".equalsIgnoreCase(exchangeRate.getCurrency()) && !"ICX".equalsIgnoreCase(exchangeRate.getCurrency()) && !"ONT".equalsIgnoreCase(exchangeRate.getCurrency())) {
+                    List<ExchangeRate> exchangeExchangeRates = exchangeToRateMap.get(exchangeRate.getExchangeId());
+                    if (exchangeExchangeRates == null) {
+                        exchangeExchangeRates = new ArrayList<>();
+                        exchangeToRateMap.put(exchangeRate.getExchangeId(), exchangeExchangeRates);
+                    }
+                    exchangeExchangeRates.add(exchangeRate);
+                }
+            }
+        }
+
+        HashMap<Integer, String> exchangeToNameMap = new HashMap<>();
+        List<Exchange> exchanges = mExchangeRepository.getExchanges();
+        for (Exchange exchange : exchanges) {
+            exchangeToNameMap.put(exchange.getId(), exchange.getName());
+        }
+        HashMap<String, ExchangeFees> exchangeToExchangeFeesMap = new HashMap<>();
+        List<ExchangeFees> exchangeFees = mExchangeRepository.getExchangeFees();
+        for (ExchangeFees exchangeFee : exchangeFees) {
+            exchangeToExchangeFeesMap.put(exchangeFee.getExchangeId() + "_" + exchangeFee.getCurrency(), exchangeFee);
+        }
+
+        TreeMap<Double, String> profitToStringMap = new TreeMap<>(Collections.reverseOrder());
+
+        Set<String> notificationCurrencies = new HashSet<>();
+
+        for (Map.Entry<String, List<ExchangeRate>> entry : currencyToRateMap.entrySet()) {
+            String currency = entry.getKey();
+            List<ExchangeRate> currencyExchangeRates = entry.getValue();
+            for (int i = 0; i < currencyExchangeRates.size(); i++) {
+                for (int j = 0; j < currencyExchangeRates.size(); j++) {
+                    if (i != j) {
+                        ExchangeRate fromExchangeRate = currencyExchangeRates.get(i);
+                        ExchangeRate toExchangeRate = currencyExchangeRates.get(j);
+                        ExchangeFees fromFee = exchangeToExchangeFeesMap.get(fromExchangeRate.getExchangeId() + "_" + fromExchangeRate.getCurrency());
+                        ExchangeFees toFee = exchangeToExchangeFeesMap.get(toExchangeRate.getExchangeId() + "_" + fromExchangeRate.getCurrency());
+                        double buyCost = 10000;
+                        double buyVolume = 10000 / (fromExchangeRate.getBuyRate() + fromExchangeRate.getBuyRate() * fromExchangeFee.get(fromExchangeRate.getExchangeId()));
+
+                        double sellCost = (buyVolume - fromFee.getTransferFee()) * (toExchangeRate.getSellRate() - toExchangeRate.getSellRate() * toExchangeFee.get(toExchangeRate.getExchangeId()));
+
+                        for (ExchangeRate reverseCurrencyRate : exchangeToRateMap.get(toExchangeRate.getExchangeId())) {
+                            if (!currency.equalsIgnoreCase(reverseCurrencyRate.getCurrency())) {
+                                ExchangeRate fromExchangeRate2 = reverseCurrencyRate;
+                                ExchangeRate toExchangeRate2 = null;
+                                for (ExchangeRate tempCurrencyRate : exchangeToRateMap.get(fromExchangeRate.getExchangeId())) {
+                                    if (tempCurrencyRate.getCurrency().equalsIgnoreCase(reverseCurrencyRate.getCurrency())) {
+                                        toExchangeRate2 = tempCurrencyRate;
+                                    }
+                                }
+                                if (toExchangeRate2 != null && fromExchangeRate2.getBuyRate() != 0.0 && fromExchangeRate.getBuyRate() != 0.0) {
+                                    double buyVolume2 = sellCost / (fromExchangeRate2.getBuyRate() + fromExchangeRate2.getBuyRate() * fromExchangeFee.get(toExchangeRate.getExchangeId()));
+                                    double sellCost2 = (buyVolume2 - toFee.getTransferFee()) * (toExchangeRate2.getSellRate() - toExchangeRate2.getSellRate() * toExchangeFee.get(toExchangeRate.getExchangeId()));
+
+                                    double profit = sellCost2 - buyCost;
+                                    if (fromExchangeRate.getBuyRate() != 0.0 && profit > 0) {
+                                        double profitPercentage = (profit * 100.0) / buyCost;
+                                        if (profitPercentage > 1) {
+                                            profitToStringMap.put(profitPercentage, String.format("%.2f%%", profitPercentage) + " " +
+                                                    currency + " " +
+                                                    exchangeToNameMap.get(fromExchangeRate.getExchangeId()) + "(" + String.format(fromExchangeRate.getBuyRate() > 1000 ? "%.0f" : "%.2f", fromExchangeRate.getBuyRate()) + ") → " +
+                                                    exchangeToNameMap.get(toExchangeRate.getExchangeId()) + "(" + String.format(toExchangeRate.getSellRate() > 1000 ? "%.0f" : "%.2f", toExchangeRate.getSellRate()) + ")" +
+                                                    reverseCurrencyRate.getCurrency() + "(" + String.format(fromExchangeRate2.getBuyRate() > 1000 ? "%.0f" : "%.2f", fromExchangeRate2.getBuyRate()) + ") → " +
+                                                    "(" + String.format(toExchangeRate2.getSellRate() > 1000 ? "%.0f" : "%.2f", toExchangeRate2.getSellRate()) + ")"
+                                            );
+
+                                            notificationCurrencies.add(currency);
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if (profitToStringMap.size() > 0) {
+            String contentText = "";
+            for (String currency : notificationCurrencies) {
+                contentText += currency + " ";
+            }
+            Intent intent = HomeActivity.getStartIntent(this);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT);
+
+            String notificationLevel = "Medium";
+            if (profitToStringMap.firstKey() > 10) {
+                notificationLevel = "Urgent";
+            } else if (profitToStringMap.firstKey() > 5) {
+                notificationLevel = "High";
+            }
+
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, notificationLevel + "1")
+                    .setContentTitle("Triangular Arbitrage")
+                    .setContentText(contentText)
+                    .setAutoCancel(false)
+                    .setSmallIcon(R.drawable.ic_launcher_background)
+                    .setColor(this.getResources().getColor(R.color.colorPrimary))
+                    .setContentIntent(pendingIntent);
+
+            NotificationCompat.InboxStyle notificationInboxStyle = new NotificationCompat.InboxStyle(notificationBuilder)
+                    .setBigContentTitle("Triangular Arbitrage Opportunity");
+
+            for (Map.Entry<Double, String> entry : profitToStringMap.entrySet()) {
+                notificationInboxStyle.addLine(entry.getValue());
+            }
+
+            if (profitToStringMap.size() == 1) {
+                notificationInboxStyle.addLine("Nothing more.");
+            }
+
+            NotificationManager notificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                NotificationChannel notificationChannel = new NotificationChannel(notificationLevel + "2", "Triangular Arbitrage Opportunity", profitToStringMap.firstKey() > 10 ? NotificationManager.IMPORTANCE_HIGH : profitToStringMap.firstKey() > 5 ? NotificationManager.IMPORTANCE_DEFAULT : NotificationManager.IMPORTANCE_LOW);
+
+                // Configure the notification channel.
+                notificationChannel.setDescription("Arbitrage Notification");
+                notificationChannel.enableLights(true);
+                notificationChannel.setLightColor(Color.RED);
+                notificationChannel.setVibrationPattern(new long[]{0, 1000, 500, 1000});
+                notificationChannel.enableVibration(true);
+                notificationManager.createNotificationChannel(notificationChannel);
+            }
+            notificationManager.notify(2, notificationInboxStyle.build());
+        }
     }
 
     private void checkIntraExchangeArbitrage(int exchangeId, String exchangeName, Map<String, Map<String, ExchangeRate>> multiCoinExchangeRates, double inrFee, double cryptoFee) {
@@ -245,7 +420,8 @@ public class RateService extends Service {
                         double sellPrice = multiCoinExchangeRates.get("INR").get(exchangeCurrency).getSellRate() * (1 - inrFee);
                         double buyPrice = multiCoinExchangeRates.get(baseCurrency).get(exchangeCurrency).getBuyRate() * (1 + cryptoFee) * multiCoinExchangeRates.get("INR").get(baseCurrency).getBuyRate() * (1 + inrFee);
                         double profit = sellPrice - buyPrice;
-                        if (multiCoinExchangeRates.get(baseCurrency).get(exchangeCurrency).getBuyRate() != 0.0 && profit > 0) {
+                        if (multiCoinExchangeRates.get(baseCurrency).get(exchangeCurrency).getBuyRate() != 0.0 &&
+                                multiCoinExchangeRates.get("INR").get(baseCurrency).getBuyRate() != 0.0 && profit > 0) {
                             double profitPercentage = (profit * 100.0) / buyPrice;
                             if (profitPercentage > 0) {
                                 profitToStringMap.put(profitPercentage, String.format("%.2f%%", profitPercentage) + " INR(" + multiCoinExchangeRates.get("INR").get(baseCurrency).getBuyRate() + ") → " +
@@ -263,7 +439,8 @@ public class RateService extends Service {
                         double profit = sellPrice - buyPrice;
                         if (profit > 0) {
                             double profitPercentage = (profit * 100.0) / buyPrice;
-                            if (multiCoinExchangeRates.get(baseCurrency).get(exchangeCurrency).getSellRate() != 0.0 && profitPercentage > 0) {
+                            if (multiCoinExchangeRates.get(baseCurrency).get(exchangeCurrency).getSellRate() != 0.0 &&
+                                    multiCoinExchangeRates.get("INR").get(baseCurrency).getSellRate() != 0.0 && profitPercentage > 0) {
                                 profitToStringMap.put(profitPercentage, String.format("%.2f%%", profitPercentage) + " INR(" + multiCoinExchangeRates.get("INR").get(exchangeCurrency).getBuyRate() + ") → " +
                                         exchangeCurrency + "(" + multiCoinExchangeRates.get(baseCurrency).get(exchangeCurrency).getSellRate() + ") → " +
                                         baseCurrency + " → INR(" + multiCoinExchangeRates.get("INR").get(baseCurrency).getSellRate() + ")");

@@ -70,6 +70,8 @@ public interface ExchangeRateDataSource {
 
     Flowable<ZebpayResponse> fetchZebpayNCASHRates();
 
+    Flowable<ZebpayResponse> fetchZebpayTUSDRates();
+
     Flowable<ZebpayResponse> fetchZebpayETHBTCRates();
 
     Flowable<ZebpayResponse> fetchZebpayBCHBTCRates();
@@ -105,6 +107,8 @@ public interface ExchangeRateDataSource {
     Flowable<ZebpayResponse> fetchZebpayNCASHBTCRates();
 
     Flowable<ZebpayResponse> fetchZebpayTRXXRPRates();
+
+    Flowable<ZebpayResponse> fetchZebpayBTCTUSDRates();
 
     Flowable<BuyUcoinResponse> fetchBuyUcoinRates();
 
