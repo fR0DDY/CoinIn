@@ -124,7 +124,7 @@ public class RateService extends Service {
                     return exchangeRates;
                 });
 
-                Flowable<Map<String, ExchangeRate>> zebpayINRRates1 = Flowable.zip(mExchangeRateRepository.fetchZebpayBTCRates(), mExchangeRateRepository.fetchZebpayBCHRates(), mExchangeRateRepository.fetchZebpayLTCRates(), mExchangeRateRepository.fetchZebpayETHRates(), mExchangeRateRepository.fetchZebpayXRPRates(), mExchangeRateRepository.fetchZebpayEOSRates(), mExchangeRateRepository.fetchZebpayOMGRates(), mExchangeRateRepository.fetchZebpayTRXRates(), mExchangeRateRepository.fetchZebpayZILRates(), (zebpayBTCResponse, zebpayBCHResponse, zebpayLTCResponse, zebpayETHResponse, zebpayXRPResponse, zebpayEOSResponse, zebpayOMGResponse, zebpayTRXResponse, zebpayZILResponse) -> {
+                /*Flowable<Map<String, ExchangeRate>> zebpayINRRates1 = Flowable.zip(mExchangeRateRepository.fetchZebpayBTCRates(), mExchangeRateRepository.fetchZebpayBCHRates(), mExchangeRateRepository.fetchZebpayLTCRates(), mExchangeRateRepository.fetchZebpayETHRates(), mExchangeRateRepository.fetchZebpayXRPRates(), mExchangeRateRepository.fetchZebpayEOSRates(), mExchangeRateRepository.fetchZebpayOMGRates(), mExchangeRateRepository.fetchZebpayTRXRates(), mExchangeRateRepository.fetchZebpayZILRates(), (zebpayBTCResponse, zebpayBCHResponse, zebpayLTCResponse, zebpayETHResponse, zebpayXRPResponse, zebpayEOSResponse, zebpayOMGResponse, zebpayTRXResponse, zebpayZILResponse) -> {
                     Map<String, ExchangeRate> inrExchangeRates = new HashMap<>();
                     inrExchangeRates.put("BTC", new ExchangeRate(ZEBPAY_ID, "BTC", date, zebpayBTCResponse.getBuyPrice(), zebpayBTCResponse.getSellPrice()));
                     inrExchangeRates.put("BCH", new ExchangeRate(ZEBPAY_ID, "BCH", date, zebpayBCHResponse.getBuyPrice(), zebpayBCHResponse.getSellPrice()));
@@ -177,7 +177,7 @@ public class RateService extends Service {
                     return btcExchangeRates;
                 });
 
-                Flowable<List<ExchangeRate>> zebpay = Flowable.zip(zebpayINRRates1, zebpayINRRates2, zebpaybitcoinRates1, zebpaybitcoinRates2, mExchangeRateRepository.fetchZebpayNCASHRates(), mExchangeRateRepository.fetchZebpayTRXXRPRates(), mExchangeRateRepository.fetchZebpayTUSDRates(), mExchangeRateRepository.fetchZebpayBTCTUSDRates(), (inrRates1, inrRates2, bitcoinRates1, bitcoinRate2, zebpayNCASHResponse, zebpayTRXXRPResponse, zebpayTUSDResponse, zebpayBTCTUSDResponse) -> {
+                Flowable<List<ExchangeRate>> zebpay = Flowable.zip(zebpaybitcoinRates1, zebpaybitcoinRates2, mExchangeRateRepository.fetchZebpayNCASHRates(), mExchangeRateRepository.fetchZebpayTRXXRPRates(), mExchangeRateRepository.fetchZebpayTUSDRates(), mExchangeRateRepository.fetchZebpayBTCTUSDRates(), (bitcoinRates1, bitcoinRate2, zebpayNCASHResponse, zebpayTRXXRPResponse, zebpayTUSDResponse, zebpayBTCTUSDResponse) -> {
                     Map<String, Map<String, ExchangeRate>> exchangeRates = new HashMap<>();
                     inrRates2.put("NCASH", new ExchangeRate(ZEBPAY_ID, "NCASH", date, zebpayNCASHResponse.getBuyPrice(), zebpayNCASHResponse.getSellPrice()));
                     inrRates2.put("TUSD", new ExchangeRate(ZEBPAY_ID, "TUSD", date, zebpayTUSDResponse.getBuyPrice(), zebpayTUSDResponse.getSellPrice()));
@@ -199,15 +199,15 @@ public class RateService extends Service {
                             inrRates.add(rates);
                     }
                     return inrRates;
-                });
+                });*/
 
 
-                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), exchangeRatesGroup, mExchangeRateRepository.fetchKoinOkRates(), mExchangeRateRepository.fetchCoinomeRates(), mExchangeRateRepository.fetchUnocoinRates(), pocketBits, zebpay, (koinexResponse, exchangeRateList, koinOkResponse, coinomeResponse, unocoinResponse, pocketbitsResponse, zebpayRates) -> {
+                Flowable.zip(mExchangeRateRepository.fetchKoinexRates(), exchangeRatesGroup, mExchangeRateRepository.fetchKoinOkRates(), mExchangeRateRepository.fetchCoinomeRates(), mExchangeRateRepository.fetchUnocoinRates(), pocketBits, (koinexResponse, exchangeRateList, koinOkResponse, coinomeResponse, unocoinResponse, pocketbitsResponse) -> {
                     List<ExchangeRate> exchangeRates = new ArrayList<>();
 
                     //ExchangeRate coinsecureBTCRate = new ExchangeRate(COINSECURE_ID, "BTC", date, coinsecureResponse.getMessage().getLowestAsk() / 100.0, coinsecureResponse.getMessage().getHighestBid() / 100.0);
 
-                    exchangeRates.addAll(zebpayRates);
+                    //exchangeRates.addAll(zebpayRates);
                     exchangeRates.addAll(exchangeRateList);
                     exchangeRates.addAll(koinexResponse.getExchangeRates(date));
                     exchangeRates.addAll(coinomeResponse.getExchangeRates(date));
@@ -374,7 +374,7 @@ public class RateService extends Service {
                 notificationLevel = "High";
             }
 
-            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, notificationLevel + "1")
+            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, notificationLevel + "X")
                     .setContentTitle("Triangular Arbitrage")
                     .setContentText(contentText)
                     .setAutoCancel(false)
@@ -396,7 +396,7 @@ public class RateService extends Service {
             NotificationManager notificationManager =
                     (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                NotificationChannel notificationChannel = new NotificationChannel(notificationLevel + "2", "Triangular Arbitrage Opportunity", profitToStringMap.firstKey() > 10 ? NotificationManager.IMPORTANCE_HIGH : profitToStringMap.firstKey() > 5 ? NotificationManager.IMPORTANCE_DEFAULT : NotificationManager.IMPORTANCE_LOW);
+                NotificationChannel notificationChannel = new NotificationChannel(notificationLevel + "Y", "Triangular Arbitrage Opportunity", profitToStringMap.firstKey() > 10 ? NotificationManager.IMPORTANCE_HIGH : profitToStringMap.firstKey() > 5 ? NotificationManager.IMPORTANCE_DEFAULT : NotificationManager.IMPORTANCE_LOW);
 
                 // Configure the notification channel.
                 notificationChannel.setDescription("Arbitrage Notification");
@@ -511,7 +511,7 @@ public class RateService extends Service {
                 notificationChannel.enableVibration(true);
                 notificationManager.createNotificationChannel(notificationChannel);
             }
-            notificationManager.notify(exchangeId + 1, notificationInboxStyle.build());
+            notificationManager.notify(exchangeId + 10, notificationInboxStyle.build());
         }
     }
 

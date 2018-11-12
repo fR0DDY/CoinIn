@@ -146,15 +146,18 @@ public class CoindeltaResponse {
             } else if ("hst-inr".equalsIgnoreCase(data.getMarketName())) {
                 ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "HST", date, data.getLowestAsk(), data.getHighestBid());
                 exchangeRates.add(rate);
+            } else if ("usdt-inr".equalsIgnoreCase(data.getMarketName())) {
+                ExchangeRate rate = new ExchangeRate(COINDELTA_ID, "USDT", date, data.getLowestAsk(), data.getHighestBid());
+                exchangeRates.add(rate);
             }
         }
-        return  exchangeRates;
+        return exchangeRates;
     }
 
     public static Map<String, Map<String, ExchangeRate>> getMultiCoinExchangeRates(List<CoindeltaResponse> coindeltaResponse, Date date) {
         Map<String, Map<String, ExchangeRate>> exchangeRates = new HashMap<>();
         Map<String, ExchangeRate> inrExchangeRates = new HashMap<>();
-        Map<String, ExchangeRate> bitcoinExchangeRates = new HashMap<>();
+        Map<String, ExchangeRate> usdtExchangeRates = new HashMap<>();
         for (CoindeltaResponse data : coindeltaResponse) {
             if ("btc-inr".equalsIgnoreCase(data.getMarketName())) {
                 inrExchangeRates.put("BTC", new ExchangeRate(COINDELTA_ID, "BTC", date, data.getLowestAsk(), data.getHighestBid()));
@@ -168,24 +171,36 @@ public class CoindeltaResponse {
                 inrExchangeRates.put("QTUM", new ExchangeRate(COINDELTA_ID, "QTUM", date, data.getLowestAsk(), data.getHighestBid()));
             } else if ("omg-inr".equalsIgnoreCase(data.getMarketName())) {
                 inrExchangeRates.put("OMG", new ExchangeRate(COINDELTA_ID, "OMG", date, data.getLowestAsk(), data.getHighestBid()));
-            }  else if ("ten-inr".equalsIgnoreCase(data.getMarketName())) {
+            } else if ("ten-inr".equalsIgnoreCase(data.getMarketName())) {
                 inrExchangeRates.put("TEN", new ExchangeRate(COINDELTA_ID, "TEN", date, data.getLowestAsk(), data.getHighestBid()));
-            } else if ("eth-btc".equalsIgnoreCase(data.getMarketName())) {
-                bitcoinExchangeRates.put("ETH", new ExchangeRate(COINDELTA_ID, "ETH", date, data.getLowestAsk(), data.getHighestBid()));
-            } else if ("ltc-btc".equalsIgnoreCase(data.getMarketName())) {
-                bitcoinExchangeRates.put("LTC", new ExchangeRate(COINDELTA_ID, "LTC", date, data.getLowestAsk(), data.getHighestBid()));
-            } else if ("omg-btc".equalsIgnoreCase(data.getMarketName())) {
-                bitcoinExchangeRates.put("OMG", new ExchangeRate(COINDELTA_ID, "OMG", date, data.getLowestAsk(), data.getHighestBid()));
-            } else if ("qtum-btc".equalsIgnoreCase(data.getMarketName())) {
-                bitcoinExchangeRates.put("QTUM", new ExchangeRate(COINDELTA_ID, "QTUM", date, data.getLowestAsk(), data.getHighestBid()));
-            } else if ("xrp-btc".equalsIgnoreCase(data.getMarketName())) {
-                bitcoinExchangeRates.put("XRP", new ExchangeRate(COINDELTA_ID, "XRP", date, data.getLowestAsk(), data.getHighestBid()));
-            } else if ("ten-btc".equalsIgnoreCase(data.getMarketName())) {
-                bitcoinExchangeRates.put("TEN", new ExchangeRate(COINDELTA_ID, "TEN", date, data.getLowestAsk(), data.getHighestBid()));
+            } else if ("zil-inr".equalsIgnoreCase(data.getMarketName())) {
+                inrExchangeRates.put("ZIL", new ExchangeRate(COINDELTA_ID, "ZIL", date, data.getLowestAsk(), data.getHighestBid()));
+            } else if ("zrx-inr".equalsIgnoreCase(data.getMarketName())) {
+                inrExchangeRates.put("ZRX", new ExchangeRate(COINDELTA_ID, "ZRX", date, data.getLowestAsk(), data.getHighestBid()));
+            } else if ("eos-inr".equalsIgnoreCase(data.getMarketName())) {
+                inrExchangeRates.put("EOS", new ExchangeRate(COINDELTA_ID, "EOS", date, data.getLowestAsk(), data.getHighestBid()));
+            } else if ("trx-inr".equalsIgnoreCase(data.getMarketName())) {
+                inrExchangeRates.put("TRX", new ExchangeRate(COINDELTA_ID, "TRX", date, data.getLowestAsk(), data.getHighestBid()));
+            } else if ("usdt-inr".equalsIgnoreCase(data.getMarketName())) {
+                inrExchangeRates.put("USDT", new ExchangeRate(COINDELTA_ID, "USDT", date, data.getLowestAsk(), data.getHighestBid()));
+            } else if ("btc-usdt".equalsIgnoreCase(data.getMarketName())) {
+                usdtExchangeRates.put("BTC", new ExchangeRate(COINDELTA_ID, "BTC", date, data.getLowestAsk(), data.getHighestBid()));
+            } else if ("eth-usdt".equalsIgnoreCase(data.getMarketName())) {
+                usdtExchangeRates.put("ETH", new ExchangeRate(COINDELTA_ID, "ETH", date, data.getLowestAsk(), data.getHighestBid()));
+            } else if ("xrp-usdt".equalsIgnoreCase(data.getMarketName())) {
+                usdtExchangeRates.put("XRP", new ExchangeRate(COINDELTA_ID, "XRP", date, data.getLowestAsk(), data.getHighestBid()));
+            } else if ("zil-usdt".equalsIgnoreCase(data.getMarketName())) {
+                usdtExchangeRates.put("ZIL", new ExchangeRate(COINDELTA_ID, "ZIL", date, data.getLowestAsk(), data.getHighestBid()));
+            } else if ("zrx-usdt".equalsIgnoreCase(data.getMarketName())) {
+                usdtExchangeRates.put("ZRX", new ExchangeRate(COINDELTA_ID, "ZRX", date, data.getLowestAsk(), data.getHighestBid()));
+            } else if ("eos-usdt".equalsIgnoreCase(data.getMarketName())) {
+                usdtExchangeRates.put("EOS", new ExchangeRate(COINDELTA_ID, "EOS", date, data.getLowestAsk(), data.getHighestBid()));
+            } else if ("trx-usdt".equalsIgnoreCase(data.getMarketName())) {
+                usdtExchangeRates.put("TRX", new ExchangeRate(COINDELTA_ID, "TRX", date, data.getLowestAsk(), data.getHighestBid()));
             }
         }
         exchangeRates.put("INR", inrExchangeRates);
-        exchangeRates.put("BTC", bitcoinExchangeRates);
+        exchangeRates.put("USDT", usdtExchangeRates);
         return exchangeRates;
     }
 }

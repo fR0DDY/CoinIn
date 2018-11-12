@@ -26,4 +26,7 @@ public interface ExchangeRateDao {
 
     @Query("SELECT ExchangeRate.*, Exchange.name as exchangeName FROM ExchangeRate JOIN Exchange on ExchangeRate.exchangeId = Exchange.id WHERE currency = :currency GROUP BY exchangeId ORDER BY dateTime DESC, buyRate ASC, sellRate DESC")
     Flowable<List<CurrentExchangeRate>> getRatesForCurrency(String currency);
+
+    @Query("SELECT * FROM ExchangeRate WHERE exchangeId = :exchangeId and currency = :currency ORDER BY dateTime DESC LIMIT 1")
+    Flowable<ExchangeRate> getRatesForCurrencyFromExchange(String currency, Long exchangeId);
 }
