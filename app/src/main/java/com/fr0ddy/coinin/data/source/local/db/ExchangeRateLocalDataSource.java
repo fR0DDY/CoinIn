@@ -7,21 +7,13 @@ import com.fr0ddy.coinin.data.source.local.db.dao.ExchangeRateDao;
 import com.fr0ddy.coinin.data.source.local.db.model.CurrentExchangeRate;
 import com.fr0ddy.coinin.data.source.local.db.model.ExchangeRate;
 import com.fr0ddy.coinin.data.source.remote.model.BitbnsResponse;
-import com.fr0ddy.coinin.data.source.remote.model.BuyUcoinResponse;
-import com.fr0ddy.coinin.data.source.remote.model.CoindeltaResponse;
-import com.fr0ddy.coinin.data.source.remote.model.CoinomeResponse;
-import com.fr0ddy.coinin.data.source.remote.model.CoinsecureResponse;
-import com.fr0ddy.coinin.data.source.remote.model.CoinslabResponse;
-import com.fr0ddy.coinin.data.source.remote.model.GiottusResponse;
-import com.fr0ddy.coinin.data.source.remote.model.KoinOkResponse;
+import com.fr0ddy.coinin.data.source.remote.model.CoinDCXResponse;
 import com.fr0ddy.coinin.data.source.remote.model.KoinexResponse;
-import com.fr0ddy.coinin.data.source.remote.model.OxybitResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsAltcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.PocketBitsBitcoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.ThroughbitResponse;
 import com.fr0ddy.coinin.data.source.remote.model.UnocoinResponse;
 import com.fr0ddy.coinin.data.source.remote.model.WazirXResponse;
-import com.fr0ddy.coinin.data.source.remote.model.ZebpayResponse;
 
 import java.util.List;
 
@@ -51,222 +43,7 @@ public class ExchangeRateLocalDataSource implements ExchangeRateDataSource {
     }
 
     @Override
-    public Flowable<CoinomeResponse> fetchCoinomeRates() {
-        // Not required in Local
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayBTCRates() {
-        // Not required in Local
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayBCHRates() {
-        // Not required in Local
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayLTCRates() {
-        // Not required in Local
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayXRPRates() {
-        // Not required in Local
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayETHRates() {
-        // Not required in Local
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayEOSRates() {
-        // Not required in Local
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayOMGRates() {
-        // Not required in Local
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayTRXRates() {
-        // Not required in Local
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayZILRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayREPRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayZRXRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayKNCRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayGNTRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayBATRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayVENRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayAERates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayIOSTRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayCMTRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayNCASHRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayETHBTCRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayBCHBTCRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayLTCBTCRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayEOSBTCRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayOMGBTCRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayTRXBTCRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayXRPBTCRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayGNTBTCRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayZRXBTCRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayREPBTCRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayKNCBTCRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayBATBTCRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayVENBTCRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayAEBTCRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayZILBTCRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayCMTBTCRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayNCASHBTCRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayTRXXRPRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayTUSDRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<ZebpayResponse> fetchZebpayBTCTUSDRates() {
-        return null;
-    }
-
-    @Override
-    public Flowable<BuyUcoinResponse> fetchBuyUcoinRates() {
-        // Not required in Local
-        return null;
-    }
-
-    @Override
-    public Flowable<List<CoindeltaResponse>> fetchCoindeltaRates() {
+    public Flowable<List<CoinDCXResponse>> fetchCoinDCXRates() {
         // Not required in Local
         return null;
     }
@@ -284,12 +61,6 @@ public class ExchangeRateLocalDataSource implements ExchangeRateDataSource {
     }
 
     @Override
-    public Flowable<CoinsecureResponse> fetchCoinsecureRates() {
-        // Not required in Local
-        return null;
-    }
-
-    @Override
     public Flowable<List<BitbnsResponse>> fetchBitbnsRates() {
         // Not required in Local
         return null;
@@ -297,18 +68,6 @@ public class ExchangeRateLocalDataSource implements ExchangeRateDataSource {
 
     @Override
     public Flowable<ThroughbitResponse> fetchThroughbitRates() {
-        // Not required in Local
-        return null;
-    }
-
-    @Override
-    public Flowable<OxybitResponse> fetchOxybitRates() {
-        // Not required in Local
-        return null;
-    }
-
-    @Override
-    public Flowable<CoinslabResponse> fetchCoinslabRates() {
         // Not required in Local
         return null;
     }
@@ -322,17 +81,6 @@ public class ExchangeRateLocalDataSource implements ExchangeRateDataSource {
     @Override
     public Flowable<WazirXResponse> fetchWazirXRates() {
         // Not required in Local
-        return null;
-    }
-
-    @Override
-    public Flowable<KoinOkResponse> fetchKoinOkRates() {
-        // Not required in Local
-        return null;
-    }
-
-    @Override
-    public Flowable<GiottusResponse> fetchGiottusRates() {
         return null;
     }
 

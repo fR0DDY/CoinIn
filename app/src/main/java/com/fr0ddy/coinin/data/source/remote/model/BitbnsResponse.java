@@ -5,7 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.fr0ddy.coinin.utils.AppConstants.BITBNS_ID;
 
@@ -72,6 +74,20 @@ public class BitbnsResponse {
     Data DENT;
     Data GRS;
     Data KMD;
+    Data BTT;
+    Data BCHABC;
+    Data BCHSV;
+    Data BTCUSDT;
+    Data ETHUSDT;
+    Data XRPUSDT;
+    Data TRXUSDT;
+    Data BTTUSDT;
+    Data BCHABCUSDT;
+    Data EOSUSDT;
+    Data NEOUSDT;
+    Data XLMUSDT;
+    Data ADAUSDT;
+    Data LTCUSDT;
 
     public class Data {
         @SerializedName("sellPrice")
@@ -476,8 +492,72 @@ public class BitbnsResponse {
                 exchangeRates.add(new ExchangeRate(BITBNS_ID, "GRS", date, response.GRS.getSellPrice(), response.GRS.getBuyPrice()));
             } else if (response.KMD != null) {
                 exchangeRates.add(new ExchangeRate(BITBNS_ID, "KMD", date, response.KMD.getSellPrice(), response.KMD.getBuyPrice()));
+            } else if (response.BCHABC != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "BCHABC", date, response.BCHABC.getSellPrice(), response.BCHABC.getBuyPrice()));
+            } else if (response.BCHSV != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "BCHSV", date, response.BCHSV.getSellPrice(), response.BCHSV.getBuyPrice()));
+            } else if (response.BTT != null) {
+                exchangeRates.add(new ExchangeRate(BITBNS_ID, "BTT", date, response.BTT.getSellPrice(), response.BTT.getBuyPrice()));
             }
         }
+        return exchangeRates;
+    }
+
+    public static Map<String, Map<String, ExchangeRate>> getMultiCoinExchangeRates(List<BitbnsResponse> bitbnsResponse, Date date) {
+        Map<String, Map<String, ExchangeRate>> exchangeRates = new HashMap<>();
+        Map<String, ExchangeRate> inrExchangeRates = new HashMap<>();
+        Map<String, ExchangeRate> usdtExchangeRates = new HashMap<>();
+        for (BitbnsResponse response : bitbnsResponse) {
+            if (response.BTC != null) {
+                inrExchangeRates.put("BTC", new ExchangeRate(BITBNS_ID, "BTC", date, response.BTC.getSellPrice(), response.BTC.getBuyPrice()));
+            } else if (response.XRP != null) {
+                inrExchangeRates.put("XRP", new ExchangeRate(BITBNS_ID, "XRP", date, response.XRP.getSellPrice(), response.XRP.getBuyPrice()));
+            } else if (response.ETH != null) {
+                inrExchangeRates.put("ETH", new ExchangeRate(BITBNS_ID, "ETH", date, response.ETH.getSellPrice(), response.ETH.getBuyPrice()));
+            } else if (response.TRX != null) {
+                inrExchangeRates.put("TRX", new ExchangeRate(BITBNS_ID, "TRX", date, response.TRX.getSellPrice(), response.TRX.getBuyPrice()));
+            } else if (response.BTT != null) {
+                inrExchangeRates.put("BTT", new ExchangeRate(BITBNS_ID, "BTT", date, response.BTT.getSellPrice(), response.BTT.getBuyPrice()));
+            } else if (response.BCHABC != null) {
+                inrExchangeRates.put("BCHABC", new ExchangeRate(BITBNS_ID, "BCHABC", date, response.BCHABC.getSellPrice(), response.BCHABC.getBuyPrice()));
+            } else if (response.EOS != null) {
+                inrExchangeRates.put("EOS", new ExchangeRate(BITBNS_ID, "EOS", date, response.EOS.getSellPrice(), response.EOS.getBuyPrice()));
+            } else if (response.NEO != null) {
+                inrExchangeRates.put("NEO", new ExchangeRate(BITBNS_ID, "NEO", date, response.NEO.getSellPrice(), response.NEO.getBuyPrice()));
+            } else if (response.XLM != null) {
+                inrExchangeRates.put("XLM", new ExchangeRate(BITBNS_ID, "XLM", date, response.XLM.getSellPrice(), response.XLM.getBuyPrice()));
+            } else if (response.ADA != null) {
+                inrExchangeRates.put("ADA", new ExchangeRate(BITBNS_ID, "ADA", date, response.ADA.getSellPrice(), response.ADA.getBuyPrice()));
+            } else if (response.LTC != null) {
+                inrExchangeRates.put("LTC", new ExchangeRate(BITBNS_ID, "LTC", date, response.LTC.getSellPrice(), response.LTC.getBuyPrice()));
+            } else if (response.USDT != null) {
+                inrExchangeRates.put("USDT", new ExchangeRate(BITBNS_ID, "USDT", date, response.USDT.getSellPrice(), response.USDT.getBuyPrice()));
+            } else if (response.BTCUSDT != null) {
+                usdtExchangeRates.put("BTC", new ExchangeRate(BITBNS_ID, "BTC", date, response.BTCUSDT.getSellPrice(), response.BTCUSDT.getBuyPrice()));
+            } else if (response.XRPUSDT != null) {
+                usdtExchangeRates.put("XRP", new ExchangeRate(BITBNS_ID, "XRP", date, response.XRPUSDT.getSellPrice(), response.XRPUSDT.getBuyPrice()));
+            } else if (response.ETHUSDT != null) {
+                usdtExchangeRates.put("ETH", new ExchangeRate(BITBNS_ID, "ETH", date, response.ETHUSDT.getSellPrice(), response.ETHUSDT.getBuyPrice()));
+            } else if (response.TRXUSDT != null) {
+                usdtExchangeRates.put("TRX", new ExchangeRate(BITBNS_ID, "TRX", date, response.TRXUSDT.getSellPrice(), response.TRXUSDT.getBuyPrice()));
+            } else if (response.BTTUSDT != null) {
+                usdtExchangeRates.put("BTT", new ExchangeRate(BITBNS_ID, "BTT", date, response.BTTUSDT.getSellPrice(), response.BTTUSDT.getBuyPrice()));
+            } else if (response.BCHABCUSDT != null) {
+                usdtExchangeRates.put("BCHABC", new ExchangeRate(BITBNS_ID, "BCHABC", date, response.BCHABCUSDT.getSellPrice(), response.BCHABCUSDT.getBuyPrice()));
+            } else if (response.EOSUSDT != null) {
+                usdtExchangeRates.put("EOS", new ExchangeRate(BITBNS_ID, "EOS", date, response.EOSUSDT.getSellPrice(), response.EOSUSDT.getBuyPrice()));
+            } else if (response.NEOUSDT != null) {
+                usdtExchangeRates.put("NEO", new ExchangeRate(BITBNS_ID, "NEO", date, response.NEOUSDT.getSellPrice(), response.NEOUSDT.getBuyPrice()));
+            } else if (response.XLMUSDT != null) {
+                usdtExchangeRates.put("XLM", new ExchangeRate(BITBNS_ID, "XLM", date, response.XLMUSDT.getSellPrice(), response.XLMUSDT.getBuyPrice()));
+            } else if (response.ADAUSDT != null) {
+                usdtExchangeRates.put("ADA", new ExchangeRate(BITBNS_ID, "ADA", date, response.ADAUSDT.getSellPrice(), response.ADAUSDT.getBuyPrice()));
+            } else if (response.LTCUSDT != null) {
+                usdtExchangeRates.put("LTC", new ExchangeRate(BITBNS_ID, "LTC", date, response.LTCUSDT.getSellPrice(), response.LTCUSDT.getBuyPrice()));
+            }
+        }
+        exchangeRates.put("INR", inrExchangeRates);
+        exchangeRates.put("USDT", usdtExchangeRates);
         return exchangeRates;
     }
 }

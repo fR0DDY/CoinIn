@@ -29,6 +29,7 @@ public final class AppConstants {
     public static final int MINTOPAY_ID = 14;
     public static final int KOINOK_ID = 15;
     public static final int GIOTTUS_ID = 16;
+    public static final int COINDCX_ID = 17;
 
     private AppConstants() {
 

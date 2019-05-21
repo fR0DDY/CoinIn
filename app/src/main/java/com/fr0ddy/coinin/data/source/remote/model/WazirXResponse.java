@@ -20,8 +20,6 @@ public class WazirXResponse {
     Data BTC;
     @SerializedName("ltcinr")
     Data LTC;
-    @SerializedName("bchinr")
-    Data BCH;
     @SerializedName("xrpinr")
     Data XRP;
     @SerializedName("ethinr")
@@ -166,6 +164,37 @@ public class WazirXResponse {
     Data POLY_BTC;
     @SerializedName("thetabtc")
     Data THETA_BTC;
+    @SerializedName("omgbtc")
+    Data OMG_BTC;
+    @SerializedName("dashusdt")
+    Data DASH_USDT;
+    @SerializedName("zrxusdt")
+    Data ZRX_USDT;
+    @SerializedName("bchabcusdt")
+    Data BCHABC_USDT;
+    @SerializedName("bchsvusdt")
+    Data BCHSV_USDT;
+    @SerializedName("csusdt")
+    Data CS_USDT;
+    @SerializedName("dentusdt")
+    Data DENT_USDT;
+    @SerializedName("gntusdt")
+    Data GNT_USDT;
+    @SerializedName("ocnusdt")
+    Data OCN_USDT;
+    @SerializedName("polyusdt")
+    Data POLY_USDT;
+    @SerializedName("requsdt")
+    Data REQ_USDT;
+    @SerializedName("stormusdt")
+    Data STORM_USDT;
+    @SerializedName("stqusdt")
+    Data STQ_USDT;
+    @SerializedName("subusdt")
+    Data SUB_USDT;
+    @SerializedName("zcousdt")
+    Data ZCO_USDT;
+
 
     public class Data {
         @SerializedName("sell")
@@ -194,24 +223,24 @@ public class WazirXResponse {
         List<ExchangeRate> exchangeRates = new ArrayList<>();
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "BTC", date, Double.parseDouble(BTC.sell), Double.parseDouble(BTC.buy)));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "LTC", date, Double.parseDouble(LTC.sell), Double.parseDouble(LTC.buy)));
-        exchangeRates.add(new ExchangeRate(WAZIRX_ID, "BCH", date, Double.parseDouble(BCH.sell), Double.parseDouble(BCH.buy)));
+        //exchangeRates.add(new ExchangeRate(WAZIRX_ID, "BCH", date, Double.parseDouble(BCH.sell), Double.parseDouble(BCH.buy)));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "XRP", date, Double.parseDouble(XRP.sell), Double.parseDouble(XRP.buy)));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "ETH", date, Double.parseDouble(ETH.sell), Double.parseDouble(ETH.buy)));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "TRX", date, Double.parseDouble(TRX.sell), Double.parseDouble(TRX.buy)));
-        //exchangeRates.add(new ExchangeRate(WAZIRX_ID, "DASH", date, Double.parseDouble(DASH.sell), Double.parseDouble(DASH.buy)));
+        exchangeRates.add(new ExchangeRate(WAZIRX_ID, "DASH", date, Math.min(Double.parseDouble(DASH_BTC.sell) * Double.parseDouble(BTC.sell), Double.parseDouble(DASH_USDT.sell) * Double.parseDouble(USDT.sell)), Math.min(Double.parseDouble(DASH_BTC.buy) * Double.parseDouble(BTC.buy), Double.parseDouble(DASH_USDT.buy) * Double.parseDouble(USDT.buy))));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "EOS", date, Double.parseDouble(EOS.sell), Double.parseDouble(EOS.buy)));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "ZIL", date, Double.parseDouble(ZIL.sell), Double.parseDouble(ZIL.buy)));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "NCASH", date, Double.parseDouble(NCASH.sell), Double.parseDouble(NCASH.buy)));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "GNT", date, Double.parseDouble(GNT.sell), Double.parseDouble(GNT.buy)));
-        //exchangeRates.add(new ExchangeRate(WAZIRX_ID, "ZRX", date, Double.parseDouble(ZRX.sell), Double.parseDouble(ZRX.buy)));
+        exchangeRates.add(new ExchangeRate(WAZIRX_ID, "ZRX", date, Math.min(Double.parseDouble(ZRX_BTC.sell) * Double.parseDouble(BTC.sell), Double.parseDouble(ZRX_USDT.sell) * Double.parseDouble(USDT.sell)), Math.min(Double.parseDouble(ZRX_BTC.buy) * Double.parseDouble(BTC.buy), Double.parseDouble(ZRX_USDT.buy) * Double.parseDouble(USDT.buy))));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "STORM", date, Double.parseDouble(STORM.sell), Double.parseDouble(STORM.buy)));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "REQ", date, Double.parseDouble(REQ.sell), Double.parseDouble(REQ.buy)));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "SUB", date, Double.parseDouble(SUB.sell), Double.parseDouble(SUB.buy)));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "NULS", date, Double.parseDouble(NULS.sell), Double.parseDouble(NULS.buy)));
         //exchangeRates.add(new ExchangeRate(WAZIRX_ID, "ICX", date, Double.parseDouble(ICX.sell), Double.parseDouble(ICX.buy)));
-        //exchangeRates.add(new ExchangeRate(WAZIRX_ID, "OMG", date, Double.parseDouble(OMG.sell), Double.parseDouble(OMG.buy)));
+        exchangeRates.add(new ExchangeRate(WAZIRX_ID, "OMG", date, Double.parseDouble(OMG_BTC.sell) * Double.parseDouble(BTC.sell), Double.parseDouble(OMG_BTC.buy) * Double.parseDouble(BTC.buy)));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "POLY", date, Double.parseDouble(POLY.sell), Double.parseDouble(POLY.buy)));
-        //exchangeRates.add(new ExchangeRate(WAZIRX_ID, "IOST", date, Double.parseDouble(IOST.sell), Double.parseDouble(IOST.buy)));
+        exchangeRates.add(new ExchangeRate(WAZIRX_ID, "IOST", date, Double.parseDouble(IOST_BTC.sell) * Double.parseDouble(BTC.sell), Double.parseDouble(IOST_BTC.buy) * Double.parseDouble(BTC.buy)));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "NPXS", date, Double.parseDouble(NPXS.sell), Double.parseDouble(NPXS.buy)));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "NOAH", date, Double.parseDouble(NOAH.sell), Double.parseDouble(NOAH.buy)));
         exchangeRates.add(new ExchangeRate(WAZIRX_ID, "BANCA", date, Double.parseDouble(BANCA.sell), Double.parseDouble(BANCA.buy)));
@@ -245,22 +274,19 @@ public class WazirXResponse {
         inrExchangeRates.put("GNT", new ExchangeRate(WAZIRX_ID, "GNT", date, Double.parseDouble(GNT.sell), Double.parseDouble(GNT.buy)));
         inrExchangeRates.put("SUB", new ExchangeRate(WAZIRX_ID, "SUB", date, Double.parseDouble(SUB.sell), Double.parseDouble(SUB.buy)));
         inrExchangeRates.put("REQ", new ExchangeRate(WAZIRX_ID, "REQ", date, Double.parseDouble(REQ.sell), Double.parseDouble(REQ.buy)));
-        //inrExchangeRates.put("SNT", new ExchangeRate(WAZIRX_ID, "SNT", date, Double.parseDouble(SNT.sell), Double.parseDouble(SNT.buy)));
-        //inrExchangeRates.put("IOST", new ExchangeRate(WAZIRX_ID, "IOST", date, Double.parseDouble(IOST.sell), Double.parseDouble(IOST.buy)));
-        //inrExchangeRates.put("DASH", new ExchangeRate(WAZIRX_ID, "DASH", date, Double.parseDouble(DASH.sell), Double.parseDouble(DASH.buy)));
         inrExchangeRates.put("STORM", new ExchangeRate(WAZIRX_ID, "STORM", date, Double.parseDouble(STORM.sell), Double.parseDouble(STORM.buy)));
-        //inrExchangeRates.put("ZRX", new ExchangeRate(WAZIRX_ID, "ZRX", date, Double.parseDouble(ZRX.sell), Double.parseDouble(ZRX.buy)));
         inrExchangeRates.put("USDT", new ExchangeRate(WAZIRX_ID, "USDT", date, Double.parseDouble(USDT.sell), Double.parseDouble(USDT.buy)));
         inrExchangeRates.put("HOT", new ExchangeRate(WAZIRX_ID, "HOT", date, Double.parseDouble(HOT.sell), Double.parseDouble(HOT.buy)));
-        inrExchangeRates.put("BCH", new ExchangeRate(WAZIRX_ID, "BCH", date, Double.parseDouble(BCH.sell), Double.parseDouble(BCH.buy)));
-        //inrExchangeRates.put("ICX", new ExchangeRate(WAZIRX_ID, "ICX", date, Double.parseDouble(ICX.sell), Double.parseDouble(ICX.buy)));
         inrExchangeRates.put("EOS", new ExchangeRate(WAZIRX_ID, "EOS", date, Double.parseDouble(EOS.sell), Double.parseDouble(EOS.buy)));
         inrExchangeRates.put("BANCA", new ExchangeRate(WAZIRX_ID, "BANCA", date, Double.parseDouble(BANCA.sell), Double.parseDouble(BANCA.buy)));
         inrExchangeRates.put("NOAH", new ExchangeRate(WAZIRX_ID, "NOAH", date, Double.parseDouble(NOAH.sell), Double.parseDouble(NOAH.buy)));
-        inrExchangeRates.put("NPXS", new ExchangeRate(WAZIRX_ID, "NPXS", date, Double.parseDouble(NPXS.sell), Double.parseDouble(NPXS.buy)));
         inrExchangeRates.put("NULS", new ExchangeRate(WAZIRX_ID, "NULS", date, Double.parseDouble(NULS.sell), Double.parseDouble(NULS.buy)));
         inrExchangeRates.put("POLY", new ExchangeRate(WAZIRX_ID, "POLY", date, Double.parseDouble(POLY.sell), Double.parseDouble(POLY.buy)));
-        //inrExchangeRates.put("THETA", new ExchangeRate(WAZIRX_ID, "THETA", date, Double.parseDouble(THETA.sell), Double.parseDouble(THETA.buy)));
+        inrExchangeRates.put("CS", new ExchangeRate(WAZIRX_ID, "CS", date, Double.parseDouble(CS.sell), Double.parseDouble(CS.buy)));
+        inrExchangeRates.put("DENT", new ExchangeRate(WAZIRX_ID, "DENT", date, Double.parseDouble(DENT.sell), Double.parseDouble(DENT.buy)));
+        inrExchangeRates.put("OCN", new ExchangeRate(WAZIRX_ID, "OCN", date, Double.parseDouble(OCN.sell), Double.parseDouble(OCN.buy)));
+        inrExchangeRates.put("STQ", new ExchangeRate(WAZIRX_ID, "STQ", date, Double.parseDouble(STQ.sell), Double.parseDouble(STQ.buy)));
+        inrExchangeRates.put("ZCO", new ExchangeRate(WAZIRX_ID, "ZCO", date, Double.parseDouble(ZCO.sell), Double.parseDouble(ZCO.buy)));
         exchangeRates.put("INR", inrExchangeRates);
         Map<String, ExchangeRate> bitcoinExchangeRates = new HashMap<>();
         bitcoinExchangeRates.put("XRP", new ExchangeRate(WAZIRX_ID, "XRP", date, Double.parseDouble(XRP_BTC.sell), Double.parseDouble(XRP_BTC.buy)));
@@ -275,17 +301,11 @@ public class WazirXResponse {
         bitcoinExchangeRates.put("GNT", new ExchangeRate(WAZIRX_ID, "GNT", date, Double.parseDouble(GNT_BTC.sell), Double.parseDouble(GNT_BTC.buy)));
         bitcoinExchangeRates.put("SUB", new ExchangeRate(WAZIRX_ID, "SUB", date, Double.parseDouble(SUB_BTC.sell), Double.parseDouble(SUB_BTC.buy)));
         bitcoinExchangeRates.put("REQ", new ExchangeRate(WAZIRX_ID, "REQ", date, Double.parseDouble(REQ_BTC.sell), Double.parseDouble(REQ_BTC.buy)));
-        //bitcoinExchangeRates.put("SNT", new ExchangeRate(WAZIRX_ID, "SNT", date, Double.parseDouble(SNT_BTC.sell), Double.parseDouble(SNT_BTC.buy)));
-        //bitcoinExchangeRates.put("IOST", new ExchangeRate(WAZIRX_ID, "IOST", date, Double.parseDouble(IOST_BTC.sell), Double.parseDouble(IOST_BTC.buy)));
-        //bitcoinExchangeRates.put("DASH", new ExchangeRate(WAZIRX_ID, "DASH", date, Double.parseDouble(DASH_BTC.sell), Double.parseDouble(DASH_BTC.buy)));
         bitcoinExchangeRates.put("STORM", new ExchangeRate(WAZIRX_ID, "STORM", date, Double.parseDouble(STORM_BTC.sell), Double.parseDouble(STORM_BTC.buy)));
-        //bitcoinExchangeRates.put("ZRX", new ExchangeRate(WAZIRX_ID, "ZRX", date, Double.parseDouble(ZRX_BTC.sell), Double.parseDouble(ZRX_BTC.buy)));
         bitcoinExchangeRates.put("HOT", new ExchangeRate(WAZIRX_ID, "HOT", date, Double.parseDouble(HOT_BTC.sell), Double.parseDouble(HOT_BTC.buy)));
-        bitcoinExchangeRates.put("BCH", new ExchangeRate(WAZIRX_ID, "BCH", date, Double.parseDouble(BCH_BTC.sell), Double.parseDouble(BCH_BTC.buy)));
         bitcoinExchangeRates.put("EOS", new ExchangeRate(WAZIRX_ID, "EOS", date, Double.parseDouble(EOS_BTC.sell), Double.parseDouble(EOS_BTC.buy)));
         bitcoinExchangeRates.put("NULS", new ExchangeRate(WAZIRX_ID, "NULS", date, Double.parseDouble(NULS_BTC.sell), Double.parseDouble(NULS_BTC.buy)));
         bitcoinExchangeRates.put("POLY", new ExchangeRate(WAZIRX_ID, "POLY", date, Double.parseDouble(POLY_BTC.sell), Double.parseDouble(POLY_BTC.buy)));
-        //bitcoinExchangeRates.put("THETA", new ExchangeRate(WAZIRX_ID, "THETA", date, Double.parseDouble(THETA_BTC.sell), Double.parseDouble(THETA_BTC.buy)));
         exchangeRates.put("BTC", bitcoinExchangeRates);
         Map<String, ExchangeRate> usdtExchangeRates = new HashMap<>();
         usdtExchangeRates.put("BTC", new ExchangeRate(WAZIRX_ID, "BTC", date, Double.parseDouble(BTC_USDT.sell), Double.parseDouble(BTC_USDT.buy)));
@@ -294,8 +314,6 @@ public class WazirXResponse {
         usdtExchangeRates.put("ETH", new ExchangeRate(WAZIRX_ID, "ETH", date, Double.parseDouble(ETH_USDT.sell), Double.parseDouble(ETH_USDT.buy)));
         usdtExchangeRates.put("LTC", new ExchangeRate(WAZIRX_ID, "LTC", date, Double.parseDouble(LTC_USDT.sell), Double.parseDouble(LTC_USDT.buy)));
         usdtExchangeRates.put("EOS", new ExchangeRate(WAZIRX_ID, "EOS", date, Double.parseDouble(EOS_USDT.sell), Double.parseDouble(EOS_USDT.buy)));
-        //usdtExchangeRates.put("ICX", new ExchangeRate(WAZIRX_ID, "ICX", date, Double.parseDouble(ICX_USDT.sell), Double.parseDouble(ICX_USDT.buy)));
-        usdtExchangeRates.put("BCH", new ExchangeRate(WAZIRX_ID, "BCH", date, Double.parseDouble(BCH_USDT.sell), Double.parseDouble(BCH_USDT.buy)));
         usdtExchangeRates.put("BANCA", new ExchangeRate(WAZIRX_ID, "BANCA", date, Double.parseDouble(BANCA_USDT.sell), Double.parseDouble(BANCA_USDT.buy)));
         usdtExchangeRates.put("BAT", new ExchangeRate(WAZIRX_ID, "BAT", date, Double.parseDouble(BAT_USDT.sell), Double.parseDouble(BAT_USDT.buy)));
         usdtExchangeRates.put("HOT", new ExchangeRate(WAZIRX_ID, "HOT", date, Double.parseDouble(HOT_USDT.sell), Double.parseDouble(HOT_USDT.buy)));
@@ -304,6 +322,16 @@ public class WazirXResponse {
         usdtExchangeRates.put("NPXS", new ExchangeRate(WAZIRX_ID, "NPXS", date, Double.parseDouble(NPXS_USDT.sell), Double.parseDouble(NPXS_USDT.buy)));
         usdtExchangeRates.put("QKC", new ExchangeRate(WAZIRX_ID, "QKC", date, Double.parseDouble(QKC_USDT.sell), Double.parseDouble(QKC_USDT.buy)));
         usdtExchangeRates.put("ZIL", new ExchangeRate(WAZIRX_ID, "ZIL", date, Double.parseDouble(ZIL_USDT.sell), Double.parseDouble(ZIL_USDT.buy)));
+        usdtExchangeRates.put("CS", new ExchangeRate(WAZIRX_ID, "CS", date, Double.parseDouble(CS_USDT.sell), Double.parseDouble(CS_USDT.buy)));
+        usdtExchangeRates.put("DENT", new ExchangeRate(WAZIRX_ID, "DENT", date, Double.parseDouble(DENT_USDT.sell), Double.parseDouble(DENT_USDT.buy)));
+        usdtExchangeRates.put("GNT", new ExchangeRate(WAZIRX_ID, "GNT", date, Double.parseDouble(GNT_USDT.sell), Double.parseDouble(GNT_USDT.buy)));
+        usdtExchangeRates.put("OCN", new ExchangeRate(WAZIRX_ID, "OCN", date, Double.parseDouble(OCN_USDT.sell), Double.parseDouble(OCN_USDT.buy)));
+        usdtExchangeRates.put("POLY", new ExchangeRate(WAZIRX_ID, "POLY", date, Double.parseDouble(POLY_USDT.sell), Double.parseDouble(POLY_USDT.buy)));
+        usdtExchangeRates.put("REQ", new ExchangeRate(WAZIRX_ID, "REQ", date, Double.parseDouble(REQ_USDT.sell), Double.parseDouble(REQ_USDT.buy)));
+        usdtExchangeRates.put("STORM", new ExchangeRate(WAZIRX_ID, "STORM", date, Double.parseDouble(STORM_USDT.sell), Double.parseDouble(STORM_USDT.buy)));
+        usdtExchangeRates.put("STQ", new ExchangeRate(WAZIRX_ID, "STQ", date, Double.parseDouble(STQ_USDT.sell), Double.parseDouble(STQ_USDT.buy)));
+        usdtExchangeRates.put("SUB", new ExchangeRate(WAZIRX_ID, "SUB", date, Double.parseDouble(SUB_USDT.sell), Double.parseDouble(SUB_USDT.buy)));
+        usdtExchangeRates.put("ZCO", new ExchangeRate(WAZIRX_ID, "ZCO", date, Double.parseDouble(ZCO_USDT.sell), Double.parseDouble(ZCO_USDT.buy)));
         exchangeRates.put("USDT", usdtExchangeRates);
         return exchangeRates;
     }
